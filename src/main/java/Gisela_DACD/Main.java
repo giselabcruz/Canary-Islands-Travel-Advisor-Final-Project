@@ -5,6 +5,7 @@ import Gisela_DACD.P1Model.SQLite.SQLiteConnector;
 import Gisela_DACD.P1Model.SQLite.SQLiteInsertWeatherData;
 import Gisela_DACD.P1Model.WeatherData;
 import com.google.gson.Gson;
+import io.github.cdimascio.dotenv.Dotenv;
 import org.apache.hc.client5.http.classic.methods.HttpGet;
 import org.apache.hc.client5.http.impl.classic.CloseableHttpClient;
 import org.apache.hc.client5.http.impl.classic.CloseableHttpResponse;
@@ -18,7 +19,8 @@ import java.util.ArrayList;
 
 public class Main {
     public static void main(String[] args) throws IOException, ParseException {
-        String apiKey = "";
+        Dotenv dotenv = Dotenv.configure().load();
+        String apiKey = dotenv.get("OPEN_WEATHER_APIKEY");
         ArrayList<Island> islands = new ArrayList<>() {
             {
                 add(new Island("Gran_Canaria", 28.0997, -15.4134));
