@@ -31,7 +31,7 @@ public class Main {
         Gson gson = new Gson();
 
         for (Island island : islands) {
-            String url = String.format("https://api.openweathermap.org/data/2.5/weather?lat=%s&lon=%s&appid=%s",
+            String url = String.format("https://api.openweathermap.org/data/2.5/weather?lat=%s&lon=%s&units=metric&appid=%s",
                             island.getLat(), island.getLongitude(),apiKey);
 
             CloseableHttpClient httpClient = HttpClients.createDefault();
@@ -39,14 +39,13 @@ public class Main {
             CloseableHttpResponse response = httpClient.execute(httpGet);
             String responseBody = EntityUtils.toString(response.getEntity());
 
-            WeatherData wind = gson.fromJson(responseBody,WeatherData.class);
+            WeatherData weatherData = gson.fromJson(responseBody,WeatherData.class);
 
 
-
-            // Now you have your POJO
-            System.out.println(wind.getWind().getSpeed());
-
-            // Maneja la respuesta aquí para cada ubicación
+            System.out.println(weatherData.getWind().getSpeed());
+            System.out.println(weatherData.getMainData().getTemp());
+            System.out.println(weatherData.getMainData().getHumidity());
+            System.out.println(weatherData.getClouds().getAllClouds());
 
             httpClient.close();
         }
