@@ -7,6 +7,7 @@ import org.apache.hc.client5.http.classic.methods.HttpGet;
 import org.apache.hc.client5.http.impl.classic.CloseableHttpClient;
 import org.apache.hc.client5.http.impl.classic.CloseableHttpResponse;
 import org.apache.hc.client5.http.impl.classic.HttpClients;
+import org.apache.hc.core5.http.HttpEntity;
 import org.apache.hc.core5.http.ParseException;
 import org.apache.hc.core5.http.io.entity.EntityUtils;
 import java.io.IOException;
@@ -34,10 +35,11 @@ public class Main {
             String url = String.format("https://api.openweathermap.org/data/2.5/weather?lat=%s&lon=%s&units=metric&appid=%s",
                             island.getLat(), island.getLongitude(),apiKey);
 
-            CloseableHttpClient httpClient = HttpClients.createDefault();
+            CloseableHttpClient httpclient = HttpClients.createDefault();
             HttpGet httpGet = new HttpGet(url);
-            CloseableHttpResponse response = httpClient.execute(httpGet);
-            String responseBody = EntityUtils.toString(response.getEntity());
+            CloseableHttpResponse response = httpclient.execute(httpGet);
+            HttpEntity entity = response.getEntity();
+            String responseBody = EntityUtils.toString(entity);
 
             WeatherData weatherData = gson.fromJson(responseBody,WeatherData.class);
 
@@ -47,7 +49,7 @@ public class Main {
             System.out.println(weatherData.getMainData().getHumidity());
             System.out.println(weatherData.getClouds().getAllClouds());
 
-            httpClient.close();
+            httpclient.close();
         }
     }
 
