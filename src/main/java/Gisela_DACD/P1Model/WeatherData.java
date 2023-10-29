@@ -1,7 +1,5 @@
 package Gisela_DACD.P1Model;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
-
 public class WeatherData {
     private Wind wind;
     private MainData main;

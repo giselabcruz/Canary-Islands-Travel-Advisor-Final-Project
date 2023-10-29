@@ -16,7 +16,7 @@ import java.util.ArrayList;
 public class Main {
     public static void main(String[] args) throws IOException, ParseException {
         String apiKey = "";
-        ArrayList<Island> islands = new ArrayList<Island>() {
+        ArrayList<Island> islands = new ArrayList<>() {
             {
                 add(new Island("Gran Canaria", 28.0997, -15.4134));
 //                add(new Island("Fuerteventura", 28.5004, -13.8627));
