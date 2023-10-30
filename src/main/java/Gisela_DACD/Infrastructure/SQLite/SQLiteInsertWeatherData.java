@@ -49,7 +49,7 @@ public class SQLiteInsertWeatherData {
             preparedStatement.setDouble(6, windSpeed);
 
             preparedStatement.executeUpdate();
-            System.out.println("Datos meteorológicos insertados en la tabla correspondiente.");
+            System.out.println("Weather data inserted into the corresponding table.");
 
             preparedStatement.close();
         } catch (SQLException e) {
