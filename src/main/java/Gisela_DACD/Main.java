@@ -4,6 +4,7 @@ import Gisela_DACD.P1Model.*;
 import io.github.cdimascio.dotenv.Dotenv;
 
 import java.util.ArrayList;
+import java.util.Timer;
 
 public class Main {
     public static void main(String[] args) {
@@ -14,26 +15,8 @@ public class Main {
         WeatherDataFetcher dataFetcher = new WeatherDataFetcher(apiKey);
         WeatherDataRepository dataSaver = new WeatherDataSaverInSQLite();
 
-            CloseableHttpClient httpclient = HttpClients.createDefault();
-            HttpGet httpGet = new HttpGet(url);
-            CloseableHttpResponse response = httpclient.execute(httpGet);
-            HttpEntity entity = response.getEntity();
-            String responseBody = EntityUtils.toString(entity);
-
-            WeatherData weatherData = gson.fromJson(responseBody,WeatherData.class);
-
-            httpclient.close();
-            SQLiteConnector connector = null;
-            try {
-                connector = new SQLiteConnector();
-                connector.createOrUpdateTable();
-
-                SQLiteInsertWeatherData.insert(island.getName(),weatherData, connector.getConnection());
-
-                connector.closeConnection();
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
-            }
-        }
+        Timer timer = new Timer();
+        WeatherUpdaterTask updaterTask = new WeatherUpdaterTask(dataFetcher, dataSaver, islands);
+        timer.schedule(updaterTask, 0, 6 * 60 * 60 * 1000);
     }
 }
