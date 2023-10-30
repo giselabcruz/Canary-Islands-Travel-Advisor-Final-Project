@@ -1,22 +1,18 @@
 package Gisela_DACD.Infrastructure.SQLite;
 
-import Gisela_DACD.P1Model.Rain;
 import Gisela_DACD.P1Model.WeatherDTO;
-import Gisela_DACD.P1Model.WeatherDataFetcher;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 
 public class SQLiteInsertWeatherData {
-    public  static void  insert(String islandName, WeatherDTO weatherDTO, Connection connection) {
+    public static void insert(String islandName, WeatherDTO weatherDTO, Connection connection) {
 
         Date date = new Date();
         double temperature = weatherDTO.getMainData().getTemp();
-        double precipitation = 0; //TODO Check Rain Class properties
         double humidity = weatherDTO.getMainData().getHumidity();
         double clouds = weatherDTO.getClouds().getAllClouds();
         double windSpeed = weatherDTO.getWind().getSpeed();
@@ -29,20 +25,6 @@ public class SQLiteInsertWeatherData {
         }
 
         try {
-
-            ArrayList<String> islands = new ArrayList<>() {
-                {
-                    add("Gran_Canaria");
-                    add("Fuerteventura");
-                    add("Lanzarote");
-                    add("La_Graciosa");
-                    add("Tenerife");
-                    add("La_Gomera");
-                    add("La_Palma");
-                    add("El_Hierro");
-                }
-            };
-
             String insertSQL = "INSERT INTO table_" + islandName + "_weather (datetime, temperature, precipitation, " +
                     "humidity, clouds, wind_speed) VALUES (?, ?, ?, ?, ?, ?)";
 
