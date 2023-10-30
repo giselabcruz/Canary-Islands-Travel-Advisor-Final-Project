@@ -1,8 +1,8 @@
 package Gisela_DACD.P1Model;
 
-public class WeatherData {
+public class WeatherDTO {
     private Wind wind;
-    private MainData main;
+    private WeatherMainDTO main;
     private Clouds clouds;
     private Rain rain;
 
@@ -13,10 +13,10 @@ public class WeatherData {
     public void setWind(Wind wind) {
         this.wind = wind;
     }
-    public MainData getMainData() {
+    public WeatherMainDTO getMainData() {
         return main;
     }
-    public void setMainData(MainData main) {
+    public void setMainData(WeatherMainDTO main) {
         this.main = main;
     }
 
