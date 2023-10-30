@@ -1,6 +1,8 @@
 package Gisela_DACD.Infrastructure.SQLite;
 
+import Gisela_DACD.P1Model.Rain;
 import Gisela_DACD.P1Model.WeatherDTO;
+import Gisela_DACD.P1Model.WeatherDataFetcher;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -18,6 +20,13 @@ public class SQLiteInsertWeatherData {
         double humidity = weatherDTO.getMainData().getHumidity();
         double clouds = weatherDTO.getClouds().getAllClouds();
         double windSpeed = weatherDTO.getWind().getSpeed();
+        double precipitation = 0;
+
+        if (weatherDTO.getRain() != null) {
+            if (weatherDTO.getRain() != null) {
+                precipitation = weatherDTO.getRain().getHour();
+            }
+        }
 
         try {
 
