@@ -5,24 +5,18 @@ import Gisela_DACD.Infrastructure.SQLite.SQLiteInsertWeatherData;
 import Gisela_DACD.P1Model.Island;
 import Gisela_DACD.P1Model.Weather;
 
-import java.sql.SQLException;
-
 public class WeatherRepositorySQLite implements WeatherRepository {
 
-    public WeatherDataSaverInSQLite() {
+    private final SQLiteConnector connector;
 
+    public WeatherRepositorySQLite(SQLiteConnector connector) {
+        this.connector = connector;
     }
 
     @Override
-    public void saveWeatherData(Island island, WeatherDTO weatherDTO) {
-        SQLiteConnector connector = null;
-        try {
-            connector = new SQLiteConnector();
-            connector.createOrUpdateTable();
-            SQLiteInsertWeatherData.insert(island.getName(), weatherDTO, connector.getConnection());
-            connector.closeConnection();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+    public void saveWeatherData(Island island, Weather weather) {
+        connector.createOrUpdateTable();
+        SQLiteInsertWeatherData.insert(island.getName(), weather, connector.getConnection());
+        connector.closeConnection();
     }
 }
