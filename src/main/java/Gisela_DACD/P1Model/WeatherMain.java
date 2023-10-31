@@ -1,6 +1,6 @@
 package Gisela_DACD.P1Model;
 
-public class WeatherMainDTO {
+public class WeatherMain {
     private double temp;
     private double humidity;
 

@@ -1,11 +1,13 @@
-package Gisela_DACD.P1Model;
+package Gisela_DACD.P1Controller;
 
 import Gisela_DACD.Infrastructure.SQLite.SQLiteConnector;
 import Gisela_DACD.Infrastructure.SQLite.SQLiteInsertWeatherData;
+import Gisela_DACD.P1Model.Island;
+import Gisela_DACD.P1Model.Weather;
 
 import java.sql.SQLException;
 
-public class WeatherDataSaverInSQLite implements WeatherDataRepository {
+public class WeatherRepositorySQLite implements WeatherRepository {
 
     public WeatherDataSaverInSQLite() {
 

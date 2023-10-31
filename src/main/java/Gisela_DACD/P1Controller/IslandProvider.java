@@ -1,4 +1,6 @@
-package Gisela_DACD.P1Model;
+package Gisela_DACD.P1Controller;
+
+import Gisela_DACD.P1Model.Island;
 
 import java.util.ArrayList;
 

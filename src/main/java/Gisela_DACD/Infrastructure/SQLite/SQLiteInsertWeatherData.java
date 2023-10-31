@@ -1,6 +1,6 @@
 package Gisela_DACD.Infrastructure.SQLite;
 
-import Gisela_DACD.P1Model.WeatherDTO;
+import Gisela_DACD.P1Model.Weather;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -9,18 +9,18 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class SQLiteInsertWeatherData {
-    public static void insert(String islandName, WeatherDTO weatherDTO, Connection connection) {
+    public static void insert(String islandName, Weather weather, Connection connection) {
 
         Date date = new Date();
-        double temperature = weatherDTO.getMainData().getTemp();
-        double humidity = weatherDTO.getMainData().getHumidity();
-        double clouds = weatherDTO.getClouds().getAllClouds();
-        double windSpeed = weatherDTO.getWind().getSpeed();
+        double temperature = weather.getMainData().getTemp();
+        double humidity = weather.getMainData().getHumidity();
+        double clouds = weather.getClouds().getAllClouds();
+        double windSpeed = weather.getWind().getSpeed();
         double precipitation = 0;
 
-        if (weatherDTO.getRain() != null) {
-            if (weatherDTO.getRain() != null) {
-                precipitation = weatherDTO.getRain().getHour();
+        if (weather.getRain() != null) {
+            if (weather.getRain() != null) {
+                precipitation = weather.getRain().getHour();
             }
         }
 

@@ -1,5 +1,7 @@
-package Gisela_DACD.P1Model;
+package Gisela_DACD.P1Controller;
 
+import Gisela_DACD.P1Model.Island;
+import Gisela_DACD.P1Model.Weather;
 import com.google.gson.Gson;
 import org.apache.hc.client5.http.classic.methods.HttpGet;
 import org.apache.hc.client5.http.impl.classic.CloseableHttpClient;
@@ -11,16 +13,16 @@ import org.apache.hc.core5.http.io.entity.EntityUtils;
 
 import java.io.IOException;
 
-public class WeatherDataFetcher implements WeatherDataProvider {
+public class WeatherController implements WeatherSupplier {
 
     private final String apiKey;
 
-    public WeatherDataFetcher(String apiKey) {
+    public WeatherController(String apiKey) {
         this.apiKey = apiKey;
     }
 
     @Override
-    public WeatherDTO getWeatherData(Island island) {
+    public Weather getWeatherData(Island island) {
         String url = String.format("https://api.openweathermap.org/data/2.5/forecast?lat=%s&lon=%s&units=metric&appid=%s",
                 island.getLat(), island.getLongitude(), apiKey);
 
@@ -30,7 +32,7 @@ public class WeatherDataFetcher implements WeatherDataProvider {
                 HttpEntity entity = response.getEntity();
                 String responseBody = EntityUtils.toString(entity);
                 Gson gson = new Gson();
-                return gson.fromJson(responseBody, WeatherDTO.class);
+                return gson.fromJson(responseBody, Weather.class);
             }
         } catch (IOException | ParseException e) {
             throw new RuntimeException(e);
