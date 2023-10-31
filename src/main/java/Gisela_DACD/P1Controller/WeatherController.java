@@ -1,6 +1,6 @@
 package Gisela_DACD.P1Controller;
 
-import Gisela_DACD.P1Model.Island;
+import Gisela_DACD.P1Model.Location;
 import Gisela_DACD.P1Model.Weather;
 import com.google.gson.Gson;
 import org.apache.hc.client5.http.classic.methods.HttpGet;
@@ -22,9 +22,9 @@ public class WeatherController implements WeatherSupplier {
     }
 
     @Override
-    public Weather getWeatherData(Island island) {
+    public Weather getWeatherData(Location location) {
         String url = String.format("https://api.openweathermap.org/data/2.5/forecast?lat=%s&lon=%s&units=metric&appid=%s",
-                island.getLat(), island.getLongitude(), apiKey);
+                location.getLat(), location.getLongitude(), apiKey);
 
         try (CloseableHttpClient httpclient = HttpClients.createDefault()) {
             HttpGet httpGet = new HttpGet(url);

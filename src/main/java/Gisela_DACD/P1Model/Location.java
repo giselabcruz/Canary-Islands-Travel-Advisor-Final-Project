@@ -1,11 +1,11 @@
 package Gisela_DACD.P1Model;
 
-public class Island {
+public class Location {
     private String name;
     private double lat;
     private double longitude;
 
-    public Island(String name, double lat, double longitude) {
+    public Location(String name, double lat, double longitude) {
         this.name = name;
         this.lat = lat;
         this.longitude = longitude;

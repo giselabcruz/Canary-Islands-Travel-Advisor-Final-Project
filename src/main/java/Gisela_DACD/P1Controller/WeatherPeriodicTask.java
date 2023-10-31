@@ -1,6 +1,6 @@
 package Gisela_DACD.P1Controller;
 
-import Gisela_DACD.P1Model.Island;
+import Gisela_DACD.P1Model.Location;
 import Gisela_DACD.P1Model.Weather;
 
 import java.util.ArrayList;
@@ -9,19 +9,19 @@ import java.util.TimerTask;
 public class WeatherPeriodicTask extends TimerTask {
     private WeatherController weatherController;
     private WeatherRepository weatherRepository;
-    private ArrayList<Island> islands;
+    private ArrayList<Location> locations;
 
-    public WeatherPeriodicTask(WeatherController weatherController, WeatherRepository weatherRepository, ArrayList<Island> islands) {
+    public WeatherPeriodicTask(WeatherController weatherController, WeatherRepository weatherRepository, ArrayList<Location> locations) {
         this.weatherController = weatherController;
         this.weatherRepository = weatherRepository;
-        this.islands = islands;
+        this.locations = locations;
     }
 
     @Override
     public void run() {
-        for (Island island : islands) {
-            Weather weather = weatherController.getWeatherData(island);
-            weatherRepository.saveWeatherData(island, weather);
+        for (Location location : locations) {
+            Weather weather = weatherController.getWeatherData(location);
+            weatherRepository.saveWeatherData(location, weather);
         }
     }
 }

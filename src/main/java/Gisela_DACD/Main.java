@@ -13,13 +13,13 @@ public class Main {
     public static void main(String[] args) throws SQLException {
         Dotenv dotenv = Dotenv.configure().load();
         String apiKey = dotenv.get("OPEN_WEATHER_APIKEY");
-        ArrayList<Island> islands = IslandProvider.initializeIslands();
+        ArrayList<Location> locations = LocationSupplier.initializeIslands();
 
         WeatherController weatherController = new WeatherController(apiKey);
         WeatherRepository weatherRepository = new WeatherRepositorySQLite(new SQLiteConnector());
 
         Timer timer = new Timer();
-        WeatherPeriodicTask updaterTask = new WeatherPeriodicTask(weatherController, weatherRepository, islands);
+        WeatherPeriodicTask updaterTask = new WeatherPeriodicTask(weatherController, weatherRepository, locations);
         timer.schedule(updaterTask, 0, 6 * 60 * 60 * 1000);
     }
 }
