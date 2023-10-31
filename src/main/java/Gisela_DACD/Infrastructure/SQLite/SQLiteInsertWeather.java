@@ -8,7 +8,7 @@ import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class SQLiteInsertWeatherData {
+public class SQLiteInsertWeather {
     public static void insert(String islandName, Weather weather, Connection connection) {
 
         Date date = new Date();
