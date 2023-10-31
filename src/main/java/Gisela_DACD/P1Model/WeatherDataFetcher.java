@@ -21,7 +21,7 @@ public class WeatherDataFetcher implements WeatherDataProvider {
 
     @Override
     public WeatherDTO getWeatherData(Island island) {
-        String url = String.format("https://api.openweathermap.org/data/2.5/weather?lat=%s&lon=%s&units=metric&appid=%s",
+        String url = String.format("https://api.openweathermap.org/data/2.5/forecast?lat=%s&lon=%s&units=metric&appid=%s",
                 island.getLat(), island.getLongitude(), apiKey);
 
         try (CloseableHttpClient httpclient = HttpClients.createDefault()) {
