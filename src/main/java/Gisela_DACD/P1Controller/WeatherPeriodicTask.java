@@ -7,21 +7,21 @@ import java.util.ArrayList;
 import java.util.TimerTask;
 
 public class WeatherPeriodicTask extends TimerTask {
-    private WeatherController dataFetcher;
-    private WeatherRepository dataSaver;
+    private WeatherController weatherController;
+    private WeatherRepository weatherRepository;
     private ArrayList<Island> islands;
 
-    public WeatherPeriodicTask(WeatherController dataFetcher, WeatherRepository dataSaver, ArrayList<Island> islands) {
-        this.dataFetcher = dataFetcher;
-        this.dataSaver = dataSaver;
+    public WeatherPeriodicTask(WeatherController weatherController, WeatherRepository weatherRepository, ArrayList<Island> islands) {
+        this.weatherController = weatherController;
+        this.weatherRepository = weatherRepository;
         this.islands = islands;
     }
 
     @Override
     public void run() {
         for (Island island : islands) {
-            Weather weather = dataFetcher.getWeatherData(island);
-            dataSaver.saveWeatherData(island, weather);
+            Weather weather = weatherController.getWeatherData(island);
+            weatherRepository.saveWeatherData(island, weather);
         }
     }
 }
