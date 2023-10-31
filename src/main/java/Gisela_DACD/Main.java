@@ -15,11 +15,13 @@ public class Main {
         String apiKey = dotenv.get("OPEN_WEATHER_APIKEY");
         ArrayList<Location> locations = LocationSupplier.initializeIslands();
 
-        WeatherController weatherController = new WeatherController(apiKey);
+        WeatherQuery weatherQuery = new WeatherQuery(apiKey);
         WeatherRepository weatherRepository = new WeatherRepositorySQLite(new SQLiteConnector());
 
+        WeatherController weatherController = new WeatherController(weatherQuery, weatherRepository, locations);
+
         Timer timer = new Timer();
-        WeatherPeriodicTask updaterTask = new WeatherPeriodicTask(weatherController, weatherRepository, locations);
+        WeatherPeriodicTask updaterTask = new WeatherPeriodicTask(weatherController);
         timer.schedule(updaterTask, 0, 6 * 60 * 60 * 1000);
     }
 }
