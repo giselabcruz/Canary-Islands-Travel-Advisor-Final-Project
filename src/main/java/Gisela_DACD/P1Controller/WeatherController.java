@@ -2,6 +2,7 @@ package Gisela_DACD.P1Controller;
 
 import Gisela_DACD.P1Model.Location;
 import Gisela_DACD.P1Model.Weather;
+import Gisela_DACD.P1Model.WeatherList;
 
 import java.util.ArrayList;
 
@@ -18,8 +19,10 @@ public class WeatherController {
 
     public void execute(){
         for (Location location : locations) {
-            Weather weather = weatherOpenWeatherApiQuery.getWeatherData(location);
-            weatherRepository.saveWeatherData(location, weather);
+            WeatherList weatherlist = weatherOpenWeatherApiQuery.getWeatherData(location);
+            for (Weather weather : weatherlist.getList()) {
+                weatherRepository.saveWeatherData(location, weather);
+            }
         }
     }
 }

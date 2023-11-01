@@ -7,11 +7,12 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.concurrent.TimeUnit;
 
 public class SQLiteInsertWeather {
     public static void insert(String islandName, Weather weather, Connection connection) {
 
-        Date date = new Date();
+        Date date = new Date(TimeUnit.SECONDS.toMillis(weather.getDt()));
         double temperature = weather.getMainData().getTemp();
         double humidity = weather.getMainData().getHumidity();
         double clouds = weather.getClouds().getAllClouds();

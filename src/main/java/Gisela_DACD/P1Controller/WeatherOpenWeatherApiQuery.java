@@ -1,7 +1,7 @@
 package Gisela_DACD.P1Controller;
 
 import Gisela_DACD.P1Model.Location;
-import Gisela_DACD.P1Model.Weather;
+import Gisela_DACD.P1Model.WeatherList;
 import com.google.gson.Gson;
 import org.apache.hc.client5.http.classic.methods.HttpGet;
 import org.apache.hc.client5.http.impl.classic.CloseableHttpClient;
@@ -22,7 +22,7 @@ public class WeatherOpenWeatherApiQuery implements WeatherQuery {
     }
 
     @Override
-    public Weather getWeatherData(Location location) {
+    public WeatherList getWeatherData(Location location) {
         String url = String.format("https://api.openweathermap.org/data/2.5/forecast?lat=%s&lon=%s&units=metric&appid=%s",
                 location.getLat(), location.getLongitude(), apiKey);
 
@@ -32,7 +32,7 @@ public class WeatherOpenWeatherApiQuery implements WeatherQuery {
                 HttpEntity entity = response.getEntity();
                 String responseBody = EntityUtils.toString(entity);
                 Gson gson = new Gson();
-                return gson.fromJson(responseBody, Weather.class);
+                return gson.fromJson(responseBody, WeatherList.class);
             }
         } catch (IOException | ParseException e) {
             throw new RuntimeException(e);

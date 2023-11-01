@@ -1,9 +1,9 @@
 package Gisela_DACD.P1Controller;
 
 import Gisela_DACD.P1Model.Location;
-import Gisela_DACD.P1Model.Weather;
+import Gisela_DACD.P1Model.WeatherList;
 
 public interface WeatherQuery {
-    Weather getWeatherData(Location location);
+    WeatherList getWeatherData(Location location);
 
 }
