@@ -17,6 +17,6 @@ public class WeatherRepositorySQLite implements WeatherRepository {
     public void saveWeatherData(Location location, Weather weather) {
         connector.createOrUpdateTable();
         SQLiteInsertWeather.insert(location.getName(), weather, connector.getConnection());
-        connector.closeConnection();
+        //connector.closeConnection();
     }
 }

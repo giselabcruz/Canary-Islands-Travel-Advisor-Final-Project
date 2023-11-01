@@ -47,13 +47,13 @@ public class SQLiteInsertWeather {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            try {
-                if (connection != null) {
-                    connection.close();
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
+//            try {
+//                if (connection != null) {
+//                    connection.close();
+//                }
+//            } catch (SQLException e) {
+//                e.printStackTrace();
+//            }
         }
     }
 }
