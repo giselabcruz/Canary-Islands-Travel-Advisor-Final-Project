@@ -1,6 +1,6 @@
 package Gisela_DACD;
 
-import Gisela_DACD.Infrastructure.SQLite.SQLiteConnector;
+import Gisela_DACD.P1Controller.SQLiteConnector;
 import Gisela_DACD.P1Controller.*;
 import Gisela_DACD.P1Model.*;
 import io.github.cdimascio.dotenv.Dotenv;
@@ -16,12 +16,16 @@ public class Main {
         ArrayList<Location> locations = LocationSupplier.initializeIslands();
 
         WeatherOpenWeatherApiQuery weatherOpenWeatherApiQuery = new WeatherOpenWeatherApiQuery(apiKey);
-        WeatherRepository weatherRepository = new WeatherRepositorySQLite(new SQLiteConnector());
+        SQLiteConnector connector = new SQLiteConnector();
+        connector.createOrUpdateTable();
+        WeatherRepository weatherRepository = new WeatherRepositorySQLite(connector.getConnection());
 
         WeatherController weatherController = new WeatherController(weatherOpenWeatherApiQuery, weatherRepository, locations);
 
         Timer timer = new Timer();
-        WeatherPeriodicTask updaterTask = new WeatherPeriodicTask(weatherController);
+        WeatherPeriodicTask updaterTask = new WeatherPeriodicTask(weatherController, "jdbc:sqlite:canary_islands_weather.db", weatherOpenWeatherApiQuery, locations);
         timer.schedule(updaterTask, 0, 6 * 60 * 60 * 1000);
+
+        connector.closeConnection();
     }
 }
