@@ -4,6 +4,7 @@ import Gisela_DACD.P1Model.Location;
 import Gisela_DACD.P1Model.Weather;
 import Gisela_DACD.P1Model.WeatherList;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class WeatherController {
@@ -17,7 +18,7 @@ public class WeatherController {
         this.locations = locations;
     }
 
-    public void execute(){
+    public void execute() throws SQLException {
         for (Location location : locations) {
             WeatherList weatherlist = weatherOpenWeatherApiQuery.getWeatherData(location);
             for (Weather weather : weatherlist.getList()) {
