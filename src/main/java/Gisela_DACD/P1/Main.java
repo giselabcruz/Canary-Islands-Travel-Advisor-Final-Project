@@ -1,8 +1,7 @@
-package Gisela_DACD;
+package Gisela_DACD.P1;
 
-import Gisela_DACD.P1Controller.SQLiteConnector;
-import Gisela_DACD.P1Controller.*;
-import Gisela_DACD.P1Model.*;
+import Gisela_DACD.P1.controller.*;
+import Gisela_DACD.P1.model.Location;
 import io.github.cdimascio.dotenv.Dotenv;
 
 import java.sql.SQLException;
@@ -15,7 +14,7 @@ public class Main {
         String apiKey = dotenv.get("OPEN_WEATHER_APIKEY");
         ArrayList<Location> locations = LocationSupplier.initializeIslands();
 
-        WeatherOpenWeatherApiQuery weatherOpenWeatherApiQuery = new WeatherOpenWeatherApiQuery(apiKey);
+        WeatherOpenWeatherProvider weatherOpenWeatherApiQuery = new WeatherOpenWeatherProvider(apiKey);
         SQLiteConnector connector = new SQLiteConnector();
         connector.createOrUpdateTable();
         WeatherRepository weatherRepository = new WeatherRepositorySQLite(connector.getConnection());

@@ -19,7 +19,7 @@ Data Science Application Development
 
 # Funcionality
 
-Java application that every 6 hours queries the service's API to obtain the weather forecast for the 8 Canary Islands for the next 5 days at 12 a.m.
+Java application that every 6 hours queries the service's API to obtain the weatherDTO forecast for the 8 Canary Islands for the next 5 days at 12 a.m.
 
 The acquired data is persisted in an SQLite database, with a separate table for each island and an entry for each day. This entry include temperature, precipitation, humidity, cloud cover, and wind speed for each day.
 

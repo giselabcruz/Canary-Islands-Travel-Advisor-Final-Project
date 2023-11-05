@@ -1,6 +1,6 @@
-package Gisela_DACD.P1Controller;
+package Gisela_DACD.P1.controller;
 
-import Gisela_DACD.P1Model.Location;
+import Gisela_DACD.P1.model.Location;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -12,12 +12,12 @@ public class WeatherPeriodicTask extends TimerTask {
     private final WeatherController weatherController;
     private String url;
 
-    private WeatherOpenWeatherApiQuery weatherOpenWeatherApiQuery;
+    private WeatherOpenWeatherProvider weatherOpenWeatherApiQuery;
 
     private ArrayList<Location> locations;
 
 
-    public WeatherPeriodicTask(WeatherController weatherController, String url, WeatherOpenWeatherApiQuery weatherOpenWeatherApiQuery, ArrayList<Location> locations) {
+    public WeatherPeriodicTask(WeatherController weatherController, String url, WeatherOpenWeatherProvider weatherOpenWeatherApiQuery, ArrayList<Location> locations) {
         this.weatherController = weatherController;
         this.url = url;
         this.weatherOpenWeatherApiQuery = weatherOpenWeatherApiQuery ;

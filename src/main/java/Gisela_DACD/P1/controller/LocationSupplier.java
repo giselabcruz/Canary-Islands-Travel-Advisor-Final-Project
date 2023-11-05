@@ -1,6 +1,6 @@
-package Gisela_DACD.P1Controller;
+package Gisela_DACD.P1.controller;
 
-import Gisela_DACD.P1Model.Location;
+import Gisela_DACD.P1.model.Location;
 
 import java.util.ArrayList;
 

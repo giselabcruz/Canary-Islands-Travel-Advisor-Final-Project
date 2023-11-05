@@ -1,4 +1,4 @@
-package Gisela_DACD.P1Model;
+package Gisela_DACD.P1.model;
 
 public class Location {
     private String name;
