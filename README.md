@@ -28,6 +28,7 @@ The acquired data is persisted in an SQLite database, with a separate table for 
 - Version Control Tools: Git and GitHub
 - Weather API: [OpenWeather 5 Day / 3 Hour Forecast API](https://openweathermap.org/forecast5)
 - [SQLite Documentation](https://www.sqlite.org/docs.html)
+- Documentation Tools: Markdown for README.md
 
 
 # Design
@@ -35,6 +36,9 @@ The acquired data is persisted in an SQLite database, with a separate table for 
 In this project, various design patterns and principles were applied to achieve efficient and maintainable code.
 
 ### Class Diagram:
+
+### Desing Pattern
+In this project, the Model-View-Controller (MVC) design pattern has been employed, with the caveat that the View layer has not been implemented. This is due to user interface is no required for this practice.
 
 ### Implemented Design Principles
 In this project, the Model-View-Controller (MVC) design pattern has been employed, with the caveat that the View layer has not been implemented. This is due to user interface is no required for this practice.
