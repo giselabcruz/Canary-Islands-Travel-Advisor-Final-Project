@@ -11,16 +11,14 @@ import java.util.TimerTask;
 public class WeatherPeriodicTask extends TimerTask {
     private final WeatherController weatherController;
     private String url;
-
-    private WeatherOpenWeatherProvider weatherOpenWeatherApiQuery;
-
+    private OpenWeatherProvider weatherProvider;
     private ArrayList<Location> locations;
 
 
-    public WeatherPeriodicTask(WeatherController weatherController, String url, WeatherOpenWeatherProvider weatherOpenWeatherApiQuery, ArrayList<Location> locations) {
+    public WeatherPeriodicTask(WeatherController weatherController, String url, OpenWeatherProvider weatherProvider, ArrayList<Location> locations) {
         this.weatherController = weatherController;
         this.url = url;
-        this.weatherOpenWeatherApiQuery = weatherOpenWeatherApiQuery ;
+        this.weatherProvider = weatherProvider;
         this.locations = locations;
     }
 
@@ -29,7 +27,7 @@ public class WeatherPeriodicTask extends TimerTask {
         try {
             Connection connection = DriverManager.getConnection(url);
             WeatherRepository weatherRepository = new WeatherRepositorySQLite(connection);
-            WeatherController weatherController = new WeatherController(weatherOpenWeatherApiQuery, weatherRepository, locations);
+            WeatherController weatherController = new WeatherController(weatherProvider, weatherRepository, locations);
             weatherController.execute();
             connection.close();
         } catch (SQLException e) {

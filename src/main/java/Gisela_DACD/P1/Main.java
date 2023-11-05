@@ -14,7 +14,7 @@ public class Main {
         String apiKey = dotenv.get("OPEN_WEATHER_APIKEY");
         ArrayList<Location> locations = LocationSupplier.initializeIslands();
 
-        WeatherOpenWeatherProvider weatherOpenWeatherApiQuery = new WeatherOpenWeatherProvider(apiKey);
+        OpenWeatherProvider weatherOpenWeatherApiQuery = new OpenWeatherProvider(apiKey);
         SQLiteConnector connector = new SQLiteConnector();
         connector.createOrUpdateTable();
         WeatherRepository weatherRepository = new WeatherRepositorySQLite(connector.getConnection());

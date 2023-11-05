@@ -8,21 +8,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class WeatherController {
-    private final WeatherOpenWeatherProvider weatherOpenWeatherApiQuery;
+    private final OpenWeatherProvider openWeatherProvider;
     private final WeatherRepository weatherRepository;
     private final ArrayList<Location> locations;
 
-    public WeatherController(WeatherOpenWeatherProvider weatherOpenWeatherApiQuery, WeatherRepository weatherRepository, ArrayList<Location> locations) {
-        this.weatherOpenWeatherApiQuery = weatherOpenWeatherApiQuery;
+    public WeatherController(OpenWeatherProvider openWeatherProvider, WeatherRepository weatherRepository, ArrayList<Location> locations) {
+        this.openWeatherProvider = openWeatherProvider;
         this.weatherRepository = weatherRepository;
         this.locations = locations;
     }
 
     public void execute() throws SQLException {
         for (Location location : locations) {
-            List<Weather> weatherlist = weatherOpenWeatherApiQuery.getWeatherData(location);
-            for (Weather weatherDTO : weatherlist) {
-                weatherRepository.saveWeatherData(location, weatherDTO);
+            List<Weather> weatherlist = openWeatherProvider.getWeatherData(location);
+            for (Weather weather : weatherlist) {
+                weatherRepository.saveWeatherData(location, weather);
             }
         }
     }

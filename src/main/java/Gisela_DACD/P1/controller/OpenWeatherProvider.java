@@ -21,10 +21,9 @@ import java.util.Date;
 import java.util.List;
 
 
-public class WeatherOpenWeatherProvider implements WeatherProvider {
-
+public class OpenWeatherProvider implements WeatherProvider {
     private final String apiKey;
-    public WeatherOpenWeatherProvider(String apiKey) {
+    public OpenWeatherProvider(String apiKey) {
         this.apiKey = apiKey;
     }
     @Override
