@@ -28,42 +28,57 @@ public class OpenWeatherProvider implements WeatherProvider {
     }
     @Override
     public List<Weather> getWeatherData(Location location) {
-        String url = String.format("https://api.openweathermap.org/data/2.5/forecast?lat=%s&lon=%s&units=metric&appid=%s",
-                location.getLat(), location.getLongitude(), apiKey);
+        String url = buildApiUrl(location);
 
         try (CloseableHttpClient httpclient = HttpClients.createDefault()) {
             HttpGet httpGet = new HttpGet(url);
             try (CloseableHttpResponse response = httpclient.execute(httpGet)) {
-                HttpEntity entity = response.getEntity();
-                String responseBody = EntityUtils.toString(entity);
-                Gson gson = new Gson();
-                JsonObject weatherResponse = gson.fromJson(responseBody, JsonObject.class);
-                JsonArray list = weatherResponse.get("list").getAsJsonArray();
-                List<Weather> weatherList = new ArrayList<>();
-                for (JsonElement l : list) {
-                    JsonObject jsonObject = l.getAsJsonObject();
-                    long ts = jsonObject.get("dt").getAsLong();
-                    double temperature = jsonObject.get("main").getAsJsonObject().get("temp").getAsDouble();
-                    double humidity = jsonObject.get("main").getAsJsonObject().get("humidity").getAsDouble();
-                    double clouds = jsonObject.get("clouds").getAsJsonObject().get("all").getAsDouble();
-                    double windSpeed = jsonObject.get("wind").getAsJsonObject().get("speed").getAsDouble();
-                    double precipitation = 0.0;
-                    if (jsonObject.get("rain") != null) {
-                        precipitation = jsonObject.get("rain").getAsJsonObject().get("3h").getAsDouble();
-                    }
-                    Date date = new Date(ts * 1000);
-                    SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
-                    String formattedDate = dateFormat.format(date);
-                    if(formattedDate.equals("00:00:00")) {
-                        Weather weather = new Weather(humidity, temperature, precipitation, clouds, windSpeed, location,
-                                date.toInstant());
-                        weatherList.add(weather);
-                    }
-                }
-                return weatherList;
+                String responseBody = obtainResponseBody(response);
+                return obtainWeatherFromJson(responseBody, location);
+            } catch (ParseException e) {
+                throw new RuntimeException(e);
             }
-        } catch (IOException | ParseException e) {
+        } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    private String buildApiUrl(Location location) {
+        return String.format("https://api.openweathermap.org/data/2.5/forecast?lat=%s&lon=%s&units=metric&appid=%s",
+                location.getLat(), location.getLongitude(), apiKey);
+    }
+
+    private String obtainResponseBody(CloseableHttpResponse response) throws IOException, ParseException {
+        HttpEntity entity = response.getEntity();
+        return EntityUtils.toString(entity);
+    }
+
+    private List<Weather> obtainWeatherFromJson(String responseBody, Location location) {
+        Gson gson = new Gson();
+        JsonObject weatherResponse = gson.fromJson(responseBody, JsonObject.class);
+        JsonArray list = weatherResponse.get("list").getAsJsonArray();
+        List<Weather> weatherList = new ArrayList<>();
+
+        for (JsonElement l : list) {
+            JsonObject jsonObject = l.getAsJsonObject();
+            long ts = jsonObject.get("dt").getAsLong();
+            double temperature = jsonObject.get("main").getAsJsonObject().get("temp").getAsDouble();
+            double humidity = jsonObject.get("main").getAsJsonObject().get("humidity").getAsDouble();
+            double clouds = jsonObject.get("clouds").getAsJsonObject().get("all").getAsDouble();
+            double windSpeed = jsonObject.get("wind").getAsJsonObject().get("speed").getAsDouble();
+            double precipitation = 0.0;
+            if (jsonObject.get("rain") != null) {
+                precipitation = jsonObject.get("rain").getAsJsonObject().get("3h").getAsDouble();
+            }
+            Date date = new Date(ts * 1000);
+            SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
+            String formattedDate = dateFormat.format(date);
+            if (formattedDate.equals("00:00:00")) {
+                Weather weather = new Weather(humidity, temperature, precipitation, clouds, windSpeed, location,
+                        date.toInstant());
+                weatherList.add(weather);
+            }
+        }
+        return weatherList;
     }
 }
