@@ -54,6 +54,19 @@ public class OpenWeatherProvider implements WeatherProvider {
         return EntityUtils.toString(entity);
     }
 
+    private List<Weather> obtainWeatherFromJson(String responseBody, Location location) {
+        Gson gson = new Gson();
+        JsonObject weatherResponse = gson.fromJson(responseBody, JsonObject.class);
+        JsonArray list = weatherResponse.getAsJsonArray("list");
+        List<Weather> weatherList = new ArrayList<>();
+
+        list.forEach(jsonElement -> {
+            JsonObject jsonObject = jsonElement.getAsJsonObject();
+            processWeather(jsonObject, location, weatherList);
+        });
+        return weatherList;
+    }
+
     private void processWeather(JsonObject jsonObject, Location location, List<Weather> weatherList) {
         double ts = getTsFrom(jsonObject);
         Date date = new Date((long) (ts * 1000));
@@ -70,19 +83,6 @@ public class OpenWeatherProvider implements WeatherProvider {
             Weather weather = new Weather(humidity, temperature, precipitation, clouds, windSpeed, location, date.toInstant());
             weatherList.add(weather);
         }
-    }
-
-    private List<Weather> obtainWeatherFromJson(String responseBody, Location location) {
-        Gson gson = new Gson();
-        JsonObject weatherResponse = gson.fromJson(responseBody, JsonObject.class);
-        JsonArray list = weatherResponse.getAsJsonArray("list");
-        List<Weather> weatherList = new ArrayList<>();
-
-        list.forEach(jsonElement -> {
-            JsonObject jsonObject = jsonElement.getAsJsonObject();
-            processWeather(jsonObject, location, weatherList);
-        });
-        return weatherList;
     }
 
     private double getTsFrom(JsonObject jsonObject) {
