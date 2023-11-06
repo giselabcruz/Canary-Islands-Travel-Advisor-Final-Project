@@ -4,7 +4,6 @@ import Gisela_DACD.P1.model.Location;
 import Gisela_DACD.P1.model.Weather;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import org.apache.hc.client5.http.classic.methods.HttpGet;
 import org.apache.hc.client5.http.impl.classic.CloseableHttpClient;
@@ -56,29 +55,54 @@ public class OpenWeatherProvider implements WeatherProvider {
     private List<Weather> obtainWeatherFromJson(String responseBody, Location location) {
         Gson gson = new Gson();
         JsonObject weatherResponse = gson.fromJson(responseBody, JsonObject.class);
-        JsonArray list = weatherResponse.get("list").getAsJsonArray();
+        JsonArray list = weatherResponse.getAsJsonArray("list");
         List<Weather> weatherList = new ArrayList<>();
 
-        for (JsonElement l : list) {
-            JsonObject jsonObject = l.getAsJsonObject();
-            long ts = jsonObject.get("dt").getAsLong();
-            double temperature = jsonObject.get("main").getAsJsonObject().get("temp").getAsDouble();
-            double humidity = jsonObject.get("main").getAsJsonObject().get("humidity").getAsDouble();
-            double clouds = jsonObject.get("clouds").getAsJsonObject().get("all").getAsDouble();
-            double windSpeed = jsonObject.get("wind").getAsJsonObject().get("speed").getAsDouble();
-            double precipitation = 0.0;
-            if (jsonObject.get("rain") != null) {
-                precipitation = jsonObject.get("rain").getAsJsonObject().get("3h").getAsDouble();
-            }
+        list.forEach(jsonElement -> {
+            JsonObject jsonObject = jsonElement.getAsJsonObject();
+            long ts = (long) tsObject(jsonObject);
+            double temperature = temperatureObject(jsonObject);
+            double humidity = humidityObject(jsonObject);
+            double clouds = cloudsObject(jsonObject);
+            double windSpeed = windSpeedObject(jsonObject);
+            double precipitation = precipitationObject(jsonObject);
+
             Date date = new Date(ts * 1000);
             SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
             String formattedDate = dateFormat.format(date);
             if (formattedDate.equals("00:00:00")) {
-                Weather weather = new Weather(humidity, temperature, precipitation, clouds, windSpeed, location,
-                        date.toInstant());
+                Weather weather = new Weather(humidity, temperature, precipitation, clouds, windSpeed, location, date.toInstant());
                 weatherList.add(weather);
             }
-        }
+        });
+
         return weatherList;
+    }
+
+    private double tsObject(JsonObject jsonObject) {
+        return jsonObject.get("dt").getAsLong();
+    }
+
+    private double temperatureObject(JsonObject jsonObject) {
+        return jsonObject.get("main").getAsJsonObject().get("temp").getAsDouble();
+    }
+
+    private double humidityObject(JsonObject jsonObject) {
+        return jsonObject.get("main").getAsJsonObject().get("humidity").getAsDouble();
+    }
+
+    private double cloudsObject(JsonObject jsonObject) {
+        return jsonObject.get("clouds").getAsJsonObject().get("all").getAsDouble();
+    }
+
+    private double windSpeedObject(JsonObject jsonObject) {
+        return jsonObject.get("wind").getAsJsonObject().get("speed").getAsDouble();
+    }
+
+    private double precipitationObject(JsonObject jsonObject) {
+        if (jsonObject.get("rain") != null) {
+            return jsonObject.get("rain").getAsJsonObject().get("3h").getAsDouble();
+        }
+        return 0.0;
     }
 }
