@@ -22,9 +22,11 @@ import java.util.List;
 
 public class OpenWeatherProvider implements WeatherProvider {
     private final String apiKey;
+
     public OpenWeatherProvider(String apiKey) {
         this.apiKey = apiKey;
     }
+
     @Override
     public List<Weather> getWeatherData(Location location) {
         String url = buildApiUrl(location);
@@ -52,6 +54,24 @@ public class OpenWeatherProvider implements WeatherProvider {
         return EntityUtils.toString(entity);
     }
 
+    private void processWeather(JsonObject jsonObject, Location location, List<Weather> weatherList) {
+        double ts = tsObject(jsonObject);
+        Date date = new Date((long) (ts * 1000));
+        SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
+        String formattedDate = dateFormat.format(date);
+
+        if (formattedDate.equals("00:00:00")) {
+            double temperature = temperatureObject(jsonObject);
+            double humidity = humidityObject(jsonObject);
+            double clouds = cloudsObject(jsonObject);
+            double windSpeed = windSpeedObject(jsonObject);
+            double precipitation = precipitationObject(jsonObject);
+
+            Weather weather = new Weather(humidity, temperature, precipitation, clouds, windSpeed, location, date.toInstant());
+            weatherList.add(weather);
+        }
+    }
+
     private List<Weather> obtainWeatherFromJson(String responseBody, Location location) {
         Gson gson = new Gson();
         JsonObject weatherResponse = gson.fromJson(responseBody, JsonObject.class);
@@ -60,22 +80,8 @@ public class OpenWeatherProvider implements WeatherProvider {
 
         list.forEach(jsonElement -> {
             JsonObject jsonObject = jsonElement.getAsJsonObject();
-            long ts = (long) tsObject(jsonObject);
-            double temperature = temperatureObject(jsonObject);
-            double humidity = humidityObject(jsonObject);
-            double clouds = cloudsObject(jsonObject);
-            double windSpeed = windSpeedObject(jsonObject);
-            double precipitation = precipitationObject(jsonObject);
-
-            Date date = new Date(ts * 1000);
-            SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
-            String formattedDate = dateFormat.format(date);
-            if (formattedDate.equals("00:00:00")) {
-                Weather weather = new Weather(humidity, temperature, precipitation, clouds, windSpeed, location, date.toInstant());
-                weatherList.add(weather);
-            }
+            processWeather(jsonObject, location, weatherList);
         });
-
         return weatherList;
     }
 
