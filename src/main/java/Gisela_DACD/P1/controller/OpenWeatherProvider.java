@@ -55,17 +55,17 @@ public class OpenWeatherProvider implements WeatherProvider {
     }
 
     private void processWeather(JsonObject jsonObject, Location location, List<Weather> weatherList) {
-        double ts = tsObject(jsonObject);
+        double ts = getTsFrom(jsonObject);
         Date date = new Date((long) (ts * 1000));
         SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
         String formattedDate = dateFormat.format(date);
 
         if (formattedDate.equals("00:00:00")) {
-            double temperature = temperatureObject(jsonObject);
-            double humidity = humidityObject(jsonObject);
-            double clouds = cloudsObject(jsonObject);
-            double windSpeed = windSpeedObject(jsonObject);
-            double precipitation = precipitationObject(jsonObject);
+            double temperature = getTemperatureFrom(jsonObject);
+            double humidity = getHumidityFrom(jsonObject);
+            double clouds = getCloudsFrom(jsonObject);
+            double windSpeed = getWindSpeedFrom(jsonObject);
+            double precipitation = getPrecipitationFrom(jsonObject);
 
             Weather weather = new Weather(humidity, temperature, precipitation, clouds, windSpeed, location, date.toInstant());
             weatherList.add(weather);
@@ -85,27 +85,27 @@ public class OpenWeatherProvider implements WeatherProvider {
         return weatherList;
     }
 
-    private double tsObject(JsonObject jsonObject) {
+    private double getTsFrom(JsonObject jsonObject) {
         return jsonObject.get("dt").getAsLong();
     }
 
-    private double temperatureObject(JsonObject jsonObject) {
+    private double getTemperatureFrom(JsonObject jsonObject) {
         return jsonObject.get("main").getAsJsonObject().get("temp").getAsDouble();
     }
 
-    private double humidityObject(JsonObject jsonObject) {
+    private double getHumidityFrom(JsonObject jsonObject) {
         return jsonObject.get("main").getAsJsonObject().get("humidity").getAsDouble();
     }
 
-    private double cloudsObject(JsonObject jsonObject) {
+    private double getCloudsFrom(JsonObject jsonObject) {
         return jsonObject.get("clouds").getAsJsonObject().get("all").getAsDouble();
     }
 
-    private double windSpeedObject(JsonObject jsonObject) {
+    private double getWindSpeedFrom(JsonObject jsonObject) {
         return jsonObject.get("wind").getAsJsonObject().get("speed").getAsDouble();
     }
 
-    private double precipitationObject(JsonObject jsonObject) {
+    private double getPrecipitationFrom(JsonObject jsonObject) {
         if (jsonObject.get("rain") != null) {
             return jsonObject.get("rain").getAsJsonObject().get("3h").getAsDouble();
         }
