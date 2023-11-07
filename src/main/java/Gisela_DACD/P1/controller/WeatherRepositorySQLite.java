@@ -16,7 +16,7 @@ public class WeatherRepositorySQLite implements WeatherRepository {
     }
 
     @Override
-    public void saveWeatherData(Location location, Weather weather) throws SQLException {
+    public void saveWeatherData(Location location, Weather weather) {
 
         String islandName = location.getName();
         String insertSQL = "INSERT INTO table_" + islandName + "_weather (datetime, temperature, precipitation, " +
