@@ -73,7 +73,7 @@ public class OpenWeatherProvider implements WeatherProvider {
         SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
         String formattedDate = dateFormat.format(date);
 
-        if (formattedDate.equals("00:00:00")) {
+        if (formattedDate.equals("12:00:00")) {
             double temperature = getTemperatureFrom(jsonObject);
             double humidity = getHumidityFrom(jsonObject);
             double clouds = getCloudsFrom(jsonObject);
