@@ -7,5 +7,5 @@ import java.sql.SQLException;
 
 public interface WeatherRepository {
     void saveWeatherData(Location location, Weather weatherDTO) throws SQLException;
-
+    //TODO: refactor code in WeatherRepositorySQLite
 }
