@@ -30,7 +30,6 @@ public class OpenWeatherProvider implements WeatherProvider {
     @Override
     public List<Weather> getWeatherData(Location location) {
         String url = buildApiUrl(location);
-
         try (CloseableHttpClient httpclient = HttpClients.createDefault()) {
             HttpGet httpGet = new HttpGet(url);
             try (CloseableHttpResponse response = httpclient.execute(httpGet)) {
@@ -59,7 +58,6 @@ public class OpenWeatherProvider implements WeatherProvider {
         JsonObject weatherResponse = gson.fromJson(responseBody, JsonObject.class);
         JsonArray list = weatherResponse.getAsJsonArray("list");
         List<Weather> weatherList = new ArrayList<>();
-
         list.forEach(jsonElement -> {
             JsonObject jsonObject = jsonElement.getAsJsonObject();
             processWeather(jsonObject, location, weatherList);
@@ -72,14 +70,12 @@ public class OpenWeatherProvider implements WeatherProvider {
         Date date = new Date((long) (ts * 1000));
         SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
         String formattedDate = dateFormat.format(date);
-
         if (formattedDate.equals("12:00:00")) {
             double temperature = getTemperatureFrom(jsonObject);
             double humidity = getHumidityFrom(jsonObject);
             double clouds = getCloudsFrom(jsonObject);
             double windSpeed = getWindSpeedFrom(jsonObject);
             double precipitation = getPrecipitationFrom(jsonObject);
-
             Weather weather = new Weather(humidity, temperature, precipitation, clouds, windSpeed, location, date.toInstant());
             weatherList.add(weather);
         }

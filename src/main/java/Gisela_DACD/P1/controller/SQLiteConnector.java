@@ -46,7 +46,6 @@ public class SQLiteConnector {
                 add("El_Hierro");
             }
         };
-
         try (Connection conn = getConnection()) {
             for (String island : islands) {
                 String createTableSQL = "CREATE TABLE IF NOT EXISTS table_" + island + "_weather ("
@@ -58,7 +57,6 @@ public class SQLiteConnector {
                         + "clouds REAL,"
                         + "wind_speed REAL"
                         + ")";
-
                 try (Statement statement = conn.createStatement()) {
                     statement.execute(createTableSQL);
                     System.out.println("Table 'table_" + island + "_weather' created (or it exists) with specified columns.");

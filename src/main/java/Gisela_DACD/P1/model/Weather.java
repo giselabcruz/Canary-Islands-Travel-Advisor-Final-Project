@@ -4,14 +4,12 @@ import java.time.Instant;
 
 public class Weather {
     private double humidity;
-
     private double temperature;
     private double precipitation;
     private double clouds;
     private double windSpeed;
     private Location location;
     private Instant ts;
-
 
     public Weather(double humidity, double temperature, double precipitation, double clouds, double windSpeed, Location location, Instant ts) {
         this.humidity = humidity;
