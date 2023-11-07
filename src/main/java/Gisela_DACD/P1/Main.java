@@ -4,12 +4,11 @@ import Gisela_DACD.P1.controller.*;
 import Gisela_DACD.P1.model.Location;
 import io.github.cdimascio.dotenv.Dotenv;
 
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Timer;
 
 public class Main {
-    public static void main(String[] args) throws SQLException {
+    public static void main(String[] args) {
         Dotenv dotenv = Dotenv.configure().load();
         String apiKey = dotenv.get("OPEN_WEATHER_APIKEY");
         ArrayList<Location> locations = LocationSupplier.initializeIslands();
