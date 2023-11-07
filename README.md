@@ -5,10 +5,10 @@
 University of Las Palmas de Gran Canaria
 
 ### Faculty
-Faculty Of Computer Science
+[Faculty Of Computer Science](https://www.eii.ulpgc.es/es)
 
 ### University Degree
-Data Science and Engineering
+[Data Science and Engineering](https://www.eii.ulpgc.es/es/formacion/Grado-en-Ciencia-e-Ingenieria-de-Datos)
 
 ### Subject
 Data Science Application Development
@@ -19,9 +19,9 @@ Data Science Application Development
 
 # Funcionality
 
-Java application that every 6 hours queries the service's API to obtain the weatherDTO forecast for the 8 Canary Islands for the next 5 days at 12 a.m.
+Java application that every 6 hours queries the service's API to obtain the weather forecast for the 8 Canary Islands for the next 5 days at 12:00:00 pm.
 
-The acquired data is persisted in an SQLite database, with a separate table for each island and an entry for each day. This entry include temperature, precipitation, humidity, cloud cover, and wind speed for each day.
+The weather data is persisted in an SQLite database, with a separate table for each island and an entry for each day. This entry include id, datetime, temperature, precipitation, humidity, clouds, and wind speed for each day.
 
 ## Resources Used
 - Development Environment: IntelliJ IDEA
