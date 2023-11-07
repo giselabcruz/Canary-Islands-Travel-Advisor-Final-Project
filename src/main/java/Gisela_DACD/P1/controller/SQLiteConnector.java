@@ -9,7 +9,7 @@ import java.util.ArrayList;
 public class SQLiteConnector {
     public Connection connection;
 
-    public SQLiteConnector() throws SQLException {
+    public SQLiteConnector() {
         try {
             connection = DriverManager.getConnection("jdbc:sqlite:canary_islands_weather.db");
             System.out.println("Successful connection to SQLite database.");
@@ -33,7 +33,7 @@ public class SQLiteConnector {
         return connection;
     }
 
-    public void createOrUpdateTable() throws SQLException {
+    public void createOrUpdateTable() {
         ArrayList<String> islands = new ArrayList<>() {
             {
                 add("Gran_Canaria");
