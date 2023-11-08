@@ -1,7 +1,7 @@
-package Gisela_DACD.P1;
+package org.gisela.dacd.p1;
 
-import Gisela_DACD.P1.controller.*;
-import Gisela_DACD.P1.model.Location;
+import org.gisela.dacd.p1.controller.*;
+import org.gisela.dacd.p1.model.Location;
 import io.github.cdimascio.dotenv.Dotenv;
 
 import java.util.ArrayList;
@@ -30,7 +30,6 @@ public class Main {
 
 
         //TODO: Delete spaces in all code.
-        // Change packages to lower case.(Gisela_dacd.p1).
 
         //TODO: change var environment to args.
     }

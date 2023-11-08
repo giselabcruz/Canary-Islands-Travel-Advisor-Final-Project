@@ -1,4 +1,4 @@
-package Gisela_DACD.P1.controller;
+package org.gisela.dacd.p1.controller;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

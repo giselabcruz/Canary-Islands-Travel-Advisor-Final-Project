@@ -1,7 +1,7 @@
-package Gisela_DACD.P1.controller;
+package org.gisela.dacd.p1.controller;
 
-import Gisela_DACD.P1.model.Location;
-import Gisela_DACD.P1.model.Weather;
+import org.gisela.dacd.p1.model.Location;
+import org.gisela.dacd.p1.model.Weather;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -9,7 +9,6 @@ import java.sql.SQLException;
 
 
 public class WeatherRepositorySQLite implements WeatherRepository {
-
     public final Connection connection;
     public WeatherRepositorySQLite(Connection connection) {
         this.connection = connection;
@@ -17,7 +16,6 @@ public class WeatherRepositorySQLite implements WeatherRepository {
 
     @Override
     public void saveWeatherData(Location location, Weather weather) {
-
         String islandName = location.getName();
         String insertSQL = "INSERT INTO table_" + islandName + "_weather (datetime, temperature, precipitation, " +
                 "humidity, clouds, wind_speed) VALUES (?, ?, ?, ?, ?, ?)";
