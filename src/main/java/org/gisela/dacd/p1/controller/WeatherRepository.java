@@ -6,6 +6,6 @@ import org.gisela.dacd.p1.model.Weather;
 import java.sql.SQLException;
 
 public interface WeatherRepository {
-    void saveWeatherData(Location location, Weather weatherDTO) throws SQLException;
+    void saveWeatherData(Location location, Weather weather) throws SQLException;
     //TODO: refactor code in WeatherRepositorySQLite
 }
