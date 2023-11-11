@@ -1,9 +1,6 @@
 package org.gisela.dacd.p1.controller;
 
 import org.gisela.dacd.p1.model.Location;
-
-import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.TimerTask;
