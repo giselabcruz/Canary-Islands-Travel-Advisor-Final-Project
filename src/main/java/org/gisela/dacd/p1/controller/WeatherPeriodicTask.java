@@ -9,14 +9,10 @@ import java.util.ArrayList;
 import java.util.TimerTask;
 
 public class WeatherPeriodicTask extends TimerTask {
-    private final WeatherController weatherController;
-    private String url;
     private OpenWeatherProvider weatherProvider;
     private ArrayList<Location> locations;
 
-    public WeatherPeriodicTask(WeatherController weatherController, String url, OpenWeatherProvider weatherProvider, ArrayList<Location> locations) {
-        this.weatherController = weatherController;
-        this.url = url;
+    public WeatherPeriodicTask(OpenWeatherProvider weatherProvider, ArrayList<Location> locations) {
         this.weatherProvider = weatherProvider;
         this.locations = locations;
     }
@@ -24,11 +20,11 @@ public class WeatherPeriodicTask extends TimerTask {
     @Override
     public void run() {
         try {
-            Connection connection = DriverManager.getConnection(url);
-            WeatherRepository weatherRepository = new WeatherRepositorySQLite(connection);
+            SQLiteConnector sqLiteConnector = new SQLiteConnector();
+            WeatherRepository weatherRepository = new WeatherRepositorySQLite(sqLiteConnector.getConnection());
             WeatherController weatherController = new WeatherController(weatherProvider, weatherRepository, locations);
             weatherController.execute();
-            connection.close();
+            sqLiteConnector.closeConnection();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
