@@ -19,8 +19,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-
 public class OpenWeatherProvider implements WeatherProvider {
+
     private final String apiKey;
 
     public OpenWeatherProvider(String apiKey) {

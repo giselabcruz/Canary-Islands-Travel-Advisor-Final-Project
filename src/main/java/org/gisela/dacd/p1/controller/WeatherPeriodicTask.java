@@ -14,7 +14,6 @@ public class WeatherPeriodicTask extends TimerTask {
     private OpenWeatherProvider weatherProvider;
     private ArrayList<Location> locations;
 
-
     public WeatherPeriodicTask(WeatherController weatherController, String url, OpenWeatherProvider weatherProvider, ArrayList<Location> locations) {
         this.weatherController = weatherController;
         this.url = url;

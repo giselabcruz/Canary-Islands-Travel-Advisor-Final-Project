@@ -7,6 +7,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 public class SQLiteConnector {
+
     public Connection connection;
 
     public SQLiteConnector() {
