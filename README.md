@@ -31,6 +31,22 @@ The weather data is persisted in an SQLite database, with a separate table for e
 - [SQLite Documentation](https://www.sqlite.org/docs.html)
 - Documentation Tools: Markdown for README.md
 
+## Important Dependencies
+#### *Note: Ensure that this libraries are included in your project dependencies for seamless integration and optimal functionality.*
+
+### - com.google.gson.JsonObject
+This project crucially relies on the com.google.gson.JsonObject library to efficiently handle JSON data. Gson, developed by Google, is a powerful and widely-used Java library for serialization and deserialization of Java objects to and from JSON.
+
+#### Why Gson?
+- Robust JSON Handling: Gson provides a robust and flexible mechanism for working with JSON data, allowing seamless conversion between Java objects and JSON representations.
+
+- Simplified Data Processing: The JsonObject class from Gson simplifies the manipulation and extraction of data from complex JSON structures, making it an essential tool for interacting with external APIs and handling weather forecast data.
+
+- Compatibility: Gson is well-maintained and enjoys broad community support, ensuring compatibility with various JSON structures and keeping the project aligned with industry best practices.
+
+#### Integration in this Project:
+The use of __com.google.gson.JsonObject__ in this project streamlines the processing of weather data retrieved from the OpenWeather 5 Day / 3 Hour Forecast API. The library enhances the project's capability to parse and manage JSON responses effectively, contributing to the overall reliability and efficiency of the application.
+
 
 # Design
 
