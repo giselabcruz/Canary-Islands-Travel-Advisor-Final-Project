@@ -46,7 +46,7 @@ The use of __com.google.gson.JsonObject__ in this project streamlines the proces
 
 
 ## Important Dependencies
-#### *Note: Ensure that this libraries are included in your project dependencies for seamless integration and optimal functionality.*
+
 The following Maven dependencies are included in this project's `pom.xml` file:
 
 ### - org.apache.httpcomponents.client5
