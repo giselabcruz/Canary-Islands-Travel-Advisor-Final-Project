@@ -31,11 +31,9 @@ The weather data is persisted in an SQLite database, with a separate table for e
 - [SQLite Documentation](https://www.sqlite.org/docs.html)
 - Documentation Tools: Markdown for README.md
 
-## Important Dependencies
-#### *Note: Ensure that this libraries are included in your project dependencies for seamless integration and optimal functionality.*
-
+## Important Libraries
 ### - com.google.gson.JsonObject
-This project crucially relies on the com.google.gson.JsonObject library to efficiently handle JSON data. Gson, developed by Google, is a powerful and widely-used Java library for serialization and deserialization of Java objects to and from JSON.
+This project crucially relies on the __com.google.gson.JsonObject__ library to efficiently handle JSON data. Gson, developed by Google, is a powerful and widely-used Java library for serialization and deserialization of Java objects to and from JSON.
 
 #### Why Gson?
 - Robust JSON Handling: Gson provides a robust and flexible mechanism for working with JSON data, allowing seamless conversion between Java objects and JSON representations.
@@ -44,8 +42,56 @@ This project crucially relies on the com.google.gson.JsonObject library to effic
 
 - Compatibility: Gson is well-maintained and enjoys broad community support, ensuring compatibility with various JSON structures and keeping the project aligned with industry best practices.
 
-#### Integration in this Project:
 The use of __com.google.gson.JsonObject__ in this project streamlines the processing of weather data retrieved from the OpenWeather 5 Day / 3 Hour Forecast API. The library enhances the project's capability to parse and manage JSON responses effectively, contributing to the overall reliability and efficiency of the application.
+
+
+## Important Dependencies
+#### *Note: Ensure that this libraries are included in your project dependencies for seamless integration and optimal functionality.*
+The following Maven dependencies are included in this project's `pom.xml` file:
+
+### - org.apache.httpcomponents.client5
+This project relies on the Apache HttpClient library (Version 5.2.1) to facilitate robust and efficient HTTP communication.
+Apache HttpClient is a mature and widely-used Java library that provides powerful features for making HTTP requests and handling responses.
+
+#### Key Features:
+- HTTP Protocol Support: Apache HttpClient supports various versions of the HTTP protocol, allowing seamless communication with web services and APIs.
+
+- Connection Management: The library offers sophisticated connection management, ensuring optimal usage of network resources and minimizing latency.
+
+- Request and Response Handling: Apache HttpClient simplifies the process of crafting HTTP requests and processing responses, making it an integral part of this project's functionality.
+
+#### Integration in this Project:
+
+```xml
+<dependency>
+    <groupId>org.apache.httpcomponents.client5</groupId>
+    <artifactId>httpclient5</artifactId>
+    <version>5.2.1</version>
+</dependency>
+```
+
+The inclusion of __org.apache.httpcomponents.client5__ is essential for the proper functioning of HTTP-related tasks, such as querying external API for weather data.
+
+
+### - org.slf4j
+SLF4J (Simple Logging Facade for Java) provides a flexible logging interface for better logging within the application. It allows you to choose and configure the underlying logging implementation.
+
+#### Key Benefits:
+- Logging Abstraction: SLF4J serves as a logging facade, allowing for a consistent logging API while providing the flexibility to choose and configure the underlying logging implementation.
+
+- Ease of Integration: By using SLF4J, this project ensures smooth integration with various logging frameworks, enabling developers to use their preferred logging implementation.
+
+- Efficient Logging: SLF4J optimizes logging statements, avoiding unnecessary computation if the logging level is not enabled. This ensures efficient logging in both development and production environments.
+
+#### Integration in this Project:
+
+```xml
+<dependency>
+    <groupId>org.slf4j</groupId>
+    <artifactId>slf4j-api</artifactId>
+    <version>2.0.9</version>
+</dependency>
+```
 
 
 # Design
