@@ -36,6 +36,7 @@ The weather data is persisted in an SQLite database, with a separate table for e
 In this project, various design patterns and principles were applied to achieve efficient and maintainable code.
 
 ### Class Diagram:
+![class_diagram](/images/WeatherForecastCapturePersistence_API-Openweathermap.png)
 
 ### Desing Pattern
 In this project, the Model-View-Controller (MVC) design pattern has been employed, with the caveat that the View layer has not been implemented. This is due to user interface is no required for this practice.
