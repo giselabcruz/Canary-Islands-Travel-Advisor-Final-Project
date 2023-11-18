@@ -110,6 +110,7 @@ __View__: Although not implemented in this case as a graphical one, it would be 
 
 __Controller__: Acts as an intermediary between the Model and the View. It receives user inputs and updates the Model accordingly. It manages the flow of control logic and interactions between the View and the Model.
 
+
 ## Implemented Design Principles
 The SOLID principles have been diligently implemented to in this project.
 
@@ -125,3 +126,27 @@ Large interfaces have been divided into smaller ones.
 ### -Dependency Inversion:
 Instead of high-level modules depending on low-level modules, both depend on abstractions. This principle facilitates potential future modifications or project reusability as it relies on abstractions rather than concrete implementations. Consequently, the need to change the entire codebase is avoided and only the relevant abstractions need to be modified with the new business logic. In this project, you can see Interface WeatherRepository in the Model logic, but also you can identify an another in the Controller and it's WeatherProvider.
 
+______________________________________________________________________________________________
+In addition, the __principles of modularity, cohesion and abstraction__ have been implemented.
+
+### __Modularization__:
+Is a key principle that emphasizes the organization of code into independent, self-contained modules or components. 
+
+_In this project_:
+The code is divided into distinct packages, such as Model and Controller, promoting a modular structure.
+Each package encapsulates related functionality, making it easier to understand, maintain, and extend.
+Modularization enhances code reuse, as individual modules can be developed, tested, and updated independently.
+
+### __Cohesion__:
+Refers to the degree to which elements within a module or component work together to achieve a common goal.
+
+_In this project_:
+The Model package demonstrates high cohesion by encapsulating related classes and interfaces responsible for data manipulation, business logic (Weather and Location), and persistence (WeatherRepository).
+The separation of concerns within each package enhances the clarity of responsibilities, contributing to higher cohesion.
+
+### __Abstraction__:
+Involves simplifying complex systems by modeling classes or components at the appropriate level of detail.
+
+_In this project_:
+Abstraction is evident in the use of interfaces (e.g., WeatherRepository) to define a contract without specifying implementation details. This allows for interchangeable implementations, adhering to the Dependency Inversion principle.
+The Model package abstracts away the internal details of data manipulation and persistence, providing a higher-level interface for interaction.
