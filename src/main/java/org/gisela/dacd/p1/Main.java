@@ -13,7 +13,7 @@ public class Main {
         ArrayList<Location> locations = LocationSupplier.initializeIslands();
         OpenWeatherProvider weatherOpenWeatherApiQuery = new OpenWeatherProvider(apiKey);
         SQLiteConnector connector = new SQLiteConnector();
-        connector.createOrUpdateTable();
+        DatabaseInitializer.createWeatherTable(connector.getConnection(),locations);
         connector.closeConnection();
         Timer timer = new Timer();
         WeatherPeriodicTask updaterTask = new WeatherPeriodicTask(weatherOpenWeatherApiQuery, locations);
