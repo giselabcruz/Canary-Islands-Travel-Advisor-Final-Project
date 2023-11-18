@@ -8,8 +8,8 @@ import java.util.ArrayList;
 import java.util.TimerTask;
 
 public class WeatherPeriodicTask extends TimerTask {
-    private OpenWeatherProvider weatherProvider;
-    private ArrayList<Location> locations;
+    private final OpenWeatherProvider weatherProvider;
+    private final ArrayList<Location> locations;
 
     public WeatherPeriodicTask(OpenWeatherProvider weatherProvider, ArrayList<Location> locations) {
         this.weatherProvider = weatherProvider;
