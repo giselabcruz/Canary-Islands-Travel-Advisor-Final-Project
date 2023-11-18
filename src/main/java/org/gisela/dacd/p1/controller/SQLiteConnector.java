@@ -16,6 +16,10 @@ public class SQLiteConnector {
         }
     }
 
+    public Connection getConnection() {
+        return connection;
+    }
+
     public void closeConnection() {
         try {
             if (connection != null && !connection.isClosed()) {
@@ -25,9 +29,5 @@ public class SQLiteConnector {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-    }
-
-    public Connection getConnection() {
-        return connection;
     }
 }
