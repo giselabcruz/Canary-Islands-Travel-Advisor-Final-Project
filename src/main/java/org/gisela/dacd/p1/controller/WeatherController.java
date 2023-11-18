@@ -2,6 +2,7 @@ package org.gisela.dacd.p1.controller;
 
 import org.gisela.dacd.p1.model.Location;
 import org.gisela.dacd.p1.model.Weather;
+import org.gisela.dacd.p1.model.WeatherRepository;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
