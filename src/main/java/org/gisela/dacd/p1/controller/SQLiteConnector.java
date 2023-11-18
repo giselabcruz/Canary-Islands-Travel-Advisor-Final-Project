@@ -30,6 +30,4 @@ public class SQLiteConnector {
     public Connection getConnection() {
         return connection;
     }
-
-
 }

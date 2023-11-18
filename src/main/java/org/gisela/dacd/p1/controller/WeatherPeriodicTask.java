@@ -3,7 +3,6 @@ package org.gisela.dacd.p1.controller;
 import org.gisela.dacd.p1.model.Location;
 import org.gisela.dacd.p1.model.WeatherRepository;
 import org.gisela.dacd.p1.model.WeatherRepositorySQLite;
-
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.TimerTask;

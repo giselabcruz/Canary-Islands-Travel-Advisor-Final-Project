@@ -1,7 +1,6 @@
 package org.gisela.dacd.p1.controller;
 
 import org.gisela.dacd.p1.model.Location;
-
 import java.util.ArrayList;
 
 public class LocationSupplier {
@@ -19,7 +18,4 @@ public class LocationSupplier {
             }
         };
     }
-
-
-
 }
