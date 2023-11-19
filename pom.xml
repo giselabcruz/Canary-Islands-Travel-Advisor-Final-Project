@@ -7,6 +7,11 @@
     <groupId>org.example</groupId>
     <artifactId>P1_dataFromExternalSource_Openweathermap</artifactId>
     <version>1.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+    <modules>
+        <module>eventStoreBuilder</module>
+        <module>predictionProvider</module>
+    </modules>
 
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
