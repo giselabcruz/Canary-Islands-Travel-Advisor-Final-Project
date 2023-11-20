@@ -1,4 +1,4 @@
-package org.gisela.dacd.p1.model;
+package org.gisela.dacd.publisher.model;
 
 import java.time.Instant;
 

@@ -1,7 +1,7 @@
-package org.gisela.dacd.p1.controller;
+package org.gisela.dacd.publisher.controller;
 
-import org.gisela.dacd.p1.model.Location;
-import org.gisela.dacd.p1.model.Weather;
+import org.gisela.dacd.publisher.model.Location;
+import org.gisela.dacd.publisher.model.Weather;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;

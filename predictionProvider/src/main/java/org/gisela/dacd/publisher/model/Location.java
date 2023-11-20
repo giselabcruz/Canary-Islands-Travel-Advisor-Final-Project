@@ -1,4 +1,4 @@
-package org.gisela.dacd.p1.model;
+package org.gisela.dacd.publisher.model;
 
 public class Location {
     private String name;

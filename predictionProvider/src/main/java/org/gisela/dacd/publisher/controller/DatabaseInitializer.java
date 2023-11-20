@@ -1,6 +1,6 @@
-package org.gisela.dacd.p1.controller;
+package org.gisela.dacd.publisher.controller;
 
-import org.gisela.dacd.p1.model.Location;
+import org.gisela.dacd.publisher.model.Location;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
