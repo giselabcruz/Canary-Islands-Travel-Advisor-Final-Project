@@ -2,7 +2,6 @@ package org.gisela.dacd.publisher.controller;
 
 import org.gisela.dacd.publisher.model.Location;
 import org.gisela.dacd.publisher.model.WeatherRepository;
-import org.gisela.dacd.publisher.model.WeatherRepositorySQLite;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.TimerTask;
