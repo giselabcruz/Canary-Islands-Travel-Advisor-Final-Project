@@ -1,4 +1,8 @@
-package org.gisela.dacd.publisher.model;
+package org.gisela.dacd.publisher.controller;
+
+import org.gisela.dacd.publisher.model.Location;
+import org.gisela.dacd.publisher.model.Weather;
+import org.gisela.dacd.publisher.model.WeatherRepository;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
