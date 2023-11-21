@@ -1,7 +1,7 @@
-package org.gisela.dacd.publisher;
+package org.gisela.dacd.provider;
 
-import org.gisela.dacd.publisher.controller.*;
-import org.gisela.dacd.publisher.model.Location;
+import org.gisela.dacd.provider.controller.*;
+import org.gisela.dacd.provider.model.Location;
 import io.github.cdimascio.dotenv.Dotenv;
 import java.util.ArrayList;
 import java.util.Timer;

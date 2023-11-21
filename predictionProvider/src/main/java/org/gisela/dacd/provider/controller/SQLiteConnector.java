@@ -1,4 +1,4 @@
-package org.gisela.dacd.publisher.controller;
+package org.gisela.dacd.provider.controller;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

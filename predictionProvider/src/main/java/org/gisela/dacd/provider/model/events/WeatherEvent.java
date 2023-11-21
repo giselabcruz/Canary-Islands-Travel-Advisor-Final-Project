@@ -1,6 +1,6 @@
-package org.gisela.dacd.publisher.model.events;
+package org.gisela.dacd.provider.model.events;
 
-import org.gisela.dacd.publisher.model.Location;
+import org.gisela.dacd.provider.model.Location;
 import java.time.Instant;
 
 public class WeatherEvent {

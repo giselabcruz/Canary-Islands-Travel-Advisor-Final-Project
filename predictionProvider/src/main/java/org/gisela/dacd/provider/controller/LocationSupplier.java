@@ -1,6 +1,6 @@
-package org.gisela.dacd.publisher.controller;
+package org.gisela.dacd.provider.controller;
 
-import org.gisela.dacd.publisher.model.Location;
+import org.gisela.dacd.provider.model.Location;
 import java.util.ArrayList;
 
 public class LocationSupplier {
