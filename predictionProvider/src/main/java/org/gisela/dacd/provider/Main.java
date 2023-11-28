@@ -2,14 +2,12 @@ package org.gisela.dacd.provider;
 
 import org.gisela.dacd.provider.controller.*;
 import org.gisela.dacd.provider.model.Location;
-import io.github.cdimascio.dotenv.Dotenv;
 import java.util.ArrayList;
 import java.util.Timer;
 
 public class Main {
     public static void main(String[] args) {
-        Dotenv dotenv = Dotenv.configure().load();
-        String apiKey = dotenv.get("OPEN_WEATHER_APIKEY");
+        String apiKey = args[0];
         ArrayList<Location> locations = LocationSupplier.initializeIslands();
         OpenWeatherProvider weatherOpenWeatherApiQuery = new OpenWeatherProvider(apiKey);
         SQLiteConnector connector = new SQLiteConnector();
