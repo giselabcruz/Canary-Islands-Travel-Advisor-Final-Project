@@ -3,7 +3,6 @@ package org.gisela.dacd.provider.controller;
 import org.gisela.dacd.provider.model.Location;
 import org.gisela.dacd.provider.model.Weather;
 import org.gisela.dacd.provider.model.WeatherRepository;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;

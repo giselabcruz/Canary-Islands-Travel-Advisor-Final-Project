@@ -3,6 +3,7 @@ package org.gisela.dacd.provider.controller;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+
 public class SQLiteConnector {
 
     public Connection connection;
