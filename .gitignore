@@ -40,3 +40,6 @@ build/
 
 ### BBDD ###
 *.db
+
+### Events ###
+*.events

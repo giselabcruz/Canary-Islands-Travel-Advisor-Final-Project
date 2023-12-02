@@ -8,43 +8,74 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.Instant;
+import java.time.ZoneOffset;
+import java.time.format.DateTimeFormatter;
 
 public class Subscriber {
-    private static String url = "tcp://localhost:61616";
+    private static final String BROKER_URL = "tcp://localhost:61616";
+    private static final String CLIENT_ID = "Gisela";
+    private static final String TOPIC_NAME = "prediction.Weather";
+    private static final String SUBSCRIBER_ID = "Gisela";
 
-    public static void main(String[] args) throws JMSException {
-        ConnectionFactory connectionFactory = new ActiveMQConnectionFactory(url);
-        Connection connection = connectionFactory.createConnection();
-        connection.setClientID("Gisela");
-        connection.start();
+    public static void main(String[] args) {
+        Subscriber subscriber = new Subscriber();
+        subscriber.start();
+    }
 
-        Session session = connection.createSession(false,
-                Session.AUTO_ACKNOWLEDGE);
+    private void start() {
+        try {
+            ConnectionFactory connectionFactory = new ActiveMQConnectionFactory(BROKER_URL);
+            Connection connection = connectionFactory.createConnection();
+            connection.setClientID(CLIENT_ID);
+            connection.start();
+            Session session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
+            Topic destination = session.createTopic(TOPIC_NAME);
+            MessageConsumer consumer = session.createDurableSubscriber(destination, SUBSCRIBER_ID);
+            consumer.setMessageListener(message -> {
+                try {
+                    handleIncomingMessage(message);
+                } catch (JMSException e) {
+                    handleError("Error processing JMS message: " + e.getMessage());
+                }
+            });
+            System.out.println("Running");
+        } catch (JMSException e) {
+            handleError("Error establishing JMS connection: " + e.getMessage());
+        }
+    }
 
-        Topic destination = session.createTopic("prediction.Weather");
+    private void processEvent(String json) {
+        Gson gson = new Gson();
+        JsonObject jsonObject = gson.fromJson(json, JsonObject.class);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
+        String formattedTimestamp = Instant.now().atOffset(ZoneOffset.UTC).format(formatter);
+        File directory = new File("eventstore/prediction.Weather/" +
+                jsonObject.get("ss").getAsString().replace("\"", "") + "/");
+        if (!directory.exists() && !directory.mkdirs()) {
+            handleError("Error creating directory: " + directory.getAbsolutePath());
+            return;
+        }
+        File file = new File(directory, formattedTimestamp + ".events");
+        try (FileWriter writer = new FileWriter(file);
+             BufferedWriter bufferedWriter = new BufferedWriter(writer)) {
 
-        MessageConsumer consumer = session.createDurableSubscriber(destination, "Cristian");
+            gson.toJson(jsonObject, bufferedWriter);
+            System.out.println("Event stored successfully at: " + file.getAbsolutePath());
+        } catch (IOException e) {
+            handleError("Error writing event to file: " + e.getMessage());
+        }
+    }
 
-        consumer.setMessageListener(message -> {
-            try {
-                System.out.println(((TextMessage)message).getText());
-                Gson gson = new Gson();
-                JsonObject jsonObject = gson.fromJson(((TextMessage)message).getText(), JsonObject.class);
+    private void handleIncomingMessage(Message message) throws JMSException {
+        if (message instanceof TextMessage textMessage) {
+            processEvent(textMessage.getText());
+        } else {
+            System.err.println("Unrecognized message: " + message.getClass().getName());
+        }
+    }
 
-                File saverData = new File( jsonObject.get("ts") + "_prediction_weather.json");
-
-                FileWriter writer = new FileWriter(saverData);
-
-                BufferedWriter bufferedWriter = new BufferedWriter(writer);
-                gson.toJson(jsonObject, bufferedWriter);
-
-                bufferedWriter.close();
-                writer.close();
-            } catch (JMSException | IOException e) {
-                throw new RuntimeException(e);
-            }
-        });
-
-        System.out.println("running");
+    private void handleError(String errorMessage) {
+        System.err.println(errorMessage);
     }
 }
