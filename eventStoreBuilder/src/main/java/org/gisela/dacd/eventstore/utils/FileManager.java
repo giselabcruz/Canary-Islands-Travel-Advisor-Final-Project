@@ -1,4 +1,4 @@
-package org.gisela.dacd.eventstore.application;
+package org.gisela.dacd.eventstore.utils;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;

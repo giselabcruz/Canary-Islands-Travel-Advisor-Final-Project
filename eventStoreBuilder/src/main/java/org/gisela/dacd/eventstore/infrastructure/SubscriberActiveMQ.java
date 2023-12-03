@@ -1,7 +1,7 @@
 package org.gisela.dacd.eventstore.infrastructure;
 
 import org.apache.activemq.ActiveMQConnectionFactory;
-import org.gisela.dacd.eventstore.application.FileManager;
+import org.gisela.dacd.eventstore.utils.FileManager;
 import org.gisela.dacd.eventstore.application.Subscriber;
 import javax.jms.*;
 

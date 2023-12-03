@@ -1,7 +1,7 @@
 package org.gisela.dacd.eventstore;
 
-import org.gisela.dacd.eventstore.application.FileManager;
 import org.gisela.dacd.eventstore.application.Subscriber;
+import org.gisela.dacd.eventstore.utils.FileManager;
 import org.gisela.dacd.eventstore.infrastructure.SubscriberActiveMQ;
 
 public class Main {
