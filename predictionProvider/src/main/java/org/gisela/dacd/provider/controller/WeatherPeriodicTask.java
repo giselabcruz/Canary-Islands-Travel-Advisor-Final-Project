@@ -18,10 +18,11 @@ public class WeatherPeriodicTask extends TimerTask {
     @Override
     public void run() {
         try {
-            Publisher publisher = new Publisher();
-            WeatherController weatherController = new WeatherController(weatherProvider, locations, publisher);
+            PublisherActiveMQ publisherActiveMQ = new PublisherActiveMQ();
+            publisherActiveMQ.start();
+            WeatherController weatherController = new WeatherController(weatherProvider, locations, publisherActiveMQ);
             weatherController.execute();
-            publisher.close();
+            publisherActiveMQ.close();
         } catch (SQLException | JMSException e) {
             throw new RuntimeException(e);
         }

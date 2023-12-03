@@ -14,12 +14,12 @@ import java.util.List;
 public class WeatherController {
     private final OpenWeatherProvider openWeatherProvider;
     private final ArrayList<Location> locations;
-    private final Publisher publisher;
+    private final PublisherActiveMQ publisherActiveMQ;
 
-    public WeatherController(OpenWeatherProvider openWeatherProvider, ArrayList<Location> locations, Publisher publisher) {
+    public WeatherController(OpenWeatherProvider openWeatherProvider, ArrayList<Location> locations, PublisherActiveMQ publisherActiveMQ) {
         this.openWeatherProvider = openWeatherProvider;
         this.locations = locations;
-        this.publisher = publisher;
+        this.publisherActiveMQ = publisherActiveMQ;
     }
 
     public void execute() throws SQLException, JMSException {
@@ -33,6 +33,6 @@ public class WeatherController {
         Gson gson = new GsonBuilder()
                 .registerTypeAdapter(Instant.class, new InstantTypeAdapter())
                 .create();
-        publisher.publish(gson.toJson(weatherEvent));
+        publisherActiveMQ.publish(gson.toJson(weatherEvent),"prediction.Weather");
     }
 }
