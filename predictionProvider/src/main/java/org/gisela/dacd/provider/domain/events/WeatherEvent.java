@@ -1,7 +1,6 @@
-package org.gisela.dacd.provider.model.events;
+package org.gisela.dacd.provider.domain.events;
 
-import org.gisela.dacd.provider.model.Weather;
-
+import org.gisela.dacd.provider.domain.Weather;
 import java.time.Instant;
 import java.util.List;
 
@@ -9,7 +8,6 @@ public class WeatherEvent {
     private Instant ts;
     private String ss;
     private final List<Weather> predictionWeather;
-
 
     public WeatherEvent(Instant ts, String ss, List<Weather> predictionWeather) {
         this.ts = ts;

@@ -1,4 +1,4 @@
-package org.gisela.dacd.provider.controller;
+package org.gisela.dacd.provider.infrastructure;
 
 import javax.jms.Connection;
 import javax.jms.ConnectionFactory;
@@ -8,6 +8,7 @@ import javax.jms.MessageProducer;
 import javax.jms.Session;
 import javax.jms.TextMessage;
 import org.apache.activemq.ActiveMQConnectionFactory;
+import org.gisela.dacd.provider.service.Publisher;
 
 public class PublisherActiveMQ implements Publisher {
     private static final String url = "tcp://localhost:61616";

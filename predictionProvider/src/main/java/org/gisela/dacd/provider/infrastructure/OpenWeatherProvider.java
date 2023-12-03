@@ -1,7 +1,7 @@
-package org.gisela.dacd.provider.controller;
+package org.gisela.dacd.provider.infrastructure;
 
-import org.gisela.dacd.provider.model.Location;
-import org.gisela.dacd.provider.model.Weather;
+import org.gisela.dacd.provider.domain.Location;
+import org.gisela.dacd.provider.domain.Weather;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
@@ -12,6 +12,7 @@ import org.apache.hc.client5.http.impl.classic.CloseableHttpResponse;
 import org.apache.hc.core5.http.HttpEntity;
 import org.apache.hc.core5.http.ParseException;
 import org.apache.hc.core5.http.io.entity.EntityUtils;
+import org.gisela.dacd.provider.service.WeatherProvider;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;

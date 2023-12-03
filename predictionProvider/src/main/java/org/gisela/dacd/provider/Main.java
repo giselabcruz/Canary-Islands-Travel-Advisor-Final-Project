@@ -1,7 +1,8 @@
 package org.gisela.dacd.provider;
 
-import org.gisela.dacd.provider.controller.*;
-import org.gisela.dacd.provider.model.Location;
+import org.gisela.dacd.provider.infrastructure.OpenWeatherProvider;
+import org.gisela.dacd.provider.service.*;
+import org.gisela.dacd.provider.domain.Location;
 import java.util.ArrayList;
 import java.util.Timer;
 

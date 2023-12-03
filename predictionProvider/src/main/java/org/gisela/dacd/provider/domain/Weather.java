@@ -1,4 +1,4 @@
-package org.gisela.dacd.provider.model;
+package org.gisela.dacd.provider.domain;
 
 import java.time.Instant;
 

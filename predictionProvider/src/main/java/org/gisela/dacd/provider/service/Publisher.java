@@ -1,4 +1,4 @@
-package org.gisela.dacd.provider.controller;
+package org.gisela.dacd.provider.service;
 
 public interface Publisher {
     void start();

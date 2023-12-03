@@ -1,28 +1,27 @@
-package org.gisela.dacd.provider.controller;
+package org.gisela.dacd.provider.service;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import org.gisela.dacd.provider.model.Location;
-import org.gisela.dacd.provider.model.Weather;
-import org.gisela.dacd.provider.model.events.WeatherEvent;
-import javax.jms.JMSException;
-import java.sql.SQLException;
+import org.gisela.dacd.provider.domain.Location;
+import org.gisela.dacd.provider.domain.Weather;
+import org.gisela.dacd.provider.domain.events.WeatherEvent;
+import org.gisela.dacd.provider.infrastructure.OpenWeatherProvider;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 
-public class WeatherController {
+public class WeatherService {
     private final OpenWeatherProvider openWeatherProvider;
     private final ArrayList<Location> locations;
-    private final PublisherActiveMQ publisherActiveMQ;
+    private final Publisher publisher;
 
-    public WeatherController(OpenWeatherProvider openWeatherProvider, ArrayList<Location> locations, PublisherActiveMQ publisherActiveMQ) {
+    public WeatherService(OpenWeatherProvider openWeatherProvider, ArrayList<Location> locations, Publisher publisher) {
         this.openWeatherProvider = openWeatherProvider;
         this.locations = locations;
-        this.publisherActiveMQ = publisherActiveMQ;
+        this.publisher = publisher;
     }
 
-    public void execute() throws SQLException, JMSException {
+    public void execute() {
         List<Weather> allWeatherLocations = new ArrayList<>();
         for (Location location : locations) {
             List<Weather> weatherList = openWeatherProvider.getWeatherData(location);
@@ -33,6 +32,6 @@ public class WeatherController {
         Gson gson = new GsonBuilder()
                 .registerTypeAdapter(Instant.class, new InstantTypeAdapter())
                 .create();
-        publisherActiveMQ.publish(gson.toJson(weatherEvent),"prediction.Weather");
+        publisher.publish(gson.toJson(weatherEvent),"prediction.Weather");
     }
 }
