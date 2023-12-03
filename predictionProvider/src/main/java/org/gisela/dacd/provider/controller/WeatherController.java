@@ -21,19 +21,17 @@ public class WeatherController {
     }
 
     public void execute() throws SQLException, JMSException {
+        List<Weather> allWeatherLocations = new ArrayList<>();
         for (Location location : locations) {
-            List<Weather> weatherlist = openWeatherProvider.getWeatherData(location);
-            for (Weather weather : weatherlist) {
-                Instant instant = Instant.now();
-                WeatherEvent event = new WeatherEvent(instant, "prediction-provider", weather.getTs(),
-                        weather.getLocation(), weather.getHumidity(), weather.getTemperature(), weather.getPrecipitation(),
-                        weather.getClouds(), weather.getWindSpeed());
-                Publisher publish = new Publisher();
-                Gson gson = new GsonBuilder()
-                        .registerTypeAdapter(Instant.class, new InstantTypeAdapter())
-                        .create();
-                publish.publish(gson.toJson(event));
-            }
+            List<Weather> weatherList = openWeatherProvider.getWeatherData(location);
+            allWeatherLocations.addAll(weatherList);
         }
+        Instant instant = Instant.now();
+        WeatherEvent weatherEvent = new WeatherEvent(instant, "prediction-provider", allWeatherLocations);
+        Gson gson = new GsonBuilder()
+                .registerTypeAdapter(Instant.class, new InstantTypeAdapter())
+                .create();
+        Publisher publish = new Publisher();
+        publish.publish(gson.toJson(weatherEvent));
     }
 }

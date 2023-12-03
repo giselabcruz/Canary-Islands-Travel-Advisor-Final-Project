@@ -9,16 +9,16 @@ public class Weather {
     private double clouds;
     private double windSpeed;
     private Location location;
-    private Instant ts;
+    private Instant predictionTime;
 
-    public Weather(double humidity, double temperature, double precipitation, double clouds, double windSpeed, Location location, Instant ts) {
+    public Weather(double humidity, double temperature, double precipitation, double clouds, double windSpeed, Location location, Instant predictionTime) {
         this.humidity = humidity;
         this.temperature = temperature;
         this.precipitation = precipitation;
         this.clouds = clouds;
         this.windSpeed = windSpeed;
         this.location = location;
-        this.ts = ts;
+        this.predictionTime = predictionTime;
     }
 
     public double getHumidity() {
@@ -61,12 +61,12 @@ public class Weather {
         this.location = location;
     }
 
-    public Instant getTs() {
-        return ts;
+    public Instant getPredictionTime() {
+        return predictionTime;
     }
 
-    public void setTs(Instant ts) {
-        this.ts = ts;
+    public void setPredictionTime(Instant predictionTime) {
+        this.predictionTime = predictionTime;
     }
 
     public double getTemperature() {

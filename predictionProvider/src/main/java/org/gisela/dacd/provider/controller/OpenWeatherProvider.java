@@ -65,8 +65,8 @@ public class OpenWeatherProvider implements WeatherProvider {
     }
 
     private void processWeather(JsonObject jsonObject, Location location, List<Weather> weatherList) {
-        double ts = getTsFrom(jsonObject);
-        Date date = new Date((long) (ts * 1000));
+        double predictionTime = getTsFrom(jsonObject);
+        Date date = new Date((long) (predictionTime * 1000));
         SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
         String formattedDate = dateFormat.format(date);
         if (formattedDate.equals("12:00:00")) {
