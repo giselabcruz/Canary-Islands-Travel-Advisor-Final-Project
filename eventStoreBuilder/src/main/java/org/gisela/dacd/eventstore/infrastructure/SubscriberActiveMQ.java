@@ -1,6 +1,8 @@
-package org.gisela.dacd.eventstore;
+package org.gisela.dacd.eventstore.infrastructure;
 
 import org.apache.activemq.ActiveMQConnectionFactory;
+import org.gisela.dacd.eventstore.application.FileManager;
+import org.gisela.dacd.eventstore.application.Subscriber;
 import javax.jms.*;
 
 public class SubscriberActiveMQ implements Subscriber {
@@ -61,7 +63,7 @@ public class SubscriberActiveMQ implements Subscriber {
         }
     }
 
-    static void handleError(String errorMessage) {
+    public static void handleError(String errorMessage) {
         System.err.println(errorMessage);
     }
 }

@@ -1,4 +1,4 @@
-package org.gisela.dacd.eventstore;
+package org.gisela.dacd.eventstore.application;
 
 public interface Subscriber {
     void start();

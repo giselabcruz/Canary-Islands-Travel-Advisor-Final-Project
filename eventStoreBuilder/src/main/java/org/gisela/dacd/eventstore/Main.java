@@ -1,5 +1,9 @@
 package org.gisela.dacd.eventstore;
 
+import org.gisela.dacd.eventstore.application.FileManager;
+import org.gisela.dacd.eventstore.application.Subscriber;
+import org.gisela.dacd.eventstore.infrastructure.SubscriberActiveMQ;
+
 public class Main {
     private static final String BROKER_URL = "tcp://localhost:61616";
     private static final String CLIENT_ID = "Gisela";

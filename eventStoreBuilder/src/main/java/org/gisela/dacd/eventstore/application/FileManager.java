@@ -1,4 +1,4 @@
-package org.gisela.dacd.eventstore;
+package org.gisela.dacd.eventstore.application;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
@@ -9,7 +9,7 @@ import java.io.IOException;
 import java.time.Instant;
 import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
-import static org.gisela.dacd.eventstore.SubscriberActiveMQ.handleError;
+import static org.gisela.dacd.eventstore.infrastructure.SubscriberActiveMQ.handleError;
 
 public class FileManager {
 
