@@ -12,7 +12,7 @@ import org.apache.hc.client5.http.impl.classic.CloseableHttpResponse;
 import org.apache.hc.core5.http.HttpEntity;
 import org.apache.hc.core5.http.ParseException;
 import org.apache.hc.core5.http.io.entity.EntityUtils;
-import org.gisela.dacd.provider.service.WeatherProvider;
+import org.gisela.dacd.provider.application.WeatherProvider;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;

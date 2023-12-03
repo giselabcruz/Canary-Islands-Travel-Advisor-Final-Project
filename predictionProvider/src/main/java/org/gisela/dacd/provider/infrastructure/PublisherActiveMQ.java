@@ -8,7 +8,7 @@ import javax.jms.MessageProducer;
 import javax.jms.Session;
 import javax.jms.TextMessage;
 import org.apache.activemq.ActiveMQConnectionFactory;
-import org.gisela.dacd.provider.service.Publisher;
+import org.gisela.dacd.provider.application.Publisher;
 
 public class PublisherActiveMQ implements Publisher {
     private static final String url = "tcp://localhost:61616";

@@ -1,4 +1,4 @@
-package org.gisela.dacd.provider.service;
+package org.gisela.dacd.provider.application;
 
 import org.gisela.dacd.provider.domain.Location;
 import org.gisela.dacd.provider.domain.Weather;

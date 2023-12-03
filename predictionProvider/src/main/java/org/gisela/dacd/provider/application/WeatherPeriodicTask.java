@@ -1,4 +1,4 @@
-package org.gisela.dacd.provider.service;
+package org.gisela.dacd.provider.application;
 
 import org.gisela.dacd.provider.domain.Location;
 import org.gisela.dacd.provider.infrastructure.OpenWeatherProvider;
@@ -19,8 +19,8 @@ public class WeatherPeriodicTask extends TimerTask {
     public void run() {
         PublisherActiveMQ publisherActiveMQ = new PublisherActiveMQ();
         publisherActiveMQ.start();
-        WeatherService weatherService = new WeatherService(weatherProvider, locations, publisherActiveMQ);
-        weatherService.execute();
+        WeatherApplication weatherApplication = new WeatherApplication(weatherProvider, locations, publisherActiveMQ);
+        weatherApplication.execute();
         publisherActiveMQ.close();
     }
 }

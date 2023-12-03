@@ -1,4 +1,4 @@
-package org.gisela.dacd.provider.service;
+package org.gisela.dacd.provider.application;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -10,12 +10,12 @@ import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 
-public class WeatherService {
+public class WeatherApplication {
     private final OpenWeatherProvider openWeatherProvider;
     private final ArrayList<Location> locations;
     private final Publisher publisher;
 
-    public WeatherService(OpenWeatherProvider openWeatherProvider, ArrayList<Location> locations, Publisher publisher) {
+    public WeatherApplication(OpenWeatherProvider openWeatherProvider, ArrayList<Location> locations, Publisher publisher) {
         this.openWeatherProvider = openWeatherProvider;
         this.locations = locations;
         this.publisher = publisher;
