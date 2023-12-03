@@ -1,7 +1,6 @@
 package org.gisela.dacd.provider.controller;
 
 import org.gisela.dacd.provider.model.Location;
-import org.gisela.dacd.provider.model.WeatherRepository;
 import javax.jms.JMSException;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -19,11 +18,8 @@ public class WeatherPeriodicTask extends TimerTask {
     @Override
     public void run() {
         try {
-            SQLiteConnector sqLiteConnector = new SQLiteConnector();
-            WeatherRepository weatherRepository = new WeatherRepositorySQLite(sqLiteConnector.getConnection());
-            WeatherController weatherController = new WeatherController(weatherProvider, weatherRepository, locations);
+            WeatherController weatherController = new WeatherController(weatherProvider, locations);
             weatherController.execute();
-            sqLiteConnector.closeConnection();
         } catch (SQLException | JMSException e) {
             throw new RuntimeException(e);
         }
