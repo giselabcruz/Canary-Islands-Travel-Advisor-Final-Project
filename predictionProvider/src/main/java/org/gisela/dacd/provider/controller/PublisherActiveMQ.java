@@ -10,7 +10,7 @@ import javax.jms.TextMessage;
 import org.apache.activemq.ActiveMQConnectionFactory;
 
 public class PublisherActiveMQ implements Publisher {
-    private static String url = "tcp://localhost:61616";
+    private static final String url = "tcp://localhost:61616";
     private Connection connection;
 
     @Override
@@ -25,51 +25,14 @@ public class PublisherActiveMQ implements Publisher {
     }
 
     @Override
-    public void publish (String event, String topic) {
-
-        Session session = null;
+    public void publish(String event, String topic) {
         try {
-            session = connection.createSession(false,
-                    Session.AUTO_ACKNOWLEDGE);
-        } catch (JMSException e) {
-            throw new RuntimeException(e);
-        }
-
-        Destination destination = null;
-        try {
-            destination = session.createTopic(topic);
-        } catch (JMSException e) {
-            throw new RuntimeException(e);
-        }
-
-        MessageProducer producer = null;
-        try {
-            producer = session.createProducer(destination);
-        } catch (JMSException e) {
-            throw new RuntimeException(e);
-        }
-
-        TextMessage message = null;
-        try {
-            message = session
-                    .createTextMessage(event);
-        } catch (JMSException e) {
-            throw new RuntimeException(e);
-        }
-
-        try {
+            Session session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
+            Destination destination = session.createTopic(topic);
+            MessageProducer producer = session.createProducer(destination);
+            TextMessage message = session.createTextMessage(event);
             producer.send(message);
-        } catch (JMSException e) {
-            throw new RuntimeException(e);
-        }
-
-        try {
             System.out.println("JCG printing@@ '" + message.getText() + "'");
-        } catch (JMSException e) {
-            throw new RuntimeException(e);
-        }
-        try {
-            connection.close();
         } catch (JMSException e) {
             throw new RuntimeException(e);
         }
