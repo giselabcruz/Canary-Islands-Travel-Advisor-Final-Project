@@ -22,16 +22,18 @@ public class WeatherApplication {
     }
 
     public void execute() {
-        List<Weather> allWeatherLocations = new ArrayList<>();
         for (Location location : locations) {
             List<Weather> weatherList = openWeatherProvider.getWeatherData(location);
-            allWeatherLocations.addAll(weatherList);
+            Instant instant = Instant.now();
+            for (Weather weather : weatherList) {
+                WeatherEvent event = new WeatherEvent(instant, "prediction-provider", weather.getPredictionTime(),
+                        weather.getLocation(), weather.getHumidity(), weather.getTemperature(), weather.getPrecipitation(),
+                        weather.getClouds(), weather.getWindSpeed());
+                Gson gson = new GsonBuilder()
+                        .registerTypeAdapter(Instant.class, new InstantTypeAdapter())
+                        .create();
+                publisher.publish(gson.toJson(event), "prediction.Weather");
+            }
         }
-        Instant instant = Instant.now();
-        WeatherEvent weatherEvent = new WeatherEvent(instant, "prediction-provider", allWeatherLocations);
-        Gson gson = new GsonBuilder()
-                .registerTypeAdapter(Instant.class, new InstantTypeAdapter())
-                .create();
-        publisher.publish(gson.toJson(weatherEvent),"prediction.Weather");
     }
 }

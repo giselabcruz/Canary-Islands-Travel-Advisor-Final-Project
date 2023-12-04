@@ -25,8 +25,9 @@ public class FileManager {
             return;
         }
         File file = new File(directory, formattedTimestamp + ".events");
-        try (FileWriter writer = new FileWriter(file); BufferedWriter bufferedWriter = new BufferedWriter(writer)) {
-            gson.toJson(jsonObject, bufferedWriter);
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(file, true))) {
+            gson.toJson(jsonObject, writer);
+            writer.newLine();
             System.out.println("Event stored successfully at: " + file.getAbsolutePath());
         } catch (IOException e) {
             handleError("Error writing event to file: " + e.getMessage());
