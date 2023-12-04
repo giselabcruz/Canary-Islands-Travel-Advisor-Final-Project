@@ -1,37 +1,9 @@
 package org.gisela.dacd.provider.domain.events;
 
-import org.gisela.dacd.provider.domain.Weather;
+import org.gisela.dacd.provider.domain.Location;
+
 import java.time.Instant;
-import java.util.List;
 
-public class WeatherEvent {
-    private Instant ts;
-    private String ss;
-    private final List<Weather> predictionWeather;
-
-    public WeatherEvent(Instant ts, String ss, List<Weather> predictionWeather) {
-        this.ts = ts;
-        this.ss = ss;
-        this.predictionWeather = predictionWeather;
-    }
-
-    public Instant getTs() {
-        return ts;
-    }
-
-    public void setTs(Instant ts) {
-        this.ts = ts;
-    }
-
-    public String getSs() {
-        return ss;
-    }
-
-    public void setSs(String ss) {
-        this.ss = ss;
-    }
-
-    public List<Weather> getPredictionWeather() {
-        return predictionWeather;
-    }
+public record WeatherEvent(Instant ts, String ss, Instant predictionTime, Location location, double humidity,
+                           double temperature, double precipitation, double clouds, double windSpeed) {
 }
