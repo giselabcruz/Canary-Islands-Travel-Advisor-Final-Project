@@ -33,6 +33,7 @@ public class WeatherApplication {
                         .registerTypeAdapter(Instant.class, new InstantTypeAdapter())
                         .create();
                 publisher.publish(gson.toJson(event), "prediction.Weather");
+                // TODO: reducir acoplamiento para la interfaz de la String(que se encargue el Publisher)
             }
         }
     }

@@ -1,7 +1,7 @@
 package org.gisela.dacd.eventstore.infrastructure;
 
 import org.apache.activemq.ActiveMQConnectionFactory;
-import org.gisela.dacd.eventstore.utils.FileManager;
+import org.gisela.dacd.eventstore.application.EventStoreManager;
 import org.gisela.dacd.eventstore.application.Subscriber;
 import javax.jms.*;
 
@@ -9,14 +9,14 @@ public class SubscriberActiveMQ implements Subscriber {
     private final String brokerUrl;
     private final String clientId;
     private final String subscriberId;
-    private final FileManager fileManager;
+    private final EventStoreManager eventStoreManager;
     private Connection connection;
 
-    public SubscriberActiveMQ(String brokerUrl, String clientId, String subscriberId, FileManager fileManager) {
+    public SubscriberActiveMQ(String brokerUrl, String clientId, String subscriberId, EventStoreManager eventStoreManager) {
         this.brokerUrl = brokerUrl;
         this.clientId = clientId;
         this.subscriberId = subscriberId;
-        this.fileManager = fileManager;
+        this.eventStoreManager = eventStoreManager;
     }
 
     @Override
@@ -29,11 +29,13 @@ public class SubscriberActiveMQ implements Subscriber {
         } catch (JMSException e) {
             handleError("Error establishing JMS connection: " + e.getMessage());
         }
-
     }
 
     @Override
     public void subscribe(String topicName) {
+        // TODO: refactor code try/catch
+        // TODO: allow new sessions
+
         try {
             Session session = this.connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
             Topic destination = session.createTopic(topicName);
@@ -57,7 +59,7 @@ public class SubscriberActiveMQ implements Subscriber {
 
     private void handleIncomingMessage(Message message) throws JMSException {
         if (message instanceof TextMessage textMessage) {
-            fileManager.storeEventToFile(textMessage.getText());
+            eventStoreManager.storeEventToFile(textMessage.getText());
         } else {
             System.err.println("Unrecognized message: " + message.getClass().getName());
         }

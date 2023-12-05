@@ -2,6 +2,7 @@ package org.gisela.dacd.provider.domain;
 
 import java.time.Instant;
 
+// TODO: implementar dentro del Weather la nueva estructura del nuevo evento
 public class Weather {
     private double humidity;
     private double temperature;
