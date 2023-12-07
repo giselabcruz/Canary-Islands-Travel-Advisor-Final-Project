@@ -31,30 +31,40 @@ public class SubscriberActiveMQ implements Subscriber {
         }
     }
 
+    // TODO: allow new sessions
     @Override
     public void subscribe(String topicName) {
-        // TODO: refactor code try/catch
-        // TODO: allow new sessions
-
         try {
-            Session session = this.connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
-            Topic destination = session.createTopic(topicName);
-            MessageConsumer consumer = session.createDurableSubscriber(destination, this.subscriberId);
-            try {
-                consumer.setMessageListener(message -> {
-                    try {
-                        handleIncomingMessage(message);
-                    } catch (JMSException e) {
-                        handleError("Error processing JMS message: " + e.getMessage());
-                    }
-                });
-            } catch (JMSException e) {
-                throw new RuntimeException(e);
-            }
+            Session session = createSession();
+            Topic destination = createTopic(session, topicName);
+            MessageConsumer consumer = createDurableSubscriber(session, destination);
+            setMessageListener(consumer);
         } catch (JMSException e) {
-            throw new RuntimeException(e);
+            handleError("Error during subscription:" + e.getMessage());
         }
         System.out.println("Running");
+    }
+
+    private Session createSession() throws JMSException {
+        return this.connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
+    }
+
+    private Topic createTopic(Session session, String topicName) throws JMSException {
+        return session.createTopic(topicName);
+    }
+
+    private MessageConsumer createDurableSubscriber(Session session, Topic destination) throws JMSException {
+        return session.createDurableSubscriber(destination, this.subscriberId);
+    }
+
+    private void setMessageListener(MessageConsumer consumer) throws JMSException {
+        consumer.setMessageListener(message -> {
+            try {
+                handleIncomingMessage(message);
+            } catch (JMSException e) {
+                handleError("Error processing JMS message: " + e.getMessage());
+            }
+        });
     }
 
     private void handleIncomingMessage(Message message) throws JMSException {
