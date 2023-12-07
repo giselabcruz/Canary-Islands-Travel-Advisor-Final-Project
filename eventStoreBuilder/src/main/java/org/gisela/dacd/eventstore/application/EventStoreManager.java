@@ -1,6 +1,5 @@
 package org.gisela.dacd.eventstore.application;
 
-import static org.gisela.dacd.eventstore.infrastructure.SubscriberActiveMQ.handleError;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import java.io.BufferedWriter;
@@ -12,29 +11,48 @@ import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 
 public class EventStoreManager implements EventStore {
-    // TODO: Changed name to EventStoreManager
-    // TODO: Changed to interface
 
     @Override
     public void storeEventToFile(String json) {
-        // TODO: clean code
-        Gson gson = new Gson();
-        JsonObject jsonObject = gson.fromJson(json, JsonObject.class);
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
-        String formattedTimestamp = Instant.now().atOffset(ZoneOffset.UTC).format(formatter);
-        File directory = new File("eventstore/prediction.Weather/" + jsonObject.get("ss").getAsString()
-                .replace("\"", "") + "/");
-        if (!directory.exists() && !directory.mkdirs()) {
-            handleError("Error creating directory: " + directory.getAbsolutePath());
-            return;
+        try {
+            Gson gson = new Gson();
+            JsonObject jsonObject = gson.fromJson(json, JsonObject.class);
+            String formattedTimestamp = getCurrentFormattedTimestamp();
+            File directory = createDirectory(jsonObject);
+            File file = new File(directory, formattedTimestamp + ".events");
+            writeEventToFile(gson, jsonObject, file);
+        } catch (IOException e) {
+            handleError(e);
         }
-        File file = new File(directory, formattedTimestamp + ".events");
+    }
+
+    private String getCurrentFormattedTimestamp() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
+        return Instant.now().atOffset(ZoneOffset.UTC).format(formatter);
+    }
+
+    private File createDirectory(JsonObject jsonObject) throws IOException {
+        String directoryPath = "eventstore/prediction.Weather/" + getCleanedStringValue(jsonObject) + "/";
+        File directory = new File(directoryPath);
+        if (!directory.exists() && !directory.mkdirs()) {
+            throw new IOException("Error creating directory: " + directory.getAbsolutePath());
+        }
+        return directory;
+    }
+
+    private void writeEventToFile(Gson gson, JsonObject jsonObject, File file) throws IOException {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(file, true))) {
             gson.toJson(jsonObject, writer);
             writer.newLine();
             System.out.println("Event stored successfully at: " + file.getAbsolutePath());
-        } catch (IOException e) {
-            handleError("Error writing event to file: " + e.getMessage());
         }
+    }
+
+    private String getCleanedStringValue(JsonObject jsonObject) {
+        return jsonObject.get("ss").getAsString().replace("\"", "");
+    }
+
+    private void handleError(Exception e) {
+        System.err.println("Error handling event" + ": " + e.getMessage());
     }
 }
