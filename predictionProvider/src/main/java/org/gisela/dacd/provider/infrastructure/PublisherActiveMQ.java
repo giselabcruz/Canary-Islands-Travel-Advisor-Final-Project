@@ -1,14 +1,13 @@
 package org.gisela.dacd.provider.infrastructure;
 
-import javax.jms.Connection;
-import javax.jms.ConnectionFactory;
-import javax.jms.Destination;
-import javax.jms.JMSException;
-import javax.jms.MessageProducer;
-import javax.jms.Session;
-import javax.jms.TextMessage;
-import org.apache.activemq.ActiveMQConnectionFactory;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import org.gisela.dacd.provider.application.InstantTypeAdapter;
 import org.gisela.dacd.provider.application.Publisher;
+import javax.jms.*;
+import org.apache.activemq.ActiveMQConnectionFactory;
+import org.gisela.dacd.provider.domain.events.WeatherEvent;
+import java.time.Instant;
 
 public class PublisherActiveMQ implements Publisher {
     private static final String url = "tcp://localhost:61616";
@@ -26,12 +25,16 @@ public class PublisherActiveMQ implements Publisher {
     }
 
     @Override
-    public void publish(String event, String topic) {
+    public void publish(WeatherEvent event) {
+        Gson gson = new GsonBuilder()
+                .registerTypeAdapter(Instant.class, new InstantTypeAdapter())
+                .create();
+        String jsonEvent = gson.toJson(event);
         try {
             Session session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
-            Destination destination = session.createTopic(topic);
+            Destination destination = session.createTopic("prediction.Weather");
             MessageProducer producer = session.createProducer(destination);
-            TextMessage message = session.createTextMessage(event);
+            TextMessage message = session.createTextMessage(jsonEvent);
             producer.send(message);
             System.out.println("JCG printing@@ '" + message.getText() + "'");
         } catch (JMSException e) {

@@ -1,3 +1,4 @@
+// WeatherApplication class
 package org.gisela.dacd.provider.application;
 
 import com.google.gson.Gson;
@@ -29,11 +30,7 @@ public class WeatherApplication {
                 WeatherEvent event = new WeatherEvent(instant, "prediction-provider", weather.getPredictionTime(),
                         weather.getLocation(), weather.getHumidity(), weather.getTemperature(), weather.getPrecipitation(),
                         weather.getClouds(), weather.getWindSpeed());
-                Gson gson = new GsonBuilder()
-                        .registerTypeAdapter(Instant.class, new InstantTypeAdapter())
-                        .create();
-                publisher.publish(gson.toJson(event), "prediction.Weather");
-                // TODO: reducir acoplamiento para la interfaz de la String(que se encargue el Publisher)
+                publisher.publish(event);
             }
         }
     }

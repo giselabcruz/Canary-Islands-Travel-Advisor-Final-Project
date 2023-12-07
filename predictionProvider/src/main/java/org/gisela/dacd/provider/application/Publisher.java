@@ -1,7 +1,9 @@
 package org.gisela.dacd.provider.application;
 
+import org.gisela.dacd.provider.domain.events.WeatherEvent;
+
 public interface Publisher {
     void start();
-    void publish (String event, String topic); //TODO: reducir acoplamiento Strings
+    void publish (WeatherEvent event);
     void close();
 }
