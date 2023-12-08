@@ -16,13 +16,6 @@ Data Science Application Development
 ### Academic Year
 2023
 
-
-# Funcionality
-
-Java application that every 6 hours queries the service's API to obtain the weather forecast for the 8 Canary Islands for the next 5 days at 12:00:00 pm.
-
-The weather data is persisted in an SQLite database, with a separate table for each island and an entry for each day. This entry include id, datetime, temperature, precipitation, humidity, clouds, and wind speed for each day.
-
 ## Resources Used
 - Development Environment: IntelliJ IDEA
 - Version Control Tools: Git and GitHub
@@ -30,6 +23,34 @@ The weather data is persisted in an SQLite database, with a separate table for e
 - Weather API: [OpenWeather 5 Day / 3 Hour Forecast API](https://openweathermap.org/forecast5)
 - [SQLite Documentation](https://www.sqlite.org/docs.html)
 - Documentation Tools: Markdown for README.md
+- [Documentation ActiveMQ Broker](https://activemq.apache.org/using-activemq)
+
+# Funcionality
+
+This Java application serves as a weather forecast system for the 8 Canary Islands, querying the service's API every 6 hours. It retrieves weather data for the next 5 days at 12:00:00 pm. 
+
+**Publisher/Subscriber Implementation:**
+![Publisher/Subscriber](/images/publish-subscribe.png)
+This application incorporates the Publisher/Subscriber pattern. The project is structured into modules, with the **Prediction Provider** and **Event Store Builder** as separate components.
+In this case, the broker is ActiveMQ, and it is installed as an application on the operating system.
+
+### Provider Module
+The Provider module retrieves meteorological data at the specified frequency, generating a JSON-formatted event with information from the weather service.
+
+The event structure includes timestamp, source (prediction-provider), prediction timestamp, and location (latitude and longitude).
+Additionally, it incorporates the weather metrics as temperature, wind speed, humidity, precipitation and clouds in the OpenWeatherMap API request.
+
+The event is sent to the "prediction.Weather" topic.
+
+### Broker - ActiveMQ
+ActiveMQ serves as the broker, facilitating communication between the Prediction Provider and Event Store Builder modules.
+
+### Event Store Builder Module
+
+The Event Store Builder module subscribes to the "prediction.Weather" topic, storing events in a temporally ordered directory structure.
+
+Events are serialized and organized into files based on the timestamp, with the following directory structure: *eventstore/prediction.Weather/{ss}/{YYYYMMDD}.events*
+
 
 ## Important Libraries
 ### - com.google.gson.JsonObject
@@ -97,21 +118,33 @@ SLF4J (Simple Logging Facade for Java) provides a flexible logging interface for
 # Design
 
 ## Class Diagram:
-![class_diagram](/images/WeatherForecastCapturePersistence_API-Openweathermap.png)
+![class_diagram](/images/)
 
 ## Desing Pattern
-Various design patterns and principles were applied to achieve efficient and maintainable code.
+In this project, **Clean Architecture** has been implemented.
 
-__Model-View-Controller (MVC)__ design pattern has been employed, with the caveat that the View layer has not been implemented due to the absence of a required user interface for this practice.
+![Clean_Architecture](/images/CleanArchitecture.png)
 
-### __Model__:
-Represents the data and business logic of the application, managing data manipulation and persistence. It is independent of the user interface and handles business rules. In the Model package, you will find the business logic for Weather and Location, as well as data manipulation in persistence through the Interface WeatherRepository and the Class WeatherRepositorySQLite.
+### ¿Why?
 
-### __View__:
-Although not implemented in this case as a graphical one, it would be responsible for presenting data to the user and receiving user input. It displays information to the user in an understandable manner, like graphical. In this case, the only user interface is through the Command Line.
+Clean architecture puts the business logic (Application) and application model (Domain) at the centre of the application together called as Core.
 
-### __Controller__:
-Acts as an intermediary between the Model and the View. It receives user inputs and updates the Model accordingly. It manages the flow of control logic and interactions between the View and the Model.
+The Core has to be completely independent of data access and other infrastructure concerns, so we invert the dependencies. This is achieved by adding interfaces or abstractions in Core that are implemented by layers outside of Core. For example, we need to implement the Repository Pattern we would add an interface within Core and add the implementation within Infrastructure.Data.
+
+All dependencies flow inwards and Core has no dependency on any other layer.
+
+Infrastructure and Presentation depend on Core, but not on one another.
+
+Also, if in the future we need to change the broker, with this architecture will be much easier.
+
+In essence, Clean Architecture promotes a flexible and scalable code structure.
+
+
+### GitHub repositories that have been used as a reference:
+
+[CleanArchitecture by jasontaylordev](https://github.com/jasontaylordev/CleanArchitecture): This repository is an implementation of Clean Architecture in .NET, and it serves as a reference for applying Clean Architecture principles in real-world projects. While the programming language and platform are different (Java in this case), the architectural concepts remain applicable.
+
+[buckpal by thombergs](https://github.com/thombergs/buckpal): This repository is an example application for implementing Clean Architecture in Java. It demonstrates how to structure a Java application following Clean Architecture principles.
 
 
 ## Implemented Design Principles
@@ -127,7 +160,7 @@ Existing code should not be modified if it is necessary to add new implementatio
 Large interfaces have been divided into smaller ones.
 
 ### Dependency Inversion:
-Instead of high-level modules depending on low-level modules, both depend on abstractions. This principle facilitates potential future modifications or project reusability as it relies on abstractions rather than concrete implementations. Consequently, the need to change the entire codebase is avoided and only the relevant abstractions need to be modified with the new business logic. In this project, you can see Interface WeatherRepository in the Model logic, but also you can identify an another in the Controller and it's WeatherProvider.
+Instead of high-level modules depending on low-level modules, both depend on abstractions. This principle facilitates potential future modifications or project reusability as it relies on abstractions rather than concrete implementations. Consequently, the need to change the entire codebase is avoided and only the relevant abstractions need to be modified with the new business logic.
 
 ______________________________________________________________________________________________
 In addition, the __principles of modularity, cohesion and abstraction__ have been implemented.
@@ -135,21 +168,9 @@ In addition, the __principles of modularity, cohesion and abstraction__ have bee
 ### __Modularization__:
 Is a key principle that emphasizes the organization of code into independent, self-contained modules or components. 
 
-_In this project_:
-The code is divided into distinct packages, such as Model and Controller, promoting a modular structure.
-Each package encapsulates related functionality, making it easier to understand, maintain, and extend.
-Modularization enhances code reuse, as individual modules can be developed, tested, and updated independently.
 
 ### __Cohesion__:
 Refers to the degree to which elements within a module or component work together to achieve a common goal.
 
-_In this project_:
-The Model package demonstrates high cohesion by encapsulating related classes and interfaces responsible for data manipulation, business logic (Weather and Location), and persistence (WeatherRepository).
-The separation of concerns within each package enhances the clarity of responsibilities, contributing to higher cohesion.
-
 ### __Abstraction__:
 Involves simplifying complex systems by modeling classes or components at the appropriate level of detail.
-
-_In this project_:
-Abstraction is evident in the use of interfaces (e.g., WeatherRepository) to define a contract without specifying implementation details. This allows for interchangeable implementations, adhering to the Dependency Inversion principle.
-The Model package abstracts away the internal details of data manipulation and persistence, providing a higher-level interface for interaction.
