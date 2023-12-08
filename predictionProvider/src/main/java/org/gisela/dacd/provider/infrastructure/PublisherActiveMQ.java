@@ -2,7 +2,7 @@ package org.gisela.dacd.provider.infrastructure;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import org.gisela.dacd.provider.application.InstantTypeAdapter;
+import org.gisela.dacd.provider.utils.InstantTypeAdapter;
 import org.gisela.dacd.provider.application.Publisher;
 import javax.jms.*;
 import org.apache.activemq.ActiveMQConnectionFactory;
