@@ -1,11 +1,7 @@
-// WeatherApplication class
 package org.gisela.dacd.provider.application;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import org.gisela.dacd.provider.domain.Location;
 import org.gisela.dacd.provider.domain.Weather;
-import org.gisela.dacd.provider.domain.events.WeatherEvent;
 import org.gisela.dacd.provider.infrastructure.OpenWeatherProvider;
 import java.time.Instant;
 import java.util.ArrayList;
@@ -24,12 +20,11 @@ public class WeatherApplication {
 
     public void execute() {
         for (Location location : locations) {
-            List<Weather> weatherList = openWeatherProvider.getWeatherData(location);
+            List<org.gisela.dacd.provider.domain.Weather> weatherList = openWeatherProvider.getWeatherData(location);
             Instant instant = Instant.now();
-            for (Weather weather : weatherList) {
-                WeatherEvent event = new WeatherEvent(instant, "prediction-provider", weather.getPredictionTime(),
-                        weather.getLocation(), weather.getHumidity(), weather.getTemperature(), weather.getPrecipitation(),
-                        weather.getClouds(), weather.getWindSpeed());
+            for (org.gisela.dacd.provider.domain.Weather weather : weatherList) {
+                Weather event = new Weather(instant, "prediction-provider", weather.getHumidity(), weather.getTemperature(),
+                        weather.getPrecipitation(), weather.getClouds(), weather.getWindSpeed(), weather.getLocation(), weather.getPredictionTime());
                 publisher.publish(event);
             }
         }

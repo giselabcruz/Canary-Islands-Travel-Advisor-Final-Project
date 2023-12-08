@@ -6,7 +6,7 @@ import org.gisela.dacd.provider.application.InstantTypeAdapter;
 import org.gisela.dacd.provider.application.Publisher;
 import javax.jms.*;
 import org.apache.activemq.ActiveMQConnectionFactory;
-import org.gisela.dacd.provider.domain.events.WeatherEvent;
+import org.gisela.dacd.provider.domain.Weather;
 import java.time.Instant;
 
 public class PublisherActiveMQ implements Publisher {
@@ -25,7 +25,7 @@ public class PublisherActiveMQ implements Publisher {
     }
 
     @Override
-    public void publish(WeatherEvent event) {
+    public void publish(Weather event) {
         Gson gson = new GsonBuilder()
                 .registerTypeAdapter(Instant.class, new InstantTypeAdapter())
                 .create();

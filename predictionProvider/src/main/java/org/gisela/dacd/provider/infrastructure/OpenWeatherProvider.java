@@ -15,6 +15,7 @@ import org.apache.hc.core5.http.io.entity.EntityUtils;
 import org.gisela.dacd.provider.application.WeatherProvider;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -71,12 +72,13 @@ public class OpenWeatherProvider implements WeatherProvider {
         SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
         String formattedDate = dateFormat.format(date);
         if (formattedDate.equals("12:00:00")) {
-            double temperature = getTemperatureFrom(jsonObject);
+            Instant instant = Instant.now();
             double humidity = getHumidityFrom(jsonObject);
+            double temperature = getTemperatureFrom(jsonObject);
+            double precipitation = getPrecipitationFrom(jsonObject);
             double clouds = getCloudsFrom(jsonObject);
             double windSpeed = getWindSpeedFrom(jsonObject);
-            double precipitation = getPrecipitationFrom(jsonObject);
-            Weather weather = new Weather(humidity, temperature, precipitation, clouds, windSpeed, location, date.toInstant());
+            Weather weather = new Weather(instant, "prediction-provider", humidity, temperature, precipitation, clouds, windSpeed, location, date.toInstant());
             weatherList.add(weather);
         }
     }

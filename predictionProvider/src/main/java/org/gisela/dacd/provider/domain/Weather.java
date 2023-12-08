@@ -2,8 +2,9 @@ package org.gisela.dacd.provider.domain;
 
 import java.time.Instant;
 
-// TODO: implementar dentro del Weather la nueva estructura del nuevo evento
 public class Weather {
+    private Instant ts;
+    private String ss;
     private double humidity;
     private double temperature;
     private double precipitation;
@@ -12,7 +13,9 @@ public class Weather {
     private Location location;
     private Instant predictionTime;
 
-    public Weather(double humidity, double temperature, double precipitation, double clouds, double windSpeed, Location location, Instant predictionTime) {
+    public Weather(Instant ts, String ss, double humidity, double temperature, double precipitation, double clouds, double windSpeed, Location location, Instant predictionTime) {
+        this.ts = ts;
+        this.ss = ss;
         this.humidity = humidity;
         this.temperature = temperature;
         this.precipitation = precipitation;
@@ -76,5 +79,21 @@ public class Weather {
 
     public void setTemperature(double temperature) {
         this.temperature = temperature;
+    }
+
+    public Instant getTs() {
+        return ts;
+    }
+
+    public void setTs(Instant ts) {
+        this.ts = ts;
+    }
+
+    public String getSs() {
+        return ss;
+    }
+
+    public void setSs(String ss) {
+        this.ss = ss;
     }
 }
