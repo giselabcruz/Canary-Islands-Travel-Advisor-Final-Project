@@ -117,8 +117,11 @@ SLF4J (Simple Logging Facade for Java) provides a flexible logging interface for
 
 # Design
 
-## Class Diagram:
-![class_diagram](/images/)
+## Class Diagram eventStoreBuilder:
+![class_diagram_EventStoreBuilder](/images/eventStoreBuilder.png)
+
+## Class Diagram predictionProvider:
+![class_diagram_PredictionProvider](/images/predictionProvider.png)
 
 ## Desing Pattern
 In this project, **Clean Architecture** has been implemented.
