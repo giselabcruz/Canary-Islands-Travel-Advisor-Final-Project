@@ -66,6 +66,36 @@ This project crucially relies on the __com.google.gson.JsonObject__ library to e
 The use of __com.google.gson.JsonObject__ in this project streamlines the processing of weather data retrieved from the OpenWeather 5 Day / 3 Hour Forecast API. The library enhances the project's capability to parse and manage JSON responses effectively, contributing to the overall reliability and efficiency of the application.
 
 
+## Important Plugin
+### Apache Copy-Dependencies
+
+The Maven Copy-Dependencies Plugin is a valuable tool for managing project dependencies by copying them from the local repository to a specified directory.
+
+```xml
+<build>
+    <plugins>
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-dependency-plugin</artifactId>
+            <version>3.1.2</version>
+            <executions>
+                <execution>
+                    <id>copy-dependencies</id>
+                    <phase>package</phase>
+                    <goals>
+                        <goal>copy-dependencies</goal>
+                    </goals>
+                    <configuration>
+                        <outputDirectory>${project.build.directory}/dependencies</outputDirectory>
+                    </configuration>
+                </execution>
+            </executions>
+        </plugin>
+    </plugins>
+</build>
+```
+This is particularly useful for packaging and distributing the applications along with its dependencies.
+
 ## Important Dependencies
 
 The following Maven dependencies are included in this project's `pom.xml` file:
