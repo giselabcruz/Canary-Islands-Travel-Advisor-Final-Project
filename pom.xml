@@ -12,6 +12,7 @@
         <module>datalakeBuilder</module>
         <module>predictionProvider</module>
         <module>businessUnit</module>
+        <module>sensor</module>
     </modules>
 
     <properties>
