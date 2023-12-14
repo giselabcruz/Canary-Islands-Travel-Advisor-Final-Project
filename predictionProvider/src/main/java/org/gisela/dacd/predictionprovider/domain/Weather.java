@@ -1,4 +1,4 @@
-package org.gisela.dacd.provider.domain;
+package org.gisela.dacd.predictionprovider.domain;
 
 import java.time.Instant;
 

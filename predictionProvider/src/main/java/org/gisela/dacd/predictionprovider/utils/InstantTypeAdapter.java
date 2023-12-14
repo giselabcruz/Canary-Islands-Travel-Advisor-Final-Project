@@ -1,4 +1,4 @@
-package org.gisela.dacd.provider.utils;
+package org.gisela.dacd.predictionprovider.utils;
 
 import com.google.gson.*;
 import java.lang.reflect.Type;

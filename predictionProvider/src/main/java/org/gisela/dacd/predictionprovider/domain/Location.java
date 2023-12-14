@@ -1,4 +1,4 @@
-package org.gisela.dacd.provider.domain;
+package org.gisela.dacd.predictionprovider.domain;
 
 public class Location {
     private String name;
