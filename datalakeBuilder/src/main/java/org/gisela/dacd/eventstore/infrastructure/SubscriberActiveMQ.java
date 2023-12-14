@@ -31,7 +31,6 @@ public class SubscriberActiveMQ implements Subscriber {
         }
     }
 
-    // TODO: allow new sessions
     @Override
     public void subscribe(String topicName) {
         try {
