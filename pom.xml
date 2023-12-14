@@ -9,7 +9,7 @@
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
     <modules>
-        <module>eventStoreBuilder</module>
+        <module>datalakeBuilder</module>
         <module>predictionProvider</module>
     </modules>
 
