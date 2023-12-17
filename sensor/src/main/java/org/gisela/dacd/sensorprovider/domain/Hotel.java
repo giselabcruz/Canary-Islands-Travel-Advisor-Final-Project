@@ -3,12 +3,12 @@ package org.gisela.dacd.sensorprovider.domain;
 public class Hotel {
 
     private String name;
-    private String apikey;
+    private String hotelKey;
     private Location location;
 
-    public Hotel(String name, String apikey, Location location) {
+    public Hotel(String name, String hotelKey, Location location) {
         this.name = name;
-        this.apikey = apikey;
+        this.hotelKey = hotelKey;
         this.location = location;
     }
 
@@ -20,12 +20,12 @@ public class Hotel {
         this.name = name;
     }
 
-    public String getApikey() {
-        return apikey;
+    public String getHotelKey() {
+        return hotelKey;
     }
 
-    public void setApikey(String apikey) {
-        this.apikey = apikey;
+    public void setHotelKey(String hotelKey) {
+        this.hotelKey = hotelKey;
     }
 
     public Location getLocation() {
