@@ -2,18 +2,16 @@ package org.gisela.dacd.sensorprovider.application;
 
 import org.gisela.dacd.sensorprovider.domain.Hotel;
 import org.gisela.dacd.sensorprovider.domain.Location;
-
 import java.util.ArrayList;
 
 public class HotelSupplier {
-
     // TODO: Application- servicio(clase) que se encarga de obtener informacion de los hoteles para una isla en concreto
     // TODO: Application- servicio(clase) que se encarga de obtener informacion de los VUELOS para una isla en concreto
-    //TODO REFACTOR: Valorar si las aplicaciones pueden converger en la misma clase.
+    // TODO REFACTOR: Valorar si las aplicaciones pueden converger en la misma clase.
 
     public static ArrayList<Hotel> canaryIslandsHotels() {
 
-        return new ArrayList<Hotel>() {
+        return new ArrayList<>() {
             {
                 add(new Hotel("Hotel Riu Gran Canaria", "g230095-d530762", new Location("Gran_Canaria", 28.0997, -15.4134)));
                 add(new Hotel("Paradisus By Meliá Gran Canaria", "g562818-d238899", new Location("Gran_Canaria", 28.0997, -15.4134)));
@@ -105,85 +103,84 @@ public class HotelSupplier {
                 add(new Hotel("Hotel Lanzarote Village", "g662290-d502189", new Location("Lanzarote", 28.963, -13.5477)));
 
 
-                add(new Hotel("Evita Beach Aptos y Suites Exclusivas", "g1190272-d2645782",new Location("La_Graciosa", 29.255217, -13.504110)));
-                add(new Hotel("Apartments La Graciosa", "g3360203-d3411835",new Location("La_Graciosa", 29.255217, -13.504110)));
-                add(new Hotel("Apartamentos El Marinero - Avenida", "g3360203-d17628872",new Location("La_Graciosa", 29.255217, -13.504110)));
-                add(new Hotel("Apartamentos GraciosaMar", "g1190272-d945848",new Location("La_Graciosa", 29.255217, -13.504110)));
-                add(new Hotel("Apartamentos La Pardela Exclusive", "g3360203-d25244761",new Location("La_Graciosa", 29.255217, -13.504110)));
+                add(new Hotel("Evita Beach Aptos y Suites Exclusivas", "g1190272-d2645782", new Location("La_Graciosa", 29.255217, -13.504110)));
+                add(new Hotel("Apartments La Graciosa", "g3360203-d3411835", new Location("La_Graciosa", 29.255217, -13.504110)));
+                add(new Hotel("Apartamentos El Marinero - Avenida", "g3360203-d17628872", new Location("La_Graciosa", 29.255217, -13.504110)));
+                add(new Hotel("Apartamentos GraciosaMar", "g1190272-d945848", new Location("La_Graciosa", 29.255217, -13.504110)));
+                add(new Hotel("Apartamentos La Pardela Exclusive", "g3360203-d25244761", new Location("La_Graciosa", 29.255217, -13.504110)));
 
 
-                add(new Hotel("Iberostar Bouganville Playa", "g662606-d296925",new Location("Tenerife", 28.5392, -16.203)));
-                add(new Hotel("Gran Melia Palacio De Isora", "g1773834-d945835",new Location("Tenerife", 28.5392, -16.203)));
-                add(new Hotel("Hard Rock Hotel Tenerife", "g315919-d4341700",new Location("Tenerife", 28.5392, -16.203)));
-                add(new Hotel("Iberostar Selection Sábila", "g662606-d291408",new Location("Tenerife", 28.5392, -16.203)));
-                add(new Hotel("Dreams Jardin Tropical", "g662606-d248458",new Location("Tenerife", 28.5392, -16.203)));
-                add(new Hotel("Iberostar Selection Anthelia", "g662606-d285140",new Location("Tenerife", 28.5392, -16.203)));
-                add(new Hotel("Hotel Botánico & The Oriental Spa Garden", "g187481-d252888",new Location("Tenerife", 28.5392, -16.203)));
-                add(new Hotel("H10 Atlantic Sunset", "g315919-d15327583",new Location("Tenerife", 28.5392, -16.203)));
-                add(new Hotel("Mynd Adeje", "g664636-d17202898",new Location("Tenerife", 28.5392, -16.203)));
-                add(new Hotel("Hotel Landmar Costa los Gigantes", "g673853-d1105939",new Location("Tenerife", 28.5392, -16.203)));
-                add(new Hotel("Santa Barbara Golf and Ocean Club", "g672806-d596048",new Location("Tenerife", 28.5392, -16.203)));
-                add(new Hotel("GF Gran Costa Adeje", "g662606-d291481",new Location("Tenerife", 28.5392, -16.203)));
-                add(new Hotel("Gran Melia Palacio De Isora", "g1773834-d945835",new Location("Tenerife", 28.5392, -16.203)));
-                add(new Hotel("Alua Atlántico Golf Resort", "g672806-d286669",new Location("Tenerife", 28.5392, -16.203)));
-                add(new Hotel("Meliá Jardines del Teide - Adults only", "g662606-d248456",new Location("Tenerife", 28.5392, -16.203)));
-                add(new Hotel("Bahía del Duque", "g662606-d248457",new Location("Tenerife", 28.5392, -16.203)));
-                add(new Hotel("Drago Nest Hostel", "g675094-d12481454",new Location("Tenerife", 28.5392, -16.203)));
-                add(new Hotel("Spring Hotel Vulcano", "g562820-d248468",new Location("Tenerife", 28.5392, -16.203)));
-                add(new Hotel("Best Semiramis", "g187481-d1221148",new Location("Tenerife", 28.5392, -16.203)));
-                add(new Hotel("GF Fanabe", "g662606-d500302",new Location("Tenerife", 28.5392, -16.203)));
-                add(new Hotel("Sol Tenerife", "g562820-d248465",new Location("Tenerife", 28.5392, -16.203)));
-                add(new Hotel("Hotel Las Águilas Tenerife, Affiliated by Meliá", "g187481-d566003",new Location("Tenerife", 28.5392, -16.203)));
-                add(new Hotel("Sol Arona Tenerife", "-g659661-d248469",new Location("Tenerife", 28.5392, -16.203)));
-                add(new Hotel("H10 Costa Adeje Palace", "g662606-d289674",new Location("Tenerife", 28.5392, -16.203)));
-                add(new Hotel("Hacienda del Conde Meliá Collection - Adults only", "g187479-d8776260",new Location("Tenerife", 28.5392, -16.203)));
-                add(new Hotel("Hotel Cleopatra Palace", "g562820-d483829",new Location("Tenerife", 28.5392, -16.203)));
-                add(new Hotel("Hollywood Mirage", "g659661-d549097",new Location("Tenerife", 28.5392, -16.203)));
-                add(new Hotel("Iberostar Heritage Grand Mencey", "g187482-d1555517",new Location("Tenerife", 28.5392, -16.203)));
+                add(new Hotel("Iberostar Bouganville Playa", "g662606-d296925", new Location("Tenerife", 28.5392, -16.203)));
+                add(new Hotel("Gran Melia Palacio De Isora", "g1773834-d945835", new Location("Tenerife", 28.5392, -16.203)));
+                add(new Hotel("Hard Rock Hotel Tenerife", "g315919-d4341700", new Location("Tenerife", 28.5392, -16.203)));
+                add(new Hotel("Iberostar Selection Sábila", "g662606-d291408", new Location("Tenerife", 28.5392, -16.203)));
+                add(new Hotel("Dreams Jardin Tropical", "g662606-d248458", new Location("Tenerife", 28.5392, -16.203)));
+                add(new Hotel("Iberostar Selection Anthelia", "g662606-d285140", new Location("Tenerife", 28.5392, -16.203)));
+                add(new Hotel("Hotel Botánico & The Oriental Spa Garden", "g187481-d252888", new Location("Tenerife", 28.5392, -16.203)));
+                add(new Hotel("H10 Atlantic Sunset", "g315919-d15327583", new Location("Tenerife", 28.5392, -16.203)));
+                add(new Hotel("Mynd Adeje", "g664636-d17202898", new Location("Tenerife", 28.5392, -16.203)));
+                add(new Hotel("Hotel Landmar Costa los Gigantes", "g673853-d1105939", new Location("Tenerife", 28.5392, -16.203)));
+                add(new Hotel("Santa Barbara Golf and Ocean Club", "g672806-d596048", new Location("Tenerife", 28.5392, -16.203)));
+                add(new Hotel("GF Gran Costa Adeje", "g662606-d291481", new Location("Tenerife", 28.5392, -16.203)));
+                add(new Hotel("Gran Melia Palacio De Isora", "g1773834-d945835", new Location("Tenerife", 28.5392, -16.203)));
+                add(new Hotel("Alua Atlántico Golf Resort", "g672806-d286669", new Location("Tenerife", 28.5392, -16.203)));
+                add(new Hotel("Meliá Jardines del Teide - Adults only", "g662606-d248456", new Location("Tenerife", 28.5392, -16.203)));
+                add(new Hotel("Bahía del Duque", "g662606-d248457", new Location("Tenerife", 28.5392, -16.203)));
+                add(new Hotel("Drago Nest Hostel", "g675094-d12481454", new Location("Tenerife", 28.5392, -16.203)));
+                add(new Hotel("Spring Hotel Vulcano", "g562820-d248468", new Location("Tenerife", 28.5392, -16.203)));
+                add(new Hotel("Best Semiramis", "g187481-d1221148", new Location("Tenerife", 28.5392, -16.203)));
+                add(new Hotel("GF Fanabe", "g662606-d500302", new Location("Tenerife", 28.5392, -16.203)));
+                add(new Hotel("Sol Tenerife", "g562820-d248465", new Location("Tenerife", 28.5392, -16.203)));
+                add(new Hotel("Hotel Las Águilas Tenerife, Affiliated by Meliá", "g187481-d566003", new Location("Tenerife", 28.5392, -16.203)));
+                add(new Hotel("Sol Arona Tenerife", "-g659661-d248469", new Location("Tenerife", 28.5392, -16.203)));
+                add(new Hotel("H10 Costa Adeje Palace", "g662606-d289674", new Location("Tenerife", 28.5392, -16.203)));
+                add(new Hotel("Hacienda del Conde Meliá Collection - Adults only", "g187479-d8776260", new Location("Tenerife", 28.5392, -16.203)));
+                add(new Hotel("Hotel Cleopatra Palace", "g562820-d483829", new Location("Tenerife", 28.5392, -16.203)));
+                add(new Hotel("Hollywood Mirage", "g659661-d549097", new Location("Tenerife", 28.5392, -16.203)));
+                add(new Hotel("Iberostar Heritage Grand Mencey", "g187482-d1555517", new Location("Tenerife", 28.5392, -16.203)));
 
 
-                add(new Hotel("Parador de la Gomera", "g187470-d190895",new Location("La_Gomera", 28.0916, -17.1133)));
-                add(new Hotel("Hotel Jardín Tecina", "g1187912-d324473",new Location("La_Gomera", 28.0916, -17.1133)));
-                add(new Hotel("Ibo Alfaro Hotel Rural - OFFLINE HOTEL", "g674060-d670383",new Location("La_Gomera", 28.0916, -17.1133)));
-                add(new Hotel("Apartamentos Los Telares", "g674060-d729666",new Location("La_Gomera", 28.0916, -17.1133)));
-                add(new Hotel("Hotel Gran Rey", "g674782-d616495",new Location("La_Gomera", 28.0916, -17.1133)));
-                add(new Hotel("Bar Hotel Sonia", "g1024999-d1811048",new Location("La_Gomera", 28.0916, -17.1133)));
-                add(new Hotel("Charco Del Conde", "g674782-d670025",new Location("La_Gomera", 28.0916, -17.1133)));
-                add(new Hotel("Tamahuche Rural Hotel", "g1024999-d616810",new Location("La_Gomera", 28.0916, -17.1133)));
-                add(new Hotel("Hotel Torre Del Conde", "g187470-d566709",new Location("La_Gomera", 28.0916, -17.1133)));
-                add(new Hotel("Hotel Villa Gomera", "g187470-d614341",new Location("La_Gomera", 28.0916, -17.1133)));
-                add(new Hotel("Hotel Rural Triana", "g1024999-d15811971",new Location("La_Gomera", 28.0916, -17.1133)));
-                add(new Hotel("Hotel La Colombina", "g187470-d2039274",new Location("La_Gomera", 28.0916, -17.1133)));
-                add(new Hotel("Jardin Las Hayas", "g1877764-d1182998",new Location("La_Gomera", 28.0916, -17.1133)));
-                add(new Hotel("Hotel Escuela Rural Casa Los Herrera", "g674060-d23373330",new Location("La_Gomera", 28.0916, -17.1133)));
-                add(new Hotel("Complejo Turístico Las TRES PALMERAS", "g21309597-d1167588",new Location("La_Gomera", 28.0916, -17.1133)));
-                add(new Hotel("Hotel Rural Villa Hermigua", "g674060-d1169732",new Location("La_Gomera", 28.0916, -17.1133)));
-                add(new Hotel("Hotel Playa Calera", "g21309597-d1379967",new Location("La_Gomera", 28.0916, -17.1133)));
-                add(new Hotel("Hotel Jardin Concha", "g12600165-d1637868",new Location("La_Gomera", 28.0916, -17.1133)));
+                add(new Hotel("Parador de la Gomera", "g187470-d190895", new Location("La_Gomera", 28.0916, -17.1133)));
+                add(new Hotel("Hotel Jardín Tecina", "g1187912-d324473", new Location("La_Gomera", 28.0916, -17.1133)));
+                add(new Hotel("Ibo Alfaro Hotel Rural - OFFLINE HOTEL", "g674060-d670383", new Location("La_Gomera", 28.0916, -17.1133)));
+                add(new Hotel("Apartamentos Los Telares", "g674060-d729666", new Location("La_Gomera", 28.0916, -17.1133)));
+                add(new Hotel("Hotel Gran Rey", "g674782-d616495", new Location("La_Gomera", 28.0916, -17.1133)));
+                add(new Hotel("Bar Hotel Sonia", "g1024999-d1811048", new Location("La_Gomera", 28.0916, -17.1133)));
+                add(new Hotel("Charco Del Conde", "g674782-d670025", new Location("La_Gomera", 28.0916, -17.1133)));
+                add(new Hotel("Tamahuche Rural Hotel", "g1024999-d616810", new Location("La_Gomera", 28.0916, -17.1133)));
+                add(new Hotel("Hotel Torre Del Conde", "g187470-d566709", new Location("La_Gomera", 28.0916, -17.1133)));
+                add(new Hotel("Hotel Villa Gomera", "g187470-d614341", new Location("La_Gomera", 28.0916, -17.1133)));
+                add(new Hotel("Hotel Rural Triana", "g1024999-d15811971", new Location("La_Gomera", 28.0916, -17.1133)));
+                add(new Hotel("Hotel La Colombina", "g187470-d2039274", new Location("La_Gomera", 28.0916, -17.1133)));
+                add(new Hotel("Jardin Las Hayas", "g1877764-d1182998", new Location("La_Gomera", 28.0916, -17.1133)));
+                add(new Hotel("Hotel Escuela Rural Casa Los Herrera", "g674060-d23373330", new Location("La_Gomera", 28.0916, -17.1133)));
+                add(new Hotel("Complejo Turístico Las TRES PALMERAS", "g21309597-d1167588", new Location("La_Gomera", 28.0916, -17.1133)));
+                add(new Hotel("Hotel Rural Villa Hermigua", "g674060-d1169732", new Location("La_Gomera", 28.0916, -17.1133)));
+                add(new Hotel("Hotel Playa Calera", "g21309597-d1379967", new Location("La_Gomera", 28.0916, -17.1133)));
+                add(new Hotel("Hotel Jardin Concha", "g12600165-d1637868", new Location("La_Gomera", 28.0916, -17.1133)));
 
 
-                add(new Hotel("Hotel Hacienda De Abajo", "g1177806-d3577949",new Location("La_Palma", 28.6835, -17.7642)));
-                add(new Hotel("La Palma Princess", "g1175543-d638034",new Location("La_Palma", 28.6835, -17.7642)));
-                add(new Hotel("Esencia de La Palma by Princess", "g1175543-d21175914",new Location("La_Palma", 28.6835, -17.7642)));
-                add(new Hotel("Hacienda San Jorge", "g642213-d535420",new Location("La_Palma", 28.6835, -17.7642)));
-                add(new Hotel("Parador de la Palma", "g642213-d482745",new Location("La_Palma", 28.6835, -17.7642)));
-                add(new Hotel("H10 Taburiente Playa", "g659966-d289252",new Location("La_Palma", 28.6835, -17.7642)));
-                add(new Hotel("Hotel Las Olas", "g642213-d488944",new Location("La_Palma", 28.6835, -17.7642)));
-                add(new Hotel("Hotel San Telmo", "g187476-d1760436",new Location("La_Palma", 28.6835, -17.7642)));
-                add(new Hotel("Hotel Emblemático Holiday Time", "g187476-d17288155",new Location("La_Palma", 28.6835, -17.7642)));
-                add(new Hotel("La Caleta", "g659966-d629213",new Location("La_Palma", 28.6835, -17.7642)));
-                add(new Hotel("Dulce Valle Villas & Spa", "g187475-d9583111",new Location("La_Palma", 28.6835, -17.7642)));
+                add(new Hotel("Hotel Hacienda De Abajo", "g1177806-d3577949", new Location("La_Palma", 28.6835, -17.7642)));
+                add(new Hotel("La Palma Princess", "g1175543-d638034", new Location("La_Palma", 28.6835, -17.7642)));
+                add(new Hotel("Esencia de La Palma by Princess", "g1175543-d21175914", new Location("La_Palma", 28.6835, -17.7642)));
+                add(new Hotel("Hacienda San Jorge", "g642213-d535420", new Location("La_Palma", 28.6835, -17.7642)));
+                add(new Hotel("Parador de la Palma", "g642213-d482745", new Location("La_Palma", 28.6835, -17.7642)));
+                add(new Hotel("H10 Taburiente Playa", "g659966-d289252", new Location("La_Palma", 28.6835, -17.7642)));
+                add(new Hotel("Hotel Las Olas", "g642213-d488944", new Location("La_Palma", 28.6835, -17.7642)));
+                add(new Hotel("Hotel San Telmo", "g187476-d1760436", new Location("La_Palma", 28.6835, -17.7642)));
+                add(new Hotel("Hotel Emblemático Holiday Time", "g187476-d17288155", new Location("La_Palma", 28.6835, -17.7642)));
+                add(new Hotel("La Caleta", "g659966-d629213", new Location("La_Palma", 28.6835, -17.7642)));
+                add(new Hotel("Dulce Valle Villas & Spa", "g187475-d9583111", new Location("La_Palma", 28.6835, -17.7642)));
 
 
-                add(new Hotel("Parador de El Hierro", "g187474-d277394",new Location("El_Hierro", 27.8063, -17.9158)));
-                add(new Hotel("Puntagrande Hotel", "g2139290-d627753",new Location("El_Hierro", 27.8063, -17.9158)));
-                add(new Hotel("Balneario Pozo de la Salud", "g1189149-d1193818",new Location("El_Hierro", 27.8063, -17.9158)));
-                add(new Hotel("Hotel Ida Inés", "g2139290-d603283",new Location("El_Hierro", 27.8063, -17.9158)));
-                add(new Hotel("Lua", "g2467431-d21119345",new Location("El_Hierro", 27.8063, -17.9158)));
-                add(new Hotel("Hotel Villa El Mocanal", "g1190055-d630598",new Location("El_Hierro", 27.8063, -17.9158)));
-                add(new Hotel("Complejo Rural La Brujita", "g1190058-d1193275",new Location("El_Hierro", 27.8063, -17.9158)));
+                add(new Hotel("Parador de El Hierro", "g187474-d277394", new Location("El_Hierro", 27.8063, -17.9158)));
+                add(new Hotel("Puntagrande Hotel", "g2139290-d627753", new Location("El_Hierro", 27.8063, -17.9158)));
+                add(new Hotel("Balneario Pozo de la Salud", "g1189149-d1193818", new Location("El_Hierro", 27.8063, -17.9158)));
+                add(new Hotel("Hotel Ida Inés", "g2139290-d603283", new Location("El_Hierro", 27.8063, -17.9158)));
+                add(new Hotel("Lua", "g2467431-d21119345", new Location("El_Hierro", 27.8063, -17.9158)));
+                add(new Hotel("Hotel Villa El Mocanal", "g1190055-d630598", new Location("El_Hierro", 27.8063, -17.9158)));
+                add(new Hotel("Complejo Rural La Brujita", "g1190058-d1193275", new Location("El_Hierro", 27.8063, -17.9158)));
             }
         };
     }
-
 }
