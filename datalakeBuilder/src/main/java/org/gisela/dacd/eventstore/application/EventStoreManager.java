@@ -9,6 +9,7 @@ import java.io.IOException;
 
 public class EventStoreManager implements EventStore {
 
+    //TODO: Implement structure
     @Override
     public void storeEventToFile(String json) {
         try {
