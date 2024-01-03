@@ -19,8 +19,8 @@ public class HotelPeriodicTask extends TimerTask {
     public void run() {
         XoteloPublisher xoteloPublisher = new XoteloPublisher();
         xoteloPublisher.start();
-        HotelApplication weatherApplication = new HotelApplication(xoteloProvider, hotels, xoteloPublisher);
-        weatherApplication.execute();
+        HotelApplication hotelApplication = new HotelApplication(xoteloProvider, hotels, xoteloPublisher);
+        hotelApplication.execute();
         xoteloPublisher.close();
     }
 }
