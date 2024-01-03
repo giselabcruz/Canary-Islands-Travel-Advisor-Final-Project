@@ -6,25 +6,33 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.Instant;
+import java.time.ZoneOffset;
+import java.time.format.DateTimeFormatter;
 
 public class EventStoreManager implements EventStore {
 
-    //TODO: Implement structure
     @Override
     public void storeEventToFile(String json) {
         try {
             Gson gson = new Gson();
             JsonObject jsonObject = gson.fromJson(json, JsonObject.class);
-            File directory = createDirectory();
-            File file = new File(directory, "data-lake");
-            writeEventToDatalake(gson, jsonObject, file);
+            String formattedTimestamp = getCurrentFormattedTimestamp();
+            File directory = createDirectory(jsonObject);
+            File file = new File(directory, formattedTimestamp + ".events");
+            writeEventToFile(gson, jsonObject, file);
         } catch (IOException e) {
             handleError(e);
         }
     }
 
-    private File createDirectory() throws IOException {
-        String directoryPath = "datalake/cleansed";
+    private String getCurrentFormattedTimestamp() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
+        return Instant.now().atOffset(ZoneOffset.UTC).format(formatter);
+    }
+
+    private File createDirectory(JsonObject jsonObject) throws IOException {
+        String directoryPath = "eventstore/prediction.Weather/" + getCleanedStringValue(jsonObject) + "/";
         File directory = new File(directoryPath);
         if (!directory.exists() && !directory.mkdirs()) {
             throw new IOException("Error creating directory: " + directory.getAbsolutePath());
@@ -32,12 +40,16 @@ public class EventStoreManager implements EventStore {
         return directory;
     }
 
-    private void writeEventToDatalake(Gson gson, JsonObject jsonObject, File file) throws IOException {
+    private void writeEventToFile(Gson gson, JsonObject jsonObject, File file) throws IOException {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(file, true))) {
             gson.toJson(jsonObject, writer);
             writer.newLine();
             System.out.println("Event stored successfully at: " + file.getAbsolutePath());
         }
+    }
+
+    private String getCleanedStringValue(JsonObject jsonObject) {
+        return jsonObject.get("ss").getAsString().replace("\"", "");
     }
 
     private void handleError(Exception e) {
