@@ -13,12 +13,12 @@ import java.time.format.DateTimeFormatter;
 public class EventStoreManager implements EventStore {
 
     @Override
-    public void storeEventToFile(String json) {
+    public void storeEventToFile(String json, String topicName) {
         try {
             Gson gson = new Gson();
             JsonObject jsonObject = gson.fromJson(json, JsonObject.class);
             String formattedTimestamp = getCurrentFormattedTimestamp();
-            File directory = createDirectory(jsonObject);
+            File directory = createDirectory(jsonObject,topicName);
             File file = new File(directory, formattedTimestamp + ".events");
             writeEventToFile(gson, jsonObject, file);
         } catch (IOException e) {
@@ -31,8 +31,8 @@ public class EventStoreManager implements EventStore {
         return Instant.now().atOffset(ZoneOffset.UTC).format(formatter);
     }
 
-    private File createDirectory(JsonObject jsonObject) throws IOException {
-        String directoryPath = "eventstore/prediction.Weather/" + getCleanedStringValue(jsonObject) + "/";
+    private File createDirectory(JsonObject jsonObject, String topicName) throws IOException {
+        String directoryPath = "eventstore/"+ topicName + "/" + getCleanedStringValue(jsonObject) + "/";
         File directory = new File(directoryPath);
         if (!directory.exists() && !directory.mkdirs()) {
             throw new IOException("Error creating directory: " + directory.getAbsolutePath());

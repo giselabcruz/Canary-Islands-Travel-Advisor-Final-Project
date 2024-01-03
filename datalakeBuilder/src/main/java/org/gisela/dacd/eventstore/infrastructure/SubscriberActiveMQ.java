@@ -37,7 +37,7 @@ public class SubscriberActiveMQ implements Subscriber {
             Session session = createSession();
             Topic destination = createTopic(session, topicName);
             MessageConsumer consumer = createDurableSubscriber(session, destination);
-            setMessageListener(consumer);
+            setMessageListener(consumer, topicName);
         } catch (JMSException e) {
             handleError("Error during subscription:" + e.getMessage());
         }
@@ -56,19 +56,19 @@ public class SubscriberActiveMQ implements Subscriber {
         return session.createDurableSubscriber(destination, this.subscriberId);
     }
 
-    private void setMessageListener(MessageConsumer consumer) throws JMSException {
+    private void setMessageListener(MessageConsumer consumer, String topicName) throws JMSException {
         consumer.setMessageListener(message -> {
             try {
-                handleIncomingMessage(message);
+                handleIncomingMessage(message,topicName);
             } catch (JMSException e) {
                 handleError("Error processing JMS message: " + e.getMessage());
             }
         });
     }
 
-    private void handleIncomingMessage(Message message) throws JMSException {
+    private void handleIncomingMessage(Message message, String topicName) throws JMSException {
         if (message instanceof TextMessage textMessage) {
-            eventStoreManager.storeEventToFile(textMessage.getText());
+            eventStoreManager.storeEventToFile(textMessage.getText(), topicName);
         } else {
             System.err.println("Unrecognized message: " + message.getClass().getName());
         }
