@@ -11,7 +11,6 @@ import org.apache.hc.core5.http.HttpEntity;
 import org.apache.hc.core5.http.ParseException;
 import org.apache.hc.core5.http.io.entity.EntityUtils;
 import org.gisela.dacd.sensorprovider.application.HotelProvider;
-import org.gisela.dacd.sensorprovider.domain.Hotel;
 import org.gisela.dacd.sensorprovider.domain.Rate;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -29,23 +28,6 @@ public class XoteloProvider implements HotelProvider {
             try (CloseableHttpResponse response = httpclient.execute(httpGet)) {
                 String responseBody = obtainResponseBody(response);
                 return obtainRatesFromJson(responseBody);
-            } catch (ParseException e) {
-                throw new RuntimeException(e);
-            }
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    @Override
-    public List<Hotel> getHotelHeatmap(String hotelKey) {
-        String url = buildUrlApiHeatmap(hotelKey);
-        try (CloseableHttpClient httpclient = HttpClients.createDefault()) {
-            HttpGet httpGet = new HttpGet(url);
-            try (CloseableHttpResponse response = httpclient.execute(httpGet)) {
-                String responseBody = obtainResponseBody(response);
-                //return obtainWeatherFromJson(responseBody, hotelKey);
-                return null;
             } catch (ParseException e) {
                 throw new RuntimeException(e);
             }
