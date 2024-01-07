@@ -12,18 +12,11 @@ import io.swagger.v3.oas.annotations.servers.Server;
                 description = "Find the best fly and hotel to travel to the best Canary Island depending on weather!",
                 version = "V12.0.12",
                 title = "API FlyHotelIsland",
-                contact = @Contact(
-                        name = "Ranga Karanam",
-                        email = "ranga.karanam@in28minutes.com",
-                        url = "http://www.in28minutes.com"
-                ),
                 license = @License(
                         name = "Apache 2.0",
                         url = "http://www.apache.org/licenses/LICENSE-2.0"
                 )
-        ),
-        servers = {@Server(url = "http://in28minutes.com")}
+        )
 )
 public interface ApiDocumentationConfig {
-
 }
