@@ -13,9 +13,11 @@ public class Main {
 
     public static void main(String[] args) {
         EventStoreManager eventStoreManager = new EventStoreManager();
-        Subscriber subscriber = new SubscriberActiveMQ(BROKER_URL,CLIENT_ID, SUBSCRIBER_ID, eventStoreManager);
-        subscriber.start();
-        subscriber.subscribe(PREDICTION_WEATHER_TOPIC);
-        subscriber.subscribe(HOTEL_TOPIC);
+        Subscriber subscriberWeather = new SubscriberActiveMQ(BROKER_URL,CLIENT_ID+"_Weather", SUBSCRIBER_ID+"_Weather", eventStoreManager);
+        subscriberWeather.start();
+        subscriberWeather.subscribe(PREDICTION_WEATHER_TOPIC);
+        Subscriber subscriberHotel = new SubscriberActiveMQ(BROKER_URL,CLIENT_ID+"_Hotel", SUBSCRIBER_ID+"_Hotel", eventStoreManager);
+        subscriberHotel.start();
+        subscriberHotel.subscribe(HOTEL_TOPIC);
     }
 }
