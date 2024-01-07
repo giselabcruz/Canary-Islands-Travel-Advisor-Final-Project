@@ -32,7 +32,7 @@ public class EventStoreManager implements EventStore {
     }
 
     private File createDirectory(JsonObject jsonObject, String topicName) throws IOException {
-        String directoryPath = "eventstore/"+ topicName + "/" + getCleanedStringValue(jsonObject) + "/";
+        String directoryPath = "datalake/eventstore/" + topicName + "/" + getCleanedStringValue(jsonObject) + "/";
         File directory = new File(directoryPath);
         if (!directory.exists() && !directory.mkdirs()) {
             throw new IOException("Error creating directory: " + directory.getAbsolutePath());
