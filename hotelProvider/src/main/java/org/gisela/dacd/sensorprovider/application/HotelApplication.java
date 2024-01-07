@@ -20,7 +20,7 @@ public class HotelApplication {
         for (Hotel hotel : hotels) {
             List<Rate> hotelRates = xoteloProvider.getHotelRates(hotel.getHotelKey());
             Instant instant = Instant.now();
-            Hotel event = new Hotel(instant, "prediction-provider",hotel.getName(),hotel.getHotelKey(),
+            Hotel event = new Hotel(instant, "hotel-provider",hotel.getName(),hotel.getHotelKey(),
                     hotel.getLocation(), hotelRates);
             publisher.publish(event);
         }
