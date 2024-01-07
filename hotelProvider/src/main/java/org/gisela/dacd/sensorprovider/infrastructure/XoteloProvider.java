@@ -62,11 +62,7 @@ public class XoteloProvider implements HotelProvider {
 
     private String buildUrlApiRates(String hotelKey) {
         return String.format("https://data.xotelo.com/api/rates?hotel_key=%s&chk_in=%s&chk_out=%s&currency=EUR",
-                hotelKey,"2024-01-02","2024-01-07");
+                hotelKey,"2024-01-08","2024-01-15"); //TODO: implement a solution for dates
     }
 
-    private String buildUrlApiHeatmap(String hotelKey) {
-        return String.format("https://data.xotelo.com/api/heatmap?hotel_key=%s&chk_out=%s",
-                hotelKey,"2023-12-27");
-    }
 }
