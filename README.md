@@ -24,32 +24,28 @@ Data Science Application Development
 - [SQLite Documentation](https://www.sqlite.org/docs.html)
 - Documentation Tools: Markdown for README.md
 - [Documentation ActiveMQ Broker](https://activemq.apache.org/using-activemq)
+- [Postman](https://www.postman.com/) for API testing
 
 # Funcionality
 
-This Java application serves as a weather forecast system for the 8 Canary Islands, querying the service's API every 6 hours. It retrieves weather data for the next 5 days at 12:00:00 pm. 
+The application allows users to retrieve tailored travel advice based on current and predicted conditions. Users interact via the REST API, providing parameters like location or travel preferences, receiving customized travel suggestions in return. 
+
+Modularity is present in this final project. It ensures flexibility, scalability, and ease of maintenance, allowing each component to function independently while contributing to the system's overall functionality. 
+
+## Architecture
+
+**DataLake**: Stores all relevant data, creating separate files for weather predictions, hotel, and flight data. 
+
+**DataMart**: Processes and refines data for user queries. 
+
+**BusinessUnit**: Accesses historical data from the DataLake. In this project, when no specific parameters or locations are provided, it displays stored DataLake information. So the businessUnit is connected to datalake. 
+
+**API Implementation**: A REST API is implemented for user interaction, utilizing Postman for testing API responses.
 
 **Publisher/Subscriber Implementation:**
 ![Publisher/Subscriber](/images/publish-subscribe.png)
-This application incorporates the Publisher/Subscriber pattern. The project is structured into modules, with the **Prediction Provider** and **Event Store Builder** as separate components.
+This application incorporates the Publisher/Subscriber pattern for working with events.
 In this case, the broker is ActiveMQ, and it is installed as an application on the operating system.
-
-### Provider Module
-The Provider module retrieves meteorological data at the specified frequency, generating a JSON-formatted event with information from the weather service.
-
-The event structure includes timestamp, source (prediction-provider), prediction timestamp, and location (latitude and longitude).
-Additionally, it incorporates the weather metrics as temperature, wind speed, humidity, precipitation and clouds in the OpenWeatherMap API request.
-
-The event is sent to the "prediction.Weather" topic.
-
-### Broker - ActiveMQ
-ActiveMQ serves as the broker, facilitating communication between the Prediction Provider and Event Store Builder modules.
-
-### Event Store Builder Module
-
-The Event Store Builder module subscribes to the "prediction.Weather" topic, storing events in a temporally ordered directory structure.
-
-Events are serialized and organized into files based on the timestamp, with the following directory structure: *eventstore/prediction.Weather/{ss}/{YYYYMMDD}.events*
 
 
 ## Important Libraries
@@ -96,55 +92,6 @@ The Maven Copy-Dependencies Plugin is a valuable tool for managing project depen
 ```
 This is particularly useful for packaging and distributing the applications along with its dependencies.
 
-## Important Dependencies
-
-The following Maven dependencies are included in this project's `pom.xml` file:
-
-### - org.apache.httpcomponents.client5
-This project relies on the Apache HttpClient library (Version 5.2.1) to facilitate robust and efficient HTTP communication.
-Apache HttpClient is a mature and widely-used Java library that provides powerful features for making HTTP requests and handling responses.
-
-#### Key Features:
-- HTTP Protocol Support: Apache HttpClient supports various versions of the HTTP protocol, allowing seamless communication with web services and APIs.
-
-- Connection Management: The library offers sophisticated connection management, ensuring optimal usage of network resources and minimizing latency.
-
-- Request and Response Handling: Apache HttpClient simplifies the process of crafting HTTP requests and processing responses, making it an integral part of this project's functionality.
-
-#### Integration in this Project:
-
-```xml
-<dependency>
-    <groupId>org.apache.httpcomponents.client5</groupId>
-    <artifactId>httpclient5</artifactId>
-    <version>5.2.1</version>
-</dependency>
-```
-
-The inclusion of __org.apache.httpcomponents.client5__ is essential for the proper functioning of HTTP-related tasks, such as querying external API for weather data.
-
-
-### - org.slf4j
-SLF4J (Simple Logging Facade for Java) provides a flexible logging interface for better logging within the application. It allows you to choose and configure the underlying logging implementation.
-
-#### Key Benefits:
-- Logging Abstraction: SLF4J serves as a logging facade, allowing for a consistent logging API while providing the flexibility to choose and configure the underlying logging implementation.
-
-- Ease of Integration: By using SLF4J, this project ensures smooth integration with various logging frameworks, enabling developers to use their preferred logging implementation.
-
-- Efficient Logging: SLF4J optimizes logging statements, avoiding unnecessary computation if the logging level is not enabled. This ensures efficient logging in both development and production environments.
-
-#### Integration in this Project:
-
-```xml
-<dependency>
-    <groupId>org.slf4j</groupId>
-    <artifactId>slf4j-api</artifactId>
-    <version>2.0.9</version>
-</dependency>
-```
-
-
 # Design
 
 ## Class Diagram eventStoreBuilder:
@@ -153,7 +100,7 @@ SLF4J (Simple Logging Facade for Java) provides a flexible logging interface for
 ## Class Diagram predictionProvider:
 ![class_diagram_PredictionProvider](/images/predictionProvider.png)
 
-## Desing Pattern
+## Desing Patterns
 In this project, **Clean Architecture** has been implemented.
 
 ![Clean_Architecture](/images/CleanArchitecture.png)
@@ -179,15 +126,14 @@ In essence, Clean Architecture promotes a flexible and scalable code structure.
 
 [buckpal by thombergs](https://github.com/thombergs/buckpal): This repository is an example application for implementing Clean Architecture in Java. It demonstrates how to structure a Java application following Clean Architecture principles.
 
+Also, in this project, *Repository Pattern** has been implemented in the Business Unit for efficient data handling and CRUD operations. Used as reference this [blog](https://www.linkedin.com/pulse/what-repository-pattern-alper-sara%C3%A7). 
+
+
 
 ## Implemented Design Principles
-The SOLID principles have been diligently implemented to in this project.
 
 ### Single Responsibility:
 Classes are designed with only one responsibility, and each class has only one reason to change.
-
-### Open for Extension, Closed for Modification:
-Existing code should not be modified if it is necessary to add new implementations in the future. Therefore, it is open for extension but not for modification.
 
 ### Interface Segregation:
 Large interfaces have been divided into smaller ones.
@@ -195,15 +141,3 @@ Large interfaces have been divided into smaller ones.
 ### Dependency Inversion:
 Instead of high-level modules depending on low-level modules, both depend on abstractions. This principle facilitates potential future modifications or project reusability as it relies on abstractions rather than concrete implementations. Consequently, the need to change the entire codebase is avoided and only the relevant abstractions need to be modified with the new business logic.
 
-______________________________________________________________________________________________
-In addition, the __principles of modularity, cohesion and abstraction__ have been implemented.
-
-### __Modularization__:
-Is a key principle that emphasizes the organization of code into independent, self-contained modules or components. 
-
-
-### __Cohesion__:
-Refers to the degree to which elements within a module or component work together to achieve a common goal.
-
-### __Abstraction__:
-Involves simplifying complex systems by modeling classes or components at the appropriate level of detail.
