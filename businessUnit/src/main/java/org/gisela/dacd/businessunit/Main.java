@@ -45,12 +45,11 @@ public class Main {
         server.createContext("/api/vacation-recommendations",
                 new VacationRecommendationsHandler(new HotelSqliteRepository(),new WeatherSqliteRepository())
         );
-        server.setExecutor(null); // creates a default executor
+        server.setExecutor(null);
         server.start();
     }
 
     public static void createNewTable() {
-        // Sentencias SQL para crear nuevas tablas
         String sqlHotel = "CREATE TABLE IF NOT EXISTS hotel (\n"
                 + " id INTEGER PRIMARY KEY AUTOINCREMENT,\n"
                 + " name TEXT NOT NULL,\n"

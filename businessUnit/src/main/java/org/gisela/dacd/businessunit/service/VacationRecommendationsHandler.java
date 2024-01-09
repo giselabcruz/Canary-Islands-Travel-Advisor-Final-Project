@@ -8,8 +8,6 @@ import org.gisela.dacd.businessunit.entity.VacationRecommendation;
 import org.gisela.dacd.businessunit.entity.Weather;
 import org.gisela.dacd.businessunit.repository.HotelRepository;
 import org.gisela.dacd.businessunit.repository.WeatherRepository;
-
-
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.HashMap;
@@ -17,7 +15,6 @@ import java.util.List;
 import java.util.Map;
 
 public class VacationRecommendationsHandler implements HttpHandler {
-
 
     private final HotelRepository hotelRepository;
     private final WeatherRepository weatherRepository;
@@ -58,5 +55,4 @@ public class VacationRecommendationsHandler implements HttpHandler {
         }
         return result;
     }
-
 }
