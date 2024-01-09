@@ -10,5 +10,5 @@ public interface WeatherRepository {
     List<Weather> getAllWeather();
     List<Weather> getWeatherByDate(Date date,String location);
     List<Weather> getWeatherByLocation(String location);
-
+    List<Weather> getWeatherByTemperature(String temperature);
 }

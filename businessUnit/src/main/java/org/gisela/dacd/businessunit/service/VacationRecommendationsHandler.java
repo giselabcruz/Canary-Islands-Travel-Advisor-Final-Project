@@ -6,9 +6,9 @@ import com.sun.net.httpserver.HttpHandler;
 import org.gisela.dacd.businessunit.entity.Hotel;
 import org.gisela.dacd.businessunit.entity.VacationRecommendation;
 import org.gisela.dacd.businessunit.entity.Weather;
-
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -35,11 +35,18 @@ public class VacationRecommendationsHandler implements HttpHandler {
 
         if (!"GET".equals(exchange.getRequestMethod())) {
             exchange.sendResponseHeaders(405, -1);
-            return;
         } else {
-            if (query == null || !queryParams.containsKey("location")) {
+            if (query == null && !queryParams.containsKey("location")) {
                 List<Hotel> historicalData = datalakeRepository.getHotelHistoricalData();
                 VacationRecommendation vacationRecommendation = new VacationRecommendation(historicalData, null);
+                response = gson.toJson(vacationRecommendation);
+                sendResponse(exchange, response);
+            } else if (queryParams.containsKey("temperature")) {
+                List<Weather> allWeather = weatherRepository.getWeatherByTemperature(queryParams.get("temperature"));
+                List<String> locations = allWeather.stream().map(Weather::getLocation).toList();
+                List<Hotel> hotels = new ArrayList<>();
+                locations.forEach(location -> hotels.addAll(hotelRepository.getHotelByLocation(location)));
+                VacationRecommendation vacationRecommendation = new VacationRecommendation(hotels, allWeather);
                 response = gson.toJson(vacationRecommendation);
                 sendResponse(exchange, response);
             } else {

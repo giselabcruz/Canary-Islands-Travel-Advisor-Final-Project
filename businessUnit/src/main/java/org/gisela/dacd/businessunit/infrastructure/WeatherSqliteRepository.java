@@ -2,7 +2,6 @@ package org.gisela.dacd.businessunit.infrastructure;
 
 import org.gisela.dacd.businessunit.entity.Weather;
 import org.gisela.dacd.businessunit.service.WeatherRepository;
-
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -92,9 +91,7 @@ public class WeatherSqliteRepository  implements WeatherRepository {
 
         try (Connection conn = DriverManager.getConnection(url);
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setString(1, location);
-
-            try (ResultSet rs = pstmt.executeQuery()) {
+            pstmt.setString(1, location);try (ResultSet rs = pstmt.executeQuery()) {
                 if (rs.next()) {
                     Weather weather = new Weather(
                             rs.getDouble("precipitation"),
@@ -106,6 +103,31 @@ public class WeatherSqliteRepository  implements WeatherRepository {
                     );
                     weathers.add(weather);
                 }
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return weathers;
+    }
+
+    @Override
+    public List<Weather> getWeatherByTemperature(String temperature) {
+        String sql = "SELECT DISTINCT id, date, location, precipitation, clouds, temperature, windSpeed FROM weather WHERE temperature >= ?";
+        List<Weather> weathers = new ArrayList<>();
+        try (Connection conn = DriverManager.getConnection(url);
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setDouble(1, Double.parseDouble(temperature));
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+                Weather weather = new Weather(
+                        rs.getDouble("precipitation"),
+                        rs.getString("date"),
+                        rs.getDouble("clouds"),
+                        rs.getDouble("temperature"),
+                        rs.getDouble("windSpeed"),
+                        rs.getString("location")
+                );
+                weathers.add(weather);
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
