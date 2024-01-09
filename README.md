@@ -111,10 +111,13 @@ This is particularly useful for packaging and distributing the applications alon
 # Design
 
 ## Class Diagram eventStoreBuilder:
-![class_diagram_EventStoreBuilder](/images/eventStoreBuilder.png)
+![class_diagram_DatalakeBuilder](/images/datalakeBuilder.png)
 
 ## Class Diagram predictionProvider:
 ![class_diagram_PredictionProvider](/images/predictionProvider.png)
+
+## Class Diagram hotelProvider:
+![class_diagram_HotelProvider](/images/HOTELPROVIDER.png)
 
 ## Desing Patterns
 In this project, **Clean Architecture** has been implemented.
