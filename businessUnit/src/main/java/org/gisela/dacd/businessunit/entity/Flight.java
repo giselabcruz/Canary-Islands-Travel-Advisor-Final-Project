@@ -1,17 +1,9 @@
 package org.gisela.dacd.businessunit.entity;
 
-import io.swagger.v3.oas.annotations.media.Schema;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
 import java.time.LocalDateTime;
 
-@Entity
-@Schema(description = "All details about the travel. ")
-public class TravelEntity {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+public class Flight {
+
     private Long id;
     private String airline;
     private String origin;
@@ -67,7 +59,7 @@ public class TravelEntity {
         this.arrivalTime = arrivalTime;
     }
 
-    public TravelEntity(Long id, String airline, String origin, String destination, LocalDateTime departureTime, LocalDateTime arrivalTime) {
+    public Flight(Long id, String airline, String origin, String destination, LocalDateTime departureTime, LocalDateTime arrivalTime) {
         this.id = id;
         this.airline = airline;
         this.origin = origin;
