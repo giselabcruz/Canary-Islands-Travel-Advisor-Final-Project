@@ -126,8 +126,9 @@ In essence, Clean Architecture promotes a flexible and scalable code structure.
 
 [buckpal by thombergs](https://github.com/thombergs/buckpal): This repository is an example application for implementing Clean Architecture in Java. It demonstrates how to structure a Java application following Clean Architecture principles.
 
-Also, in this project, *Repository Pattern** has been implemented in the Business Unit for efficient data handling and CRUD operations. Used as reference this [blog](https://www.linkedin.com/pulse/what-repository-pattern-alper-sara%C3%A7). 
+Also, in this project, **Repository Pattern** has been implemented in the Business Unit for efficient data handling and CRUD operations. Used as reference this [blog](https://www.linkedin.com/pulse/what-repository-pattern-alper-sara%C3%A7). 
 
+![Repository_Pattern](/images/RepositoryPattern.png)
 
 ## Implemented Design Principles
 
