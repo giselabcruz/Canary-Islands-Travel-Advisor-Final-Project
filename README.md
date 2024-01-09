@@ -172,6 +172,9 @@ This is particularly useful for packaging and distributing the applications alon
 ## Class Diagram hotelProvider:
 ![class_diagram_HotelProvider](/images/HOTELPROVIDER.png)
 
+## Class Diagram businessUnit:
+![class_diagram_businessUnit](/images/businessUnit.png)
+
 ## Desing Patterns
 In this project, **Clean Architecture** has been implemented.
 
