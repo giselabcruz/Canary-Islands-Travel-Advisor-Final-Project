@@ -98,15 +98,6 @@ GET ```/api/vacation-recommendations?location=Gran_Canaria```
 ![Location](/images/Location.png)
 
 
-### Filter by Check In and Checkout
-_________________________________________
-Get all available hotels in the input location and checks.
-
-GET ```/api/vacation-recommendations?location=Gran_Canaria&checkIn=2024-01-09&checkOut=2024-01-4```
-
-![Location and checks](/images/POSTMAN.png)
-
-
 ### Filter by Temperature
 _________________________________________
 Get all hotels where the temperature of the Weather predictions of any location fulfill the criteria
