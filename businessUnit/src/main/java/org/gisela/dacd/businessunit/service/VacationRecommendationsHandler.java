@@ -6,9 +6,7 @@ import com.sun.net.httpserver.HttpHandler;
 import org.gisela.dacd.businessunit.entity.Hotel;
 import org.gisela.dacd.businessunit.entity.VacationRecommendation;
 import org.gisela.dacd.businessunit.entity.Weather;
-import org.gisela.dacd.businessunit.repository.DatalakeRepository;
-import org.gisela.dacd.businessunit.repository.HotelRepository;
-import org.gisela.dacd.businessunit.repository.WeatherRepository;
+
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.HashMap;

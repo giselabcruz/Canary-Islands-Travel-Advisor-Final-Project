@@ -1,6 +1,8 @@
-package org.gisela.dacd.businessunit.repository;
+package org.gisela.dacd.businessunit.infrastructure;
 
 import org.gisela.dacd.businessunit.entity.Hotel;
+import org.gisela.dacd.businessunit.service.HotelRepository;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;

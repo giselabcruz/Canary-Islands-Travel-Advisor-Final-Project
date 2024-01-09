@@ -13,7 +13,6 @@
         <module>predictionProvider</module>
         <module>businessUnit</module>
         <module>hotelProvider</module>
-        <module>flightProvider</module>
     </modules>
 
     <properties>

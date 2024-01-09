@@ -4,8 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import org.gisela.dacd.businessunit.entity.Hotel;
-import org.gisela.dacd.businessunit.repository.HotelRepository;
-import org.gisela.dacd.businessunit.repository.WeatherRepository;
+import org.gisela.dacd.businessunit.service.HotelRepository;
 import org.gisela.dacd.businessunit.service.EventStore;
 
 public class EventStoreHotelSqliteManager implements EventStore {

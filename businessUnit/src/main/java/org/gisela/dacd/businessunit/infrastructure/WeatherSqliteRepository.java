@@ -1,11 +1,13 @@
-package org.gisela.dacd.businessunit.repository;
+package org.gisela.dacd.businessunit.infrastructure;
 
 import org.gisela.dacd.businessunit.entity.Weather;
+import org.gisela.dacd.businessunit.service.WeatherRepository;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class WeatherSqliteRepository  implements WeatherRepository{
+public class WeatherSqliteRepository  implements WeatherRepository {
     private static final String url = "jdbc:sqlite:datamart.db";
 
     @Override

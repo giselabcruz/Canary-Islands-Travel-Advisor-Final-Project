@@ -1,8 +1,10 @@
-package org.gisela.dacd.businessunit.repository;
+package org.gisela.dacd.businessunit.infrastructure;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import org.gisela.dacd.businessunit.entity.Hotel;
+import org.gisela.dacd.businessunit.service.DatalakeRepository;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;

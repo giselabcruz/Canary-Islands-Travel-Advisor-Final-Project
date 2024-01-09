@@ -3,7 +3,7 @@ package org.gisela.dacd.businessunit.infrastructure;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import org.gisela.dacd.businessunit.entity.Weather;
-import org.gisela.dacd.businessunit.repository.WeatherRepository;
+import org.gisela.dacd.businessunit.service.WeatherRepository;
 import org.gisela.dacd.businessunit.service.EventStore;
 
 public class EventStoreWeatherSqliteManager implements EventStore {

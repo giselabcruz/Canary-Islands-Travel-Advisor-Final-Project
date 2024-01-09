@@ -1,4 +1,4 @@
-package org.gisela.dacd.businessunit.repository;
+package org.gisela.dacd.businessunit.service;
 
 import org.gisela.dacd.businessunit.entity.Weather;
 import java.sql.Date;
