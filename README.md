@@ -113,10 +113,9 @@ Get all hotels where the temperature of the Weather predictions of any location 
 
 GET ``` /api//vacation-recommendations?temperature=23```
 
-![Location](/images/Location.png)
+![byTemperature](/images/byTemperature.jpg)
 
  
-
 
 **Publisher/Subscriber Implementation:**
 ![Publisher/Subscriber](/images/publish-subscribe.png)
