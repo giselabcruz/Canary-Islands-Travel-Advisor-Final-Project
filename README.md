@@ -28,7 +28,7 @@ Data Science Application Development
 
 # Funcionality
 
-The application allows users to retrieve tailored travel advice based on current and predicted conditions. Users interact via the REST API, providing parameters like location or travel preferences, receiving customized travel suggestions in return. 
+The project is centered on developing a travel advisor for the Canary Islands, focusing primarily on weather conditions and hotel accommodations. 
 
 Modularity is present in this final project. It ensures flexibility, scalability, and ease of maintenance, allowing each component to function independently while contributing to the system's overall functionality. 
 
@@ -36,7 +36,7 @@ Modularity is present in this final project. It ensures flexibility, scalability
 
 ![Organized project modules](/images/Archetype-removebg-preview.png)
 
-**DataLake**: Stores all relevant data, creating separate files for weather predictions, hotel, and flight data. 
+**DataLake**: Stores all relevant data, creating separate files for weather predictions and hotel data. 
 
 **DataMart**: Processes and refines data for user queries. 
 
