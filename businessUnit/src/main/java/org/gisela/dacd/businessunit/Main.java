@@ -4,6 +4,7 @@ import com.sun.net.httpserver.HttpServer;
 import org.gisela.dacd.businessunit.infrastructure.EventStoreHotelSqliteManager;
 import org.gisela.dacd.businessunit.infrastructure.EventStoreWeatherSqliteManager;
 import org.gisela.dacd.businessunit.infrastructure.SubscriberActiveMQ;
+import org.gisela.dacd.businessunit.repository.DatalakeFileRepository;
 import org.gisela.dacd.businessunit.repository.HotelSqliteRepository;
 import org.gisela.dacd.businessunit.repository.WeatherSqliteRepository;
 import org.gisela.dacd.businessunit.service.EventStore;
@@ -21,10 +22,10 @@ public class Main {
     private static final String URL = "jdbc:sqlite:datamart.db";
 
     private static final String BROKER_URL = "tcp://localhost:61616";
-    private static final String CLIENT_ID = "Gisela";
+    private static final String CLIENT_ID = "Business_Gisela";
     private static final String PREDICTION_WEATHER_TOPIC = "prediction.Weather";
     private static final String HOTEL_TOPIC = "sensor.Hotel";
-    private static final String SUBSCRIBER_ID = "Gisela";
+    private static final String SUBSCRIBER_ID = "Business_Gisela";
     public static void main(String[] args) throws IOException {
         createNewTable();
 
@@ -43,7 +44,7 @@ public class Main {
         int serverPort = 9090;
         HttpServer server = HttpServer.create(new InetSocketAddress(serverPort), 0);
         server.createContext("/api/vacation-recommendations",
-                new VacationRecommendationsHandler(new HotelSqliteRepository(),new WeatherSqliteRepository())
+                new VacationRecommendationsHandler(new HotelSqliteRepository(),new WeatherSqliteRepository(), new DatalakeFileRepository())
         );
         server.setExecutor(null);
         server.start();
