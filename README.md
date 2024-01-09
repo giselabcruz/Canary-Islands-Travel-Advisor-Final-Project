@@ -63,6 +63,9 @@ Get all disponible hotels in the input location and checks.
 This application incorporates the Publisher/Subscriber pattern for working with events.
 In this case, the broker is ActiveMQ, and it is installed as an application on the operating system.
 
+This image shows all the Topics in activeMQ created in this project:
+![Topics](/images/activeMQ.png)
+
 
 ## Important Libraries
 ### - com.google.gson.JsonObject
