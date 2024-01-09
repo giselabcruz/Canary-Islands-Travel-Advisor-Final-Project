@@ -47,13 +47,14 @@ Modularity is present in this final project. It ensures flexibility, scalability
 A REST API is implemented for user interaction, utilizing Postman for testing API responses.
 
 Get all generalized information about hotels in the input location.
- ``` GET /api/vacation-recommendations?location=Gran_Canaria&checkIn=2024-01-09&checkOut=2024-01-4```
+ ``` GET /api/vacation-recommendations?location=Gran_Canaria```
+
 ![Location](/images/Location.png)
 
  
 
 Get all disponible hotels in the input location and checks.
- ``` GET /api/vacation-recommendations?location=Gran_Canaria```
+ ``` GET /api/vacation-recommendations?location=Gran_Canaria&checkIn=2024-01-09&checkOut=2024-01-4```
 ![Location and checks](/images/POSTMAN.png)
 
 
