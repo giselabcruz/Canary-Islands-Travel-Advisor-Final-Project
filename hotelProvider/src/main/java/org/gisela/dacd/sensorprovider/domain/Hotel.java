@@ -10,6 +10,8 @@ public class Hotel {
     private String hotelKey;
     private Location location;
     private List<Rate> rates;
+    private String checkIn;
+    private String checkOut;
 
     public Hotel(String name, String hotelKey, Location location) {
         this.name = name;
@@ -17,13 +19,16 @@ public class Hotel {
         this.location = location;
     }
 
-    public Hotel(Instant ts, String ss, String name, String hotelKey, Location location, List<Rate> rates) {
+    public Hotel(Instant ts, String ss, String name, String hotelKey, Location location, List<Rate> rates,
+                 String checkIn, String checkOut) {
         this.ts = ts;
         this.ss = ss;
         this.name = name;
         this.hotelKey = hotelKey;
         this.location = location;
         this.rates = rates;
+        this.checkIn = checkIn;
+        this.checkOut = checkOut;
     }
 
     public String getName() {
@@ -72,5 +77,21 @@ public class Hotel {
 
     public void setRates(List<Rate> rate) {
         this.rates = rate;
+    }
+
+    public String getCheckIn() {
+        return checkIn;
+    }
+
+    public void setCheckIn(String checkIn) {
+        this.checkIn = checkIn;
+    }
+
+    public String getCheckOut() {
+        return checkOut;
+    }
+
+    public void setCheckOut(String checkOut) {
+        this.checkOut = checkOut;
     }
 }

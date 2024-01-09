@@ -12,7 +12,9 @@ import org.apache.hc.core5.http.ParseException;
 import org.apache.hc.core5.http.io.entity.EntityUtils;
 import org.gisela.dacd.sensorprovider.application.HotelProvider;
 import org.gisela.dacd.sensorprovider.domain.Rate;
+
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,8 +23,8 @@ public class XoteloProvider implements HotelProvider {
     public XoteloProvider() {}
 
     @Override
-    public List<Rate> getHotelRates(String hotelKey) {
-        String url = buildUrlApiRates(hotelKey);
+    public List<Rate> getHotelRates(String hotelKey, LocalDate currentDate) {
+        String url = buildUrlApiRates(hotelKey, currentDate);
         try (CloseableHttpClient httpclient = HttpClients.createDefault()) {
             HttpGet httpGet = new HttpGet(url);
             try (CloseableHttpResponse response = httpclient.execute(httpGet)) {
@@ -60,9 +62,9 @@ public class XoteloProvider implements HotelProvider {
         return EntityUtils.toString(entity);
     }
 
-    private String buildUrlApiRates(String hotelKey) {
+    private String buildUrlApiRates(String hotelKey, LocalDate currentDate) {
         return String.format("https://data.xotelo.com/api/rates?hotel_key=%s&chk_in=%s&chk_out=%s&currency=EUR",
-                hotelKey,"2024-01-08","2024-01-15"); //TODO: implement a solution for dates
+                hotelKey, currentDate,currentDate.plusDays(5));
     }
 
 }

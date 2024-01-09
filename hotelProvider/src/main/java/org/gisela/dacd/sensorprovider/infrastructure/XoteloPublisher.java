@@ -6,6 +6,7 @@ import org.apache.activemq.ActiveMQConnectionFactory;
 import org.gisela.dacd.sensorprovider.application.HotelPublisher;
 import org.gisela.dacd.sensorprovider.domain.Hotel;
 import org.gisela.dacd.sensorprovider.utils.InstantTypeAdapter;
+
 import javax.jms.*;
 import java.time.Instant;
 

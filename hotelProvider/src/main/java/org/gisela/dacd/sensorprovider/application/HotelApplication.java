@@ -3,6 +3,7 @@ package org.gisela.dacd.sensorprovider.application;
 import org.gisela.dacd.sensorprovider.domain.Hotel;
 import org.gisela.dacd.sensorprovider.domain.Rate;
 import java.time.Instant;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,11 +18,12 @@ public class HotelApplication {
         this.publisher = publisher;
     }
     public void execute() {
+        LocalDate currentDate = LocalDate.now();
         for (Hotel hotel : hotels) {
-            List<Rate> hotelRates = xoteloProvider.getHotelRates(hotel.getHotelKey());
+            List<Rate> hotelRates = xoteloProvider.getHotelRates(hotel.getHotelKey(),currentDate);
             Instant instant = Instant.now();
             Hotel event = new Hotel(instant, "hotel-provider",hotel.getName(),hotel.getHotelKey(),
-                    hotel.getLocation(), hotelRates);
+                    hotel.getLocation(), hotelRates, currentDate.toString(),currentDate.plusDays(5).toString());
             publisher.publish(event);
         }
     }
