@@ -42,7 +42,17 @@ Modularity is present in this final project. It ensures flexibility, scalability
 
 **BusinessUnit**: Accesses historical data from the DataLake. In this project, when no specific parameters or locations are provided, it displays stored DataLake information. So the businessUnit is connected to datalake. 
 
-**API Implementation**: A REST API is implemented for user interaction, utilizing Postman for testing API responses.
+
+## API Implementation: 
+A REST API is implemented for user interaction, utilizing Postman for testing API responses.
+
+Get all generalized information about hotels in the input location.
+ ``` GET /api/vacation-recommendations?location=Gran_Canaria&checkIn=2024-01-09&checkOut=2024-01-4```
+
+Get all disponible hotels in the input location and checks.
+ ``` GET /api/vacation-recommendations?location=Gran_Canaria```
+
+
 
 **Publisher/Subscriber Implementation:**
 ![Publisher/Subscriber](/images/publish-subscribe.png)
