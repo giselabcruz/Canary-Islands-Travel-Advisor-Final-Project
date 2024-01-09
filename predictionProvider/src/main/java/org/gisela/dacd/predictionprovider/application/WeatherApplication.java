@@ -20,9 +20,9 @@ public class WeatherApplication {
 
     public void execute() {
         for (Location location : locations) {
-            List<org.gisela.dacd.predictionprovider.domain.Weather> weatherList = openWeatherProvider.getWeatherData(location);
+            List<Weather> weatherList = openWeatherProvider.getWeatherData(location);
             Instant instant = Instant.now();
-            for (org.gisela.dacd.predictionprovider.domain.Weather weather : weatherList) {
+            for (Weather weather : weatherList) {
                 Weather event = new Weather(instant, "prediction-provider", weather.getHumidity(), weather.getTemperature(),
                         weather.getPrecipitation(), weather.getClouds(), weather.getWindSpeed(), weather.getLocation(), weather.getPredictionTime());
                 publisher.publish(event);

@@ -2,11 +2,11 @@ package org.gisela.dacd.predictionprovider.infrastructure;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import org.gisela.dacd.predictionprovider.utils.InstantTypeAdapter;
-import org.gisela.dacd.predictionprovider.application.Publisher;
-import javax.jms.*;
 import org.apache.activemq.ActiveMQConnectionFactory;
+import org.gisela.dacd.predictionprovider.application.Publisher;
 import org.gisela.dacd.predictionprovider.domain.Weather;
+import org.gisela.dacd.predictionprovider.utils.InstantTypeAdapter;
+import javax.jms.*;
 import java.time.Instant;
 
 public class PublisherActiveMQ implements Publisher {

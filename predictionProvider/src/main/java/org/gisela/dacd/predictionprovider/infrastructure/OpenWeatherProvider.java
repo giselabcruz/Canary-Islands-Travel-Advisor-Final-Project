@@ -1,18 +1,18 @@
 package org.gisela.dacd.predictionprovider.infrastructure;
 
-import org.gisela.dacd.predictionprovider.domain.Location;
-import org.gisela.dacd.predictionprovider.domain.Weather;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import org.apache.hc.client5.http.classic.methods.HttpGet;
 import org.apache.hc.client5.http.impl.classic.CloseableHttpClient;
-import org.apache.hc.client5.http.impl.classic.HttpClients;
 import org.apache.hc.client5.http.impl.classic.CloseableHttpResponse;
+import org.apache.hc.client5.http.impl.classic.HttpClients;
 import org.apache.hc.core5.http.HttpEntity;
 import org.apache.hc.core5.http.ParseException;
 import org.apache.hc.core5.http.io.entity.EntityUtils;
 import org.gisela.dacd.predictionprovider.application.WeatherProvider;
+import org.gisela.dacd.predictionprovider.domain.Location;
+import org.gisela.dacd.predictionprovider.domain.Weather;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.time.Instant;
