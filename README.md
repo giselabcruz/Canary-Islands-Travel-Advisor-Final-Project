@@ -34,6 +34,8 @@ Modularity is present in this final project. It ensures flexibility, scalability
 
 ## Architecture
 
+![Organized project modules](/images/Archetype-removebg-preview.png)
+
 **DataLake**: Stores all relevant data, creating separate files for weather predictions, hotel, and flight data. 
 
 **DataMart**: Processes and refines data for user queries. 
