@@ -39,16 +39,21 @@ public class XoteloProvider implements HotelProvider {
     }
 
     private List<Rate> obtainRatesFromJson(String responseBody) {
-        Gson gson = new Gson();
-        JsonObject rateResponse = gson.fromJson(responseBody, JsonObject.class);
-        JsonArray list = rateResponse.get("result").getAsJsonObject().get("rates").getAsJsonArray();
         List<Rate> rates = new ArrayList<>();
-        list.forEach(jsonElement -> {
-            JsonObject jsonObject = jsonElement.getAsJsonObject();
-            processRate(jsonObject, rates);
-        });
+        try {
+            Gson gson = new Gson();
+        JsonObject rateResponse = gson.fromJson(responseBody, JsonObject.class);
+            JsonArray list = rateResponse.get("result").getAsJsonObject().get("rates").getAsJsonArray();
+            list.forEach(jsonElement -> {
+                JsonObject jsonObject = jsonElement.getAsJsonObject();
+                processRate(jsonObject, rates);
+            });
+        } catch (Exception e) {
+            System.out.println("JSON nulo o con estructura incorrecta");
+        }
         return rates;
     }
+
 
     private void processRate(JsonObject jsonObject, List<Rate> rates) {
         double price = jsonObject.get("rate").getAsDouble();
