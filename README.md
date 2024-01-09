@@ -46,16 +46,76 @@ Modularity is present in this final project. It ensures flexibility, scalability
 ## API Implementation: 
 A REST API is implemented for user interaction, utilizing Postman for testing API responses.
 
+### OpenAPI Schema
+
+```openapi: 3.0.0
+info:
+  title: Vacation Recommendation API
+  version: 1.0.0
+  description: An API for vacation recommendations based on hotels and weather predictions
+paths:
+  # Define your API paths here
+components:
+  schemas:
+    Hotel:
+      type: object
+      properties:
+        name:
+          type: string
+        location:
+          type: string
+        platformName:
+          type: string
+        price:
+          type: number
+        checkIn:
+          type: string
+        checkOut:
+          type: string
+    Weather:
+      type: object
+      properties:
+        location:
+          type: string
+        date:
+          type: string
+        precipitation:
+          type: number
+        clouds:
+          type: number
+        temperature:
+          type: number
+        windSpeed:
+          type: number
+```
+
+### Filter by Location
+_________________________________________
 Get all generalized information about hotels in the input location.
- ``` GET /api/vacation-recommendations?location=Gran_Canaria```
+
+GET ```/api/vacation-recommendations?location=Gran_Canaria```
+ 
+![Location](/images/Location.png)
+
+
+### Filter by Check In and Checkout
+_________________________________________
+Get all available hotels in the input location and checks.
+
+GET ```/api/vacation-recommendations?location=Gran_Canaria&checkIn=2024-01-09&checkOut=2024-01-4```
+
+![Location and checks](/images/POSTMAN.png)
+
+
+### Filter by Temperature
+_________________________________________
+Get all hotels where the temperature of the Weather predictions of any location fulfill the criteria
+
+GET ``` /api//vacation-recommendations?temperature=23```
 
 ![Location](/images/Location.png)
 
  
-
-Get all disponible hotels in the input location and checks.
- ``` GET /api/vacation-recommendations?location=Gran_Canaria&checkIn=2024-01-09&checkOut=2024-01-4```
-![Location and checks](/images/POSTMAN.png)
 
 
 **Publisher/Subscriber Implementation:**
