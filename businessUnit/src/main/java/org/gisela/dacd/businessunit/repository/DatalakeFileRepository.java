@@ -1,5 +1,4 @@
 package org.gisela.dacd.businessunit.repository;
-
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
@@ -16,7 +15,8 @@ public class DatalakeFileRepository implements DatalakeRepository {
         List<Hotel> hotelList = new ArrayList<>();
         Gson gson = new Gson();
         try (BufferedReader reader = new BufferedReader(
-                new FileReader("C:\\Users\\Gisela\\IdeaProjects\\P1_dataFromExternalSource_Openweathermap\\datalake\\eventstore\\sensor.Hotel\\hotel-provider\\20240109.events"))) {
+                new FileReader("C:\\Users\\Gisela\\IdeaProjects\\P1_dataFromExternalSource_Openweathermap\\datalake\\eventstore\\sensor.Hotel\\hotel-provider\\20240109.events"
+                ))) {
             String line;
             while ((line = reader.readLine()) != null) {
                 JsonObject jsonObject = gson.fromJson(line, JsonObject.class);
