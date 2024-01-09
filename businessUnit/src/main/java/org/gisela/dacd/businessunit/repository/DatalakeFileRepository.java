@@ -12,10 +12,11 @@ import java.util.List;
 
 public class DatalakeFileRepository implements DatalakeRepository {
     @Override
-    public List<Hotel> getHotelHistoricalData() throws IOException {
+    public List<Hotel> getHotelHistoricalData()  {
         List<Hotel> hotelList = new ArrayList<>();
         Gson gson = new Gson();
-        try (BufferedReader reader = new BufferedReader(new FileReader("C:\\Users\\Gisela\\IdeaProjects\\P1_dataFromExternalSource_Openweathermap\\datalake\\eventstore\\sensor.Hotel\\hotel-provider\\20240109.events"))) {
+        try (BufferedReader reader = new BufferedReader(
+                new FileReader("C:\\Users\\Gisela\\IdeaProjects\\P1_dataFromExternalSource_Openweathermap\\datalake\\eventstore\\sensor.Hotel\\hotel-provider\\20240109.events"))) {
             String line;
             while ((line = reader.readLine()) != null) {
                 JsonObject jsonObject = gson.fromJson(line, JsonObject.class);
@@ -31,8 +32,9 @@ public class DatalakeFileRepository implements DatalakeRepository {
                     hotelList.add(new Hotel(name, location, price, platformName, checkIn, checkOut));
                 });
             }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
         return hotelList;
     }
 }
-

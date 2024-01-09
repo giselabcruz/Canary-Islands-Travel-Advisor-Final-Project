@@ -39,18 +39,18 @@ public class VacationRecommendationsHandler implements HttpHandler {
             exchange.sendResponseHeaders(405, -1);
             return;
         } else {
-            List<Hotel> hotels = hotelRepository.getHotelByLocation(queryParams.get("location"));
-            List<Weather> allWeather = weatherRepository.getWeatherByLocation(queryParams.get("location"));
-            VacationRecommendation vacationRecommendation = new VacationRecommendation(hotels, allWeather);
-            response = gson.toJson(vacationRecommendation);
-            sendResponse(exchange, response);
-        }
-
-        if (query == null || !queryParams.containsKey("location")) {
-            List<Hotel> historicalData = datalakeRepository.getHotelHistoricalData();
-            VacationRecommendation vacationRecommendation = new VacationRecommendation(historicalData, null);
-            response = gson.toJson(vacationRecommendation);
-            sendResponse(exchange, response);
+            if (query == null || !queryParams.containsKey("location")) {
+                List<Hotel> historicalData = datalakeRepository.getHotelHistoricalData();
+                VacationRecommendation vacationRecommendation = new VacationRecommendation(historicalData, null);
+                response = gson.toJson(vacationRecommendation);
+                sendResponse(exchange, response);
+            } else {
+                List<Hotel> hotels = hotelRepository.getHotelByLocation(queryParams.get("location"));
+                List<Weather> allWeather = weatherRepository.getWeatherByLocation(queryParams.get("location"));
+                VacationRecommendation vacationRecommendation = new VacationRecommendation(hotels, allWeather);
+                response = gson.toJson(vacationRecommendation);
+                sendResponse(exchange, response);
+            }
         }
     }
 
