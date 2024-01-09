@@ -48,10 +48,13 @@ A REST API is implemented for user interaction, utilizing Postman for testing AP
 
 Get all generalized information about hotels in the input location.
  ``` GET /api/vacation-recommendations?location=Gran_Canaria&checkIn=2024-01-09&checkOut=2024-01-4```
+![Location](/images/Location.png)
+
+ 
 
 Get all disponible hotels in the input location and checks.
  ``` GET /api/vacation-recommendations?location=Gran_Canaria```
-
+![Location and checks](/images/POSTMAN.png)
 
 
 **Publisher/Subscriber Implementation:**
